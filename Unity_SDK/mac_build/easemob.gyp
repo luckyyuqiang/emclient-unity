@@ -4,7 +4,7 @@
         'standalone': 0,
         'msvs_RuntimeLibrary': '3', #md:2, mdd:3, mt:0, mtd:1
         'ENABLE_CALL': '0',
-        'USE_SQLCIPHER':'0',
+        'USE_SQLCIPHER':'1',
         'emclient-linux-path':'../../../emclient-linux'
     },
 
@@ -252,20 +252,28 @@
                     ],
                 }],
                 ['USE_SQLCIPHER==1 and OS=="mac"',{
+                    'include_dirs': [
+			    '<(emclient-linux-path)/3rd_party/platform/darwin/sqlcipher-4.4.3',
+			],
                     'link_settings': {
                         'libraries': [
-                            'libsqlcipher.dylib',
+                            'libsqlcipher.0.dylib',
                         ],
+                        'library_dirs': [
+                           '<(emclient-linux-path)/3rd_party/platform/darwin/sqlcipher-4.4.3',
+                       ],
                     },
                 }],
                 ['USE_SQLCIPHER!=1 and OS=="mac"',{
+		    'include_dirs': [
+                            '<(emclient-linux-path)/3rd_party/platform/sqlite3/include',
+                        ],
                     'link_settings': {
                         'libraries': [
                             'libsqlite3.dylib',
                         ],
                         'library_dirs': [
                            '<(emclient-linux-path)/3rd_party/platform/darwin/sqlite3-3.26.0',
-                           #'/usr/local/lib',
                        ],
                     },
                 }],
