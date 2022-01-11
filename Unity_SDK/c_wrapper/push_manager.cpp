@@ -6,7 +6,6 @@
 //  Copyright © 2021 easemob. All rights reserved.
 //
 
-//#include "empushmanager_interface.h"
 #include "emchatclient.h"
 #include "emchatconfigs.h"
 #include "emclient.h"

@@ -22,4 +22,8 @@ bool MandatoryCheck(const char* ptr1, const char* ptr2, const char* ptr3, EMErro
 
 std::string OptionalStrParamCheck(const char* ptr);
 
+#ifndef _WIN32
+std::string GetMacUuid();
+#endif
+
 #endif //_CWRAPPER_TOOL_H_

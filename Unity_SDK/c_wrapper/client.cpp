@@ -4,6 +4,7 @@
 #include "emchatprivateconfigs.h"
 #include "emclient.h"
 #include "contact_manager.h"
+#include "tool.h"
 
 using namespace easemob;
 
@@ -60,6 +61,11 @@ EMChatConfigsPtr ConfigsFromOptions(Options *options) {
     configs->setAutoDownloadThumbnail(options->IsAutoDownload);
     //configs->setLogPath("/tmp/sdk.log");
     //configs->setEnableConsoleLog(true);
+#ifndef _WIN32
+    std::string uuid = GetMacUuid();
+    if (uuid.size() > 0)
+        configs->setDeviceUuid(uuid);
+#endif
     return configs;
 }
 

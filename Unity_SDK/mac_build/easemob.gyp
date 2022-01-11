@@ -4,7 +4,7 @@
         'standalone': 0,
         'msvs_RuntimeLibrary': '3', #md:2, mdd:3, mt:0, mtd:1
         'ENABLE_CALL': '0',
-        'USE_SQLCIPHER':'0',
+        'USE_SQLCIPHER':'1',
         'emclient-linux-path':'../../../emclient-linux'
     },
 
@@ -105,10 +105,10 @@
                 '<(emclient-linux-path)/3rd_party/rapidjson/include',
                 '<(emclient-linux-path)/3rd_party/curlcpp/include',
                 '<(emclient-linux-path)/3rd_party/protobuf',
-                '<(emclient-linux-path)/3rd_party/openssl/include',
+                '<(emclient-linux-path)/3rd_party/openssl_1.1.1/include',
+                '<(emclient-linux-path)/3rd_party/md5',
                 '<(emclient-linux-path)/protocol',
                 '<(emclient-linux-path)/protocol/generated',
-                '<(emclient-linux-path)/3rd_party/md5',
             ],
             'standalone_static_library': '<(standalone)',
             'sources': [
@@ -226,7 +226,9 @@
                 '<(emclient-linux-path)/protocol/generated/statisticsbody.pb.cc',
             ],
             'mac_bundle_resources': [
-                 '<(emclient-linux-path)/3rd_party/platform/darwin/lib/libcrypto.1.0.0.dylib',
+                 '<(emclient-linux-path)/3rd_party/platform/darwin/openssl-1.1.1/libcrypto.1.1.dylib',
+                 '<(emclient-linux-path)/3rd_party/platform/darwin/openssl-1.1.1/libssl.1.1.dylib',
+            #    '<(emclient-linux-path)/3rd_party/platform/darwin/lib/libcrypto.1.0.0.dylib',
             #    '<(emclient-linux-path)/3rd_party/platform/darwin/lib/libcurl.4.dylib',
             #    '<(emclient-linux-path)/3rd_party/platform/darwin/lib/libssl.1.0.0.dylib',
             #    #'<(emclient-linux-path)/3rd_party/platform/darwin/lib/libz.dylib',
@@ -250,20 +252,28 @@
                     ],
                 }],
                 ['USE_SQLCIPHER==1 and OS=="mac"',{
+                    'include_dirs': [
+			    '<(emclient-linux-path)/3rd_party/platform/darwin/sqlcipher-4.4.3',
+			],
                     'link_settings': {
                         'libraries': [
-                            'libsqlcipher.dylib',
+                            'libsqlcipher.0.dylib',
                         ],
+                        'library_dirs': [
+                           '<(emclient-linux-path)/3rd_party/platform/darwin/sqlcipher-4.4.3',
+                       ],
                     },
                 }],
                 ['USE_SQLCIPHER!=1 and OS=="mac"',{
+		    'include_dirs': [
+                            '<(emclient-linux-path)/3rd_party/platform/sqlite3/include',
+                        ],
                     'link_settings': {
                         'libraries': [
                             'libsqlite3.dylib',
                         ],
                         'library_dirs': [
-                           '<(emclient-linux-path)/3rd_party/platform/darwin/lib',
-                           '/usr/local/lib',
+                           '<(emclient-linux-path)/3rd_party/platform/darwin/sqlite3-3.26.0',
                        ],
                     },
                 }],
@@ -290,10 +300,13 @@
                            #'libsqlcipher.dylib',
                            'libcurl.dylib',
                            'libz.dylib',
-                           'libcrypto.1.0.0.dylib',
+                           #'libcrypto.1.0.0.dylib',
+                           'libcrypto.1.1.dylib',
+                           'libssl.1.1.dylib',
                        ],
                        'library_dirs': [
-                           '<(emclient-linux-path)/3rd_party/platform/darwin/lib',
+                           '<(emclient-linux-path)/3rd_party/platform/darwin/curl-7.40.0',
+                           '<(emclient-linux-path)/3rd_party/platform/darwin/openssl-1.1.1',
                            # '/usr/local/lib',
                        ],
                    }],
