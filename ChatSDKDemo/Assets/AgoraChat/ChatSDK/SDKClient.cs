@@ -112,7 +112,7 @@
          * \~english
          * The SDK version.
          */
-        public string SdkVersion { get => "1.0.5"; }
+        public string SdkVersion { get => "1.0.8"; }
 
 
         /**
