@@ -14,7 +14,7 @@ extern EMClient* gClient;
 
 ContactManagerListener *gContactListener = nullptr;
 
-HYPHENATE_API void ContactManager_AddListener(void *client,
+HYPHENATE_API void  AGORA_CALL ContactManager_AddListener(void *client,
                                         FUNC_OnContactAdded onContactAdded,
                                         FUNC_OnContactDeleted onContactDeleted,
                                         FUNC_OnContactInvited onContactInvited,
@@ -31,7 +31,7 @@ HYPHENATE_API void ContactManager_AddListener(void *client,
     }
 }
 
-HYPHENATE_API void ContactManager_AddContact(void *client, int callbackId, const char* username, const char* reason, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_AddContact(void *client, int callbackId, const char* username, const char* reason, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -57,7 +57,7 @@ HYPHENATE_API void ContactManager_AddContact(void *client, int callbackId, const
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_DeleteContact(void *client, int callbackId, const char* username, bool keepConversation, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_DeleteContact(void *client, int callbackId, const char* username, bool keepConversation, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -82,7 +82,7 @@ HYPHENATE_API void ContactManager_DeleteContact(void *client, int callbackId, co
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_GetContactsFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_GetContactsFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -106,7 +106,7 @@ HYPHENATE_API void ContactManager_GetContactsFromServer(void *client, int callba
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_GetContactsFromDB(void *client, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_GetContactsFromDB(void *client, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(-1, onError)) return;
 
@@ -128,7 +128,7 @@ HYPHENATE_API void ContactManager_GetContactsFromDB(void *client, FUNC_OnSuccess
     }
 }
 
-HYPHENATE_API void ContactManager_AddToBlackList(void *client, int callbackId, const char* username, bool both, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_AddToBlackList(void *client, int callbackId, const char* username, bool both, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -153,7 +153,7 @@ HYPHENATE_API void ContactManager_AddToBlackList(void *client, int callbackId, c
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_RemoveFromBlackList(void *client, int callbackId, const char* username,FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_RemoveFromBlackList(void *client, int callbackId, const char* username,FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -178,7 +178,7 @@ HYPHENATE_API void ContactManager_RemoveFromBlackList(void *client, int callback
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_GetBlackListFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_GetBlackListFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -202,7 +202,7 @@ HYPHENATE_API void ContactManager_GetBlackListFromServer(void *client, int callb
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_AcceptInvitation(void *client, int callbackId, const char* username,FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_AcceptInvitation(void *client, int callbackId, const char* username,FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -227,7 +227,7 @@ HYPHENATE_API void ContactManager_AcceptInvitation(void *client, int callbackId,
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_DeclineInvitation(void *client, int callbackId, const char* username,FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_DeclineInvitation(void *client, int callbackId, const char* username,FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -252,7 +252,7 @@ HYPHENATE_API void ContactManager_DeclineInvitation(void *client, int callbackId
     t.detach();
 }
 
-HYPHENATE_API void ContactManager_GetSelfIdsOnOtherPlatform(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ContactManager_GetSelfIdsOnOtherPlatform(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 

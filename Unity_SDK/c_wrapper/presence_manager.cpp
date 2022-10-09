@@ -13,7 +13,7 @@ extern EMClient* gClient;
 
 EMPresenceManagerListener *gPresenceManagerListener = nullptr;
 
-HYPHENATE_API void PresenceManager_AddListener(void *client, FUNC_OnPresenceUpdated onPresenceUpdated)
+HYPHENATE_API void  AGORA_CALL PresenceManager_AddListener(void *client, FUNC_OnPresenceUpdated onPresenceUpdated)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -24,7 +24,7 @@ HYPHENATE_API void PresenceManager_AddListener(void *client, FUNC_OnPresenceUpda
     }
 }
 
-HYPHENATE_API void PresenceManager_PublishPresence(void * client, int callbackId, int presenceStatus, const char* ext, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PresenceManager_PublishPresence(void * client, int callbackId, int presenceStatus, const char* ext, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -44,7 +44,7 @@ HYPHENATE_API void PresenceManager_PublishPresence(void * client, int callbackId
     t.detach();
 }
 
-HYPHENATE_API void PresenceManager_SubscribePresences(void * client, int callbackId, const char * members[], int size, int64_t expiry, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PresenceManager_SubscribePresences(void * client, int callbackId, const char * members[], int size, int64_t expiry, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -97,7 +97,7 @@ HYPHENATE_API void PresenceManager_SubscribePresences(void * client, int callbac
     t.detach();
 }
 
-HYPHENATE_API void PresenceManager_UnsubscribePresences(void * client, int callbackId, const char * members[], int size, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PresenceManager_UnsubscribePresences(void * client, int callbackId, const char * members[], int size, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -128,7 +128,7 @@ HYPHENATE_API void PresenceManager_UnsubscribePresences(void * client, int callb
     t.detach();
 }
 
-HYPHENATE_API void PresenceManager_FetchSubscribedMembers(void * client, int callbackId, int pageNum, int pageSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PresenceManager_FetchSubscribedMembers(void * client, int callbackId, int pageNum, int pageSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -162,7 +162,7 @@ HYPHENATE_API void PresenceManager_FetchSubscribedMembers(void * client, int cal
     t.detach();
 }
 
-HYPHENATE_API void PresenceManager_FetchPresenceStatus(void * client, int callbackId, const char * members[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PresenceManager_FetchPresenceStatus(void * client, int callbackId, const char * members[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 

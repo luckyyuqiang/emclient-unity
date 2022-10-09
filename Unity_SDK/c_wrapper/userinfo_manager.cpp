@@ -110,7 +110,7 @@ void TestParseUserInfoResponseFromServer()
     return;
 }
 
-HYPHENATE_API void UserInfoManager_UpdateOwnInfo(void *client, int callbackId, void* userInfo, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL UserInfoManager_UpdateOwnInfo(void *client, int callbackId, void* userInfo, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -191,7 +191,7 @@ HYPHENATE_API void UserInfoManager_UpdateOwnInfo(void *client, int callbackId, v
     t.detach();
 }
 
-HYPHENATE_API void UserInfoManager_UpdateOwnInfoByAttribute(void *client, int callbackId, int userinfoType, const char* value, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL UserInfoManager_UpdateOwnInfoByAttribute(void *client, int callbackId, int userinfoType, const char* value, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -238,7 +238,7 @@ HYPHENATE_API void UserInfoManager_UpdateOwnInfoByAttribute(void *client, int ca
     t.detach();
 }
 
-HYPHENATE_API void UserInfoManager_FetchUserInfoByUserId(void *client, int callbackId, const char * users[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL UserInfoManager_FetchUserInfoByUserId(void *client, int callbackId, const char * users[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -303,7 +303,7 @@ HYPHENATE_API void UserInfoManager_FetchUserInfoByUserId(void *client, int callb
     t.detach();
 }
 
-HYPHENATE_API void UserInfoManager_FetchUserInfoByAttribute(void *client, int callbackId, const char * users[], int userSize, int userinfoTypes[], int typeSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL UserInfoManager_FetchUserInfoByAttribute(void *client, int callbackId, const char * users[], int userSize, int userinfoTypes[], int typeSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 

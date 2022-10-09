@@ -122,7 +122,7 @@ int GetLastProgress(std::string msgId)
     return it->second;
 }
 
-HYPHENATE_API void ChatManager_SendMessage(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress, void *mto, EMMessageBody::EMMessageBodyType type) {
+HYPHENATE_API void  AGORA_CALL ChatManager_SendMessage(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress, void *mto, EMMessageBody::EMMessageBodyType type) {
     
     if (!CheckClientInitOrNot(callbackId, onError)) return;
     
@@ -167,7 +167,7 @@ HYPHENATE_API void ChatManager_SendMessage(void *client, int callbackId, FUNC_On
     CLIENT->getChatManager().sendMessage(messagePtr);
 }
 
-HYPHENATE_API void ChatManager_AddListener(void *client,
+HYPHENATE_API void  AGORA_CALL ChatManager_AddListener(void *client,
                                        FUNC_OnMessagesReceived onMessagesReceived,
                                        FUNC_OnCmdMessagesReceived onCmdMessagesReceived,
                                        FUNC_OnMessagesRead onMessagesRead,
@@ -195,7 +195,7 @@ HYPHENATE_API void ChatManager_AddListener(void *client,
     }
 }
 
-HYPHENATE_API void ChatManager_FetchHistoryMessages(void *client, int callbackId, const char * conversationId, EMConversation::EMConversationType type, 
+HYPHENATE_API void  AGORA_CALL ChatManager_FetchHistoryMessages(void *client, int callbackId, const char * conversationId, EMConversation::EMConversationType type, 
     const char * startMessageId, int count, EMConversation::EMMessageSearchDirection direction, FUNC_OnSuccess_With_Result_V2 onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
@@ -245,7 +245,7 @@ HYPHENATE_API void ChatManager_FetchHistoryMessages(void *client, int callbackId
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_GetConversationsFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_GetConversationsFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -275,7 +275,7 @@ HYPHENATE_API void ChatManager_GetConversationsFromServer(void *client, int call
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_RemoveConversation(void *client, const char * conversationId, bool isRemoveMessages, bool isThread)
+HYPHENATE_API void  AGORA_CALL ChatManager_RemoveConversation(void *client, const char * conversationId, bool isRemoveMessages, bool isThread)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -285,7 +285,7 @@ HYPHENATE_API void ChatManager_RemoveConversation(void *client, const char * con
     LOG("Remove conversation completed.");
 }
 
-HYPHENATE_API void ChatManager_DownloadMessageAttachments(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress)
+HYPHENATE_API void  AGORA_CALL ChatManager_DownloadMessageAttachments(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -334,7 +334,7 @@ HYPHENATE_API void ChatManager_DownloadMessageAttachments(void *client, int call
     CLIENT->getChatManager().downloadMessageAttachments(messagePtr);
 }
 
-HYPHENATE_API void ChatManager_DownloadMessageThumbnail(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress)
+HYPHENATE_API void  AGORA_CALL ChatManager_DownloadMessageThumbnail(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -384,7 +384,7 @@ HYPHENATE_API void ChatManager_DownloadMessageThumbnail(void *client, int callba
     CLIENT->getChatManager().downloadMessageThumbnail(messagePtr);
 }
 
-HYPHENATE_API bool ChatManager_ConversationWithType(void *client, const char * conversationId, EMConversation::EMConversationType type, 
+HYPHENATE_API bool AGORA_CALL ChatManager_ConversationWithType(void *client, const char * conversationId, EMConversation::EMConversationType type, 
                                                     bool createIfNotExist, bool isThread)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
@@ -402,7 +402,7 @@ HYPHENATE_API bool ChatManager_ConversationWithType(void *client, const char * c
     }
 }
 
-HYPHENATE_API int ChatManager_GetUnreadMessageCount(void *client)
+HYPHENATE_API int AGORA_CALL ChatManager_GetUnreadMessageCount(void *client)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return -1;
 
@@ -420,7 +420,7 @@ HYPHENATE_API int ChatManager_GetUnreadMessageCount(void *client)
     return count;
 }
 
-HYPHENATE_API bool ChatManager_InsertMessages(void *client, void * messageList[], EMMessageBody::EMMessageBodyType typeList[], int size)
+HYPHENATE_API bool AGORA_CALL ChatManager_InsertMessages(void *client, void * messageList[], EMMessageBody::EMMessageBodyType typeList[], int size)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
 
@@ -438,7 +438,7 @@ HYPHENATE_API bool ChatManager_InsertMessages(void *client, void * messageList[]
     }
 }
 
-HYPHENATE_API void ChatManager_LoadAllConversationsFromDB(void *client, FUNC_OnSuccess_With_Result onSuccess)
+HYPHENATE_API void  AGORA_CALL ChatManager_LoadAllConversationsFromDB(void *client, FUNC_OnSuccess_With_Result onSuccess)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -459,7 +459,7 @@ HYPHENATE_API void ChatManager_LoadAllConversationsFromDB(void *client, FUNC_OnS
     delete []data;
 }
 
-HYPHENATE_API void ChatManager_GetMessage(void *client, const char * messageId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_GetMessage(void *client, const char * messageId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(-1, onError)) return;
 
@@ -485,7 +485,7 @@ HYPHENATE_API void ChatManager_GetMessage(void *client, const char * messageId, 
     }
 }
 
-HYPHENATE_API bool ChatManager_MarkAllConversationsAsRead(void *client)
+HYPHENATE_API bool AGORA_CALL ChatManager_MarkAllConversationsAsRead(void *client)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
 
@@ -505,7 +505,7 @@ HYPHENATE_API bool ChatManager_MarkAllConversationsAsRead(void *client)
     return ret;
 }
 
-HYPHENATE_API void ChatManager_RecallMessage(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress)
+HYPHENATE_API void  AGORA_CALL ChatManager_RecallMessage(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, FUNC_OnProgress onProgress)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -545,7 +545,7 @@ HYPHENATE_API void ChatManager_RecallMessage(void *client, int callbackId, const
     CLIENT->getChatManager().recallMessage(messagePtr, error);
 }
 
-HYPHENATE_API void ChatManager_ResendMessage(void *client, int callbackId, const char * messageId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_ResendMessage(void *client, int callbackId, const char * messageId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -588,7 +588,7 @@ HYPHENATE_API void ChatManager_ResendMessage(void *client, int callbackId, const
     delete item;
 }
 
-HYPHENATE_API void ChatManager_LoadMoreMessages(void *client, FUNC_OnSuccess_With_Result onSuccess, const char * keywords, int64_t timestamp, int maxcount, const char * from, EMConversation::EMMessageSearchDirection direction)
+HYPHENATE_API void  AGORA_CALL ChatManager_LoadMoreMessages(void *client, FUNC_OnSuccess_With_Result onSuccess, const char * keywords, int64_t timestamp, int maxcount, const char * from, EMConversation::EMMessageSearchDirection direction)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -616,7 +616,7 @@ HYPHENATE_API void ChatManager_LoadMoreMessages(void *client, FUNC_OnSuccess_Wit
     delete []data;
 }
 
-HYPHENATE_API void ChatManager_SendReadAckForConversation(void *client, int callbackId, const char * conversationId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_SendReadAckForConversation(void *client, int callbackId, const char * conversationId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -641,7 +641,7 @@ HYPHENATE_API void ChatManager_SendReadAckForConversation(void *client, int call
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_SendReadAckForMessage(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_SendReadAckForMessage(void *client, int callbackId, const char * messageId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -670,7 +670,7 @@ HYPHENATE_API void ChatManager_SendReadAckForMessage(void *client, int callbackI
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_SendReadAckForGroupMessage(void *client,int callbackId, const char * messageId, const char* ackContent, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_SendReadAckForGroupMessage(void *client,int callbackId, const char * messageId, const char* ackContent, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -701,7 +701,7 @@ HYPHENATE_API void ChatManager_SendReadAckForGroupMessage(void *client,int callb
     t.detach();
 }
 
-HYPHENATE_API bool ChatManager_UpdateMessage(void *client, void *mto, EMMessageBody::EMMessageBodyType type)
+HYPHENATE_API bool AGORA_CALL ChatManager_UpdateMessage(void *client, void *mto, EMMessageBody::EMMessageBodyType type)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
 
@@ -718,7 +718,7 @@ HYPHENATE_API bool ChatManager_UpdateMessage(void *client, void *mto, EMMessageB
     return conversationPtr->updateMessage(messagePtr);
 }
 
-HYPHENATE_API void ChatManager_RemoveMessagesBeforeTimestamp(void *client, int callbackId, int64_t timeStamp,  FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_RemoveMessagesBeforeTimestamp(void *client, int callbackId, int64_t timeStamp,  FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -738,7 +738,7 @@ HYPHENATE_API void ChatManager_RemoveMessagesBeforeTimestamp(void *client, int c
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_DeleteConversationFromServer(void *client, int callbackId, const char * conversationId, EMConversation::EMConversationType conversationType, bool isDeleteServerMessages, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_DeleteConversationFromServer(void *client, int callbackId, const char * conversationId, EMConversation::EMConversationType conversationType, bool isDeleteServerMessages, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -762,7 +762,7 @@ HYPHENATE_API void ChatManager_DeleteConversationFromServer(void *client, int ca
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_FetchSupportLanguages(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_FetchSupportLanguages(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -805,7 +805,7 @@ HYPHENATE_API void ChatManager_FetchSupportLanguages(void *client, int callbackI
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_TranslateMessage(void *client, int callbackId, void *mto, EMMessageBody::EMMessageBodyType type, const char * targetLanguages[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_TranslateMessage(void *client, int callbackId, void *mto, EMMessageBody::EMMessageBodyType type, const char * targetLanguages[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -840,7 +840,7 @@ HYPHENATE_API void ChatManager_TranslateMessage(void *client, int callbackId, vo
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_FetchGroupReadAcks(void* client, int callbackId, const char* messageId, const char* groupId, int pageSize, const char* startAckId, FUNC_OnSuccess_With_Result_V2 onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_FetchGroupReadAcks(void* client, int callbackId, const char* messageId, const char* groupId, int pageSize, const char* startAckId, FUNC_OnSuccess_With_Result_V2 onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -894,7 +894,7 @@ HYPHENATE_API void ChatManager_FetchGroupReadAcks(void* client, int callbackId, 
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_ReportMessage(void* client, int callbackId, const char* messageId, const char* tag, const char* reason, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_ReportMessage(void* client, int callbackId, const char* messageId, const char* tag, const char* reason, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -922,7 +922,7 @@ HYPHENATE_API void ChatManager_ReportMessage(void* client, int callbackId, const
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_AddReaction(void* client, int callbackId, const char* messageId, const char* reaction, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_AddReaction(void* client, int callbackId, const char* messageId, const char* reaction, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -949,7 +949,7 @@ HYPHENATE_API void ChatManager_AddReaction(void* client, int callbackId, const c
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_RemoveReaction(void* client, int callbackId, const char* messageId, const char* reaction, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_RemoveReaction(void* client, int callbackId, const char* messageId, const char* reaction, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
 
     if (!CheckClientInitOrNot(callbackId, onError)) return;
@@ -977,7 +977,7 @@ HYPHENATE_API void ChatManager_RemoveReaction(void* client, int callbackId, cons
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_GetReactionList(void* client, int callbackId, const char* messageIdList, const char* messageType, const char* groupId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_GetReactionList(void* client, int callbackId, const char* messageIdList, const char* messageType, const char* groupId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -1011,7 +1011,7 @@ HYPHENATE_API void ChatManager_GetReactionList(void* client, int callbackId, con
     t.detach();
 }
 
-HYPHENATE_API void ChatManager_GetReactionDetail(void* client, int callbackId, const char* messageId, const char* reaction, const char* cursor, uint64_t pageSize, FUNC_OnSuccess_With_Result_V2 onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ChatManager_GetReactionDetail(void* client, int callbackId, const char* messageId, const char* reaction, const char* cursor, uint64_t pageSize, FUNC_OnSuccess_With_Result_V2 onSuccessResult, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -1052,7 +1052,7 @@ HYPHENATE_API void ChatManager_GetReactionDetail(void* client, int callbackId, c
     t.detach();
 }
 
-HYPHENATE_API int  ChatManager_GetGroupAckCount(const char* messageId)
+HYPHENATE_API int AGORA_CALL  ChatManager_GetGroupAckCount(const char* messageId)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return 0;
 
@@ -1067,7 +1067,7 @@ HYPHENATE_API int  ChatManager_GetGroupAckCount(const char* messageId)
         return (int)messagePtr->groupAckCount();
     }
 }
-HYPHENATE_API bool ChatManager_GetHasDeliverAck(const char* messageId)
+HYPHENATE_API bool AGORA_CALL ChatManager_GetHasDeliverAck(const char* messageId)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
 
@@ -1083,7 +1083,7 @@ HYPHENATE_API bool ChatManager_GetHasDeliverAck(const char* messageId)
     }
 }
 
-HYPHENATE_API bool ChatManager_GetHasReadAck(const char* messageId)
+HYPHENATE_API bool AGORA_CALL ChatManager_GetHasReadAck(const char* messageId)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
 
@@ -1099,7 +1099,7 @@ HYPHENATE_API bool ChatManager_GetHasReadAck(const char* messageId)
     }
 }
 
-HYPHENATE_API void ChatManager_GetReactionListForMsg(const char* messageId, char* buf, int len)
+HYPHENATE_API void  AGORA_CALL ChatManager_GetReactionListForMsg(const char* messageId, char* buf, int len)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -1124,7 +1124,7 @@ HYPHENATE_API void ChatManager_GetReactionListForMsg(const char* messageId, char
     }
 }
 
-HYPHENATE_API void ChatManager_GetChatThreadForMsg(const char* messageId, char* buf, int len)
+HYPHENATE_API void  AGORA_CALL ChatManager_GetChatThreadForMsg(const char* messageId, char* buf, int len)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 

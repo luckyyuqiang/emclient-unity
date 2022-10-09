@@ -17,7 +17,7 @@
 
 extern EMClient* gClient;
 
-HYPHENATE_API void PushManager_GetIgnoredGroupIds(void *client, FUNC_OnSuccess_With_Result onSuccess)
+HYPHENATE_API void  AGORA_CALL PushManager_GetIgnoredGroupIds(void *client, FUNC_OnSuccess_With_Result onSuccess)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -38,7 +38,7 @@ HYPHENATE_API void PushManager_GetIgnoredGroupIds(void *client, FUNC_OnSuccess_W
     delete []data;
 }
 
-HYPHENATE_API void PushManager_GetPushConfig(void *client, FUNC_OnSuccess_With_Result onSuccess)
+HYPHENATE_API void  AGORA_CALL PushManager_GetPushConfig(void *client, FUNC_OnSuccess_With_Result onSuccess)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -56,7 +56,7 @@ HYPHENATE_API void PushManager_GetPushConfig(void *client, FUNC_OnSuccess_With_R
     delete data[0];
 }
 
-HYPHENATE_API void PushManager_GetUserConfigsFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_GetUserConfigsFromServer(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -84,7 +84,7 @@ HYPHENATE_API void PushManager_GetUserConfigsFromServer(void *client, int callba
     t.detach();
 }
 
-HYPHENATE_API void PushManager_IgnoreGroupPush(void *client, int callbackId, const char * groupId, bool noDisturb, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_IgnoreGroupPush(void *client, int callbackId, const char * groupId, bool noDisturb, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -109,7 +109,7 @@ HYPHENATE_API void PushManager_IgnoreGroupPush(void *client, int callbackId, con
     t.detach();
 }
 
-HYPHENATE_API void PushManager_UpdatePushNoDisturbing(void *client, int callbackId, bool noDisturb, int startTime, int endTime, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_UpdatePushNoDisturbing(void *client, int callbackId, bool noDisturb, int startTime, int endTime, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -142,7 +142,7 @@ HYPHENATE_API void PushManager_UpdatePushNoDisturbing(void *client, int callback
     t.detach();
 }
 
-HYPHENATE_API void PushManager_UpdatePushDisplayStyle(void *client, int callbackId, EMPushConfigs::EMPushDisplayStyle style, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_UpdatePushDisplayStyle(void *client, int callbackId, EMPushConfigs::EMPushDisplayStyle style, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -161,7 +161,7 @@ HYPHENATE_API void PushManager_UpdatePushDisplayStyle(void *client, int callback
     t.detach();
 }
 
-HYPHENATE_API void PushManager_UpdateFCMPushToken(void *client, int callbackId, const char * token, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_UpdateFCMPushToken(void *client, int callbackId, const char * token, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -186,7 +186,7 @@ HYPHENATE_API void PushManager_UpdateFCMPushToken(void *client, int callbackId, 
     t.detach();
 }
 
-HYPHENATE_API void PushManager_UpdateHMSPushToken(void *client, int callbackId, const char * token, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_UpdateHMSPushToken(void *client, int callbackId, const char * token, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -211,7 +211,7 @@ HYPHENATE_API void PushManager_UpdateHMSPushToken(void *client, int callbackId, 
     t.detach();
 }
 
-HYPHENATE_API void PushManager_UpdatePushNickName(void *client, int callbackId, const char * nickname, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_UpdatePushNickName(void *client, int callbackId, const char * nickname, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -236,7 +236,7 @@ HYPHENATE_API void PushManager_UpdatePushNickName(void *client, int callbackId, 
     t.detach();
 }
 
-HYPHENATE_API void PushManager_ReportPushAction(void *client, int callbackId, const char * parameters, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_ReportPushAction(void *client, int callbackId, const char * parameters, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -261,7 +261,7 @@ HYPHENATE_API void PushManager_ReportPushAction(void *client, int callbackId, co
     t.detach();
 }
 
-HYPHENATE_API void PushManager_SetSilentModeForAll(void* client, int callbackId, const char* param, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_SetSilentModeForAll(void* client, int callbackId, const char* param, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     EMError error;
     if (!MandatoryCheck(param, error)) {
@@ -291,7 +291,7 @@ HYPHENATE_API void PushManager_SetSilentModeForAll(void* client, int callbackId,
     t.detach();
 }
 
-HYPHENATE_API void PushManager_GetSilentModeForAll(void* client, int callbackId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_GetSilentModeForAll(void* client, int callbackId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     std::thread t([=]() {
         EMError error;
@@ -312,7 +312,7 @@ HYPHENATE_API void PushManager_GetSilentModeForAll(void* client, int callbackId,
     t.detach();
 }
 
-HYPHENATE_API void PushManager_SetSilentModeForConversation(void* client, int callbackId, const char* convId, EMConversation::EMConversationType type, const char* param, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_SetSilentModeForConversation(void* client, int callbackId, const char* convId, EMConversation::EMConversationType type, const char* param, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     EMError error;
     if (!MandatoryCheck(convId, param, error)) {
@@ -343,7 +343,7 @@ HYPHENATE_API void PushManager_SetSilentModeForConversation(void* client, int ca
     t.detach();
 }
 
-HYPHENATE_API void PushManager_GetSilentModeForConversation(void* client, int callbackId, const char* convId, EMConversation::EMConversationType type, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_GetSilentModeForConversation(void* client, int callbackId, const char* convId, EMConversation::EMConversationType type, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     EMError error;
     if (!MandatoryCheck(convId, error)) {
@@ -372,7 +372,7 @@ HYPHENATE_API void PushManager_GetSilentModeForConversation(void* client, int ca
     t.detach();
 }
 
-HYPHENATE_API void PushManager_GetSilentModeForConversations(void* client, int callbackId, const char* param, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_GetSilentModeForConversations(void* client, int callbackId, const char* param, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     EMError error;
     if (!MandatoryCheck(param, error)) {
@@ -402,7 +402,7 @@ HYPHENATE_API void PushManager_GetSilentModeForConversations(void* client, int c
     t.detach();
 }
 
-HYPHENATE_API void PushManager_SetPreferredNotificationLanguage(void* client, int callbackId, const char* laguangeCode, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_SetPreferredNotificationLanguage(void* client, int callbackId, const char* laguangeCode, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     EMError error;
     if (!MandatoryCheck(laguangeCode, error)) {
@@ -427,7 +427,7 @@ HYPHENATE_API void PushManager_SetPreferredNotificationLanguage(void* client, in
     t.detach();
 }
 
-HYPHENATE_API void PushManager_GetPreferredNotificationLanguage(void* client, int callbackId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL PushManager_GetPreferredNotificationLanguage(void* client, int callbackId, FUNC_OnSuccess_With_Result onSuccessResult, FUNC_OnError onError)
 {
     std::thread t([=]() {
         EMError error;

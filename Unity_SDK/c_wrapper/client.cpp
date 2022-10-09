@@ -296,7 +296,7 @@ void GetAutoLoginConfigFromFile()
         global_autologin_config.availablePeriod);
 }
 
-HYPHENATE_API void Client_CreateAccount(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, const char *username, const char *password)
+HYPHENATE_API void  AGORA_CALL Client_CreateAccount(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, const char *username, const char *password)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -371,7 +371,7 @@ EMChatConfigsPtr ConfigsFromOptions(Options *options) {
     return configs;
 }
 
-HYPHENATE_API void* Client_InitWithOptions(Options *options, FUNC_OnConnected onConnected,
+HYPHENATE_API void* AGORA_CALL Client_InitWithOptions(Options *options, FUNC_OnConnected onConnected,
                                            FUNC_OnDisconnected onDisconnected, FUNC_OnPong onPong,
                                            FUNC_onTokenNotification onTokenNotification)
 {
@@ -408,7 +408,7 @@ HYPHENATE_API void* Client_InitWithOptions(Options *options, FUNC_OnConnected on
 }
 
 // Must be called afer Client_InitWithOptions!
-HYPHENATE_API void Client_AddMultiDeviceListener(FUNC_onContactMultiDevicesEvent contactEventFunc,
+HYPHENATE_API void  AGORA_CALL Client_AddMultiDeviceListener(FUNC_onContactMultiDevicesEvent contactEventFunc,
                                                  FUNC_onGroupMultiDevicesEvent groupEventFunc,
                                                  FUNC_undisturbMultiDevicesEvent undisturbEventFunc,
                                                  FUNC_onThreadMultiDevicesEvent threadEventFunc)
@@ -422,7 +422,7 @@ HYPHENATE_API void Client_AddMultiDeviceListener(FUNC_onContactMultiDevicesEvent
     }
 }
 
-HYPHENATE_API void Client_Login(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, const char *username, const char *pwdOrToken, bool isToken)
+HYPHENATE_API void  AGORA_CALL Client_Login(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, const char *username, const char *pwdOrToken, bool isToken)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -459,7 +459,7 @@ HYPHENATE_API void Client_Login(void *client, int callbackId, FUNC_OnSuccess onS
     t.detach();
 }
 
-HYPHENATE_API void Client_Logout(void *client, int callbackId, FUNC_OnSuccess onSuccess, bool unbindDeviceToken)
+HYPHENATE_API void  AGORA_CALL Client_Logout(void *client, int callbackId, FUNC_OnSuccess onSuccess, bool unbindDeviceToken)
 {
     if (!CheckClientInitOrNot(callbackId, nullptr)) return;
 
@@ -483,15 +483,15 @@ HYPHENATE_API void Client_Logout(void *client, int callbackId, FUNC_OnSuccess on
     t.join();
 }
 
-HYPHENATE_API void Client_StartLog(const char *logFilePath) {
+HYPHENATE_API void  AGORA_CALL Client_StartLog(const char *logFilePath) {
     LogHelper::getInstance().startLogService(logFilePath);
 }
 
-HYPHENATE_API void Client_StopLog() {
+HYPHENATE_API void  AGORA_CALL Client_StopLog() {
     return LogHelper::getInstance().stopLogService();
 }
 
-HYPHENATE_API void Client_LoginToken(void *client, FUNC_OnSuccess_With_Result onSuccess) {
+HYPHENATE_API void  AGORA_CALL Client_LoginToken(void *client, FUNC_OnSuccess_With_Result onSuccess) {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
     const EMLoginInfo& loginInfo = CLIENT->getLoginInfo();
@@ -500,17 +500,17 @@ HYPHENATE_API void Client_LoginToken(void *client, FUNC_OnSuccess_With_Result on
     if(onSuccess) onSuccess((void **)data, DataType::String, 1, -1);
 }
 
-HYPHENATE_API bool Client_isConnected(void* client) {
+HYPHENATE_API bool AGORA_CALL Client_isConnected(void* client) {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
     return CLIENT->isConnected();
 }
-HYPHENATE_API bool Client_isLoggedIn(void* client) {
+HYPHENATE_API bool AGORA_CALL Client_isLoggedIn(void* client) {
     if (!CheckClientInitOrNot(-1, nullptr)) return false;
     return CLIENT->isLoggedIn();
 }
 
 // this function must be executed after logout!!!
-HYPHENATE_API void Client_ClearResource(void *client) {
+HYPHENATE_API void  AGORA_CALL Client_ClearResource(void *client) {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
     if(true == G_LOGIN_STATUS) {
@@ -549,7 +549,7 @@ HYPHENATE_API void Client_ClearResource(void *client) {
     LOG("Clear resource completed----------");
 }
 
-HYPHENATE_API void Client_LoginWithAgoraToken(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, const char *username, const char *agoraToken)
+HYPHENATE_API void  AGORA_CALL Client_LoginWithAgoraToken(void *client, int callbackId, FUNC_OnSuccess onSuccess, FUNC_OnError onError, const char *username, const char *agoraToken)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -614,7 +614,7 @@ HYPHENATE_API void Client_LoginWithAgoraToken(void *client, int callbackId, FUNC
     t.detach();
 }
 
-HYPHENATE_API void Client_RenewAgoraToken(void *client, const char *agoraToken)
+HYPHENATE_API void  AGORA_CALL Client_RenewAgoraToken(void *client, const char *agoraToken)
 {
     if (!CheckClientInitOrNot(-1, nullptr)) return;
 
@@ -663,7 +663,7 @@ HYPHENATE_API void Client_RenewAgoraToken(void *client, const char *agoraToken)
     LOG("renewToken complete");
 }
 
-HYPHENATE_API void Client_AutoLogin(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL Client_AutoLogin(void *client, int callbackId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 

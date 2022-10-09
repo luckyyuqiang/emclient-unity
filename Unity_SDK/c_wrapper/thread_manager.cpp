@@ -21,7 +21,7 @@ extern EMClient* gClient;
 
 ThreadManagerListener* gThreadListener = nullptr;
 
-HYPHENATE_API void ThreadManager_AddListener(void* client,
+HYPHENATE_API void  AGORA_CALL ThreadManager_AddListener(void* client,
     FUNC_OnChatThreadCreate OnChatThreadCreate,
     FUNC_OnChatThreadUpdate OnChatThreadUpdate,
     FUNC_OnChatThreadDestroy OnChatThreadDestroy,
@@ -37,7 +37,7 @@ HYPHENATE_API void ThreadManager_AddListener(void* client,
     }
 }
 
-HYPHENATE_API void ThreadManager_GetThreadWithThreadId(void* client, int callbackId, const char* threadId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_GetThreadWithThreadId(void* client, int callbackId, const char* threadId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -67,7 +67,7 @@ HYPHENATE_API void ThreadManager_GetThreadWithThreadId(void* client, int callbac
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_CreateThread(void* client, int callbackId, const char* threadName, const char* msgId, const char* groupId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_CreateThread(void* client, int callbackId, const char* threadName, const char* msgId, const char* groupId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -99,7 +99,7 @@ HYPHENATE_API void ThreadManager_CreateThread(void* client, int callbackId, cons
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_JoinThread(void* client, int callbackId, const char* threadId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_JoinThread(void* client, int callbackId, const char* threadId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -130,7 +130,7 @@ HYPHENATE_API void ThreadManager_JoinThread(void* client, int callbackId, const 
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_LeaveThread(void* client, int callbackId, const char* threadId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_LeaveThread(void* client, int callbackId, const char* threadId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -159,7 +159,7 @@ HYPHENATE_API void ThreadManager_LeaveThread(void* client, int callbackId, const
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_DestroyThread(void* client, int callbackId, const char* threadId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_DestroyThread(void* client, int callbackId, const char* threadId, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -188,7 +188,7 @@ HYPHENATE_API void ThreadManager_DestroyThread(void* client, int callbackId, con
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_RemoveThreadMember(void* client, int callbackId, const char* threadId, const char* username, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_RemoveThreadMember(void* client, int callbackId, const char* threadId, const char* username, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -218,7 +218,7 @@ HYPHENATE_API void ThreadManager_RemoveThreadMember(void* client, int callbackId
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_ChangeThreadSubject(void* client, int callbackId, const char* threadId, const char* newSubject, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_ChangeThreadSubject(void* client, int callbackId, const char* threadId, const char* newSubject, FUNC_OnSuccess onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -248,7 +248,7 @@ HYPHENATE_API void ThreadManager_ChangeThreadSubject(void* client, int callbackI
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_FetchThreadMembers(void* client, int callbackId, const char* threadId, const char* cursor, int pageSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_FetchThreadMembers(void* client, int callbackId, const char* threadId, const char* cursor, int pageSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -280,7 +280,7 @@ HYPHENATE_API void ThreadManager_FetchThreadMembers(void* client, int callbackId
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_FetchThreadListOfGroup(void* client, int callbackId, const char* cursor, int pageSize, const char* groupId, bool joined, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_FetchThreadListOfGroup(void* client, int callbackId, const char* cursor, int pageSize, const char* groupId, bool joined, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -312,7 +312,7 @@ HYPHENATE_API void ThreadManager_FetchThreadListOfGroup(void* client, int callba
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_FetchMineJoinedThreadList(void* client, int callbackId, const char* cursor, int pageSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_FetchMineJoinedThreadList(void* client, int callbackId, const char* cursor, int pageSize, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -337,7 +337,7 @@ HYPHENATE_API void ThreadManager_FetchMineJoinedThreadList(void* client, int cal
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_GetThreadDetail(void* client, int callbackId, const char* threadId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_GetThreadDetail(void* client, int callbackId, const char* threadId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 
@@ -367,7 +367,7 @@ HYPHENATE_API void ThreadManager_GetThreadDetail(void* client, int callbackId, c
     t.detach();
 }
 
-HYPHENATE_API void ThreadManager_GetLastMessageAccordingThreads(void* client, int callbackId, const char* threadIds[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
+HYPHENATE_API void  AGORA_CALL ThreadManager_GetLastMessageAccordingThreads(void* client, int callbackId, const char* threadIds[], int size, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
 {
     if (!CheckClientInitOrNot(callbackId, onError)) return;
 

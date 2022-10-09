@@ -9,7 +9,8 @@
 #include <windows.h>
 
 #include <cstdint>
-#define AGORA_CALL __cdecl
+//#define AGORA_CALL __cdecl
+#define AGORA_CALL __stdcall
 #if defined(AGORACHAT_EXPORT)
 #define HYPHENATE_API extern "C" __declspec(dllexport)
 #else
