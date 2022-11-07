@@ -268,7 +268,7 @@ namespace AgoraChat{
 		internal static extern void GroupManager_DeclineJoinGroupApplication(IntPtr client, int callbackId, string groupId, string username, [In, MarshalAs(UnmanagedType.LPTStr)] string reason, OnSuccess onSuccess, OnErrorV2 onError);
 
 		[DllImport(MyLibName)]
-		internal static extern void GroupManager_DownloadGroupSharedFile(IntPtr client, int callbackId, string groupId, string filePath, string fileId, OnSuccess onSuccess, OnErrorV2 onError);
+		internal static extern void GroupManager_DownloadGroupSharedFile(IntPtr client, int callbackId, string groupId, [In, MarshalAs(UnmanagedType.LPTStr)] string filePath, string fileId, OnSuccess onSuccess, OnErrorV2 onError);
 
 		[DllImport(MyLibName)]
 		internal static extern void GroupManager_FetchGroupAnnouncement(IntPtr client, int callbackId, string groupId, OnSuccessResult onSuccessResult = null, OnErrorV2 onError = null);
@@ -354,7 +354,7 @@ namespace AgoraChat{
 		internal static extern void GroupManager_ChangeGroupExtension(IntPtr client, int callbackId, string groupId, string newExtension, OnSuccessResult onSuccessResult = null, OnErrorV2 onError = null);
 
 		[DllImport(MyLibName)]
-		internal static extern void GroupManager_UploadGroupSharedFile(IntPtr client, int callbackId, string groupId, string filePath, OnSuccess onSuccess, OnErrorV2 onError, OnProgressV2 onProgress = null);
+		internal static extern void GroupManager_UploadGroupSharedFile(IntPtr client, int callbackId, string groupId, [In, MarshalAs(UnmanagedType.LPTStr)] string filePath, OnSuccess onSuccess, OnErrorV2 onError, OnProgressV2 onProgress = null);
 
 		/** RoomManager Stub **/
 		[DllImport(MyLibName)]

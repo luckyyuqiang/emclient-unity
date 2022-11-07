@@ -496,7 +496,8 @@ namespace AgoraChat
                     {
                         for (int i = 0; i < dSize; i++)
                         {
-                            var file = Marshal.PtrToStructure<GroupSharedFile>(data[i]);
+                            var fileTO = Marshal.PtrToStructure<GroupSharedFileTO>(data[i]);
+                            var file = fileTO.Unmarshall();
                             fileList.Add(file);
                         }
                         ChatCallbackObject.ValueCallBackOnSuccess<List<GroupSharedFile>>(cbId, fileList);

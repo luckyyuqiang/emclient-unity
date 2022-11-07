@@ -575,6 +575,9 @@ HYPHENATE_API void GroupManager_DownloadGroupSharedFile(void *client, int callba
         if(onError) onError(error.mErrorCode, error.mDescription.c_str(), callbackId);
         return;
     }
+
+    string fp = GetUTF8FromUnicode(filePath);
+
     EMCallbackPtr callbackPtr(new EMCallback(gCallbackObserverHandle,
                                              [=]()->bool {
                                                 LOG("Download group shared file succeeds.");
@@ -587,7 +590,7 @@ HYPHENATE_API void GroupManager_DownloadGroupSharedFile(void *client, int callba
                                                 return true;
                                              }));
     
-    EMGroupPtr groupPtr = CLIENT->getGroupManager().downloadGroupSharedFile(groupId, filePath, fileId, callbackPtr, error);
+    EMGroupPtr groupPtr = CLIENT->getGroupManager().downloadGroupSharedFile(groupId, fp, fileId, callbackPtr, error);
 }
 
 HYPHENATE_API void GroupManager_FetchGroupAnnouncement(void *client, int callbackId, const char * groupId, FUNC_OnSuccess_With_Result onSuccess, FUNC_OnError onError)
@@ -1378,7 +1381,7 @@ HYPHENATE_API void GroupManager_UploadGroupSharedFile(void *client, int callback
 
     std::string processId = std::to_string(callbackId);
     std::string groupIdStr = groupId;
-    std::string filePathStr = filePath;
+    std::string filePathStr = GetUTF8FromUnicode(filePath);
 
     AddGroupProgressItem(processId);
 

@@ -252,7 +252,7 @@ std::string GetUTF8FromUnicode(const char* src)
     return dst;
 }
 
-std::string UTF8toANSI(std::string& strUTF8)
+std::string GetUTF8FromANSI(std::string& strUTF8)
 {
     std::string strAnsi = strUTF8;
 
@@ -275,7 +275,7 @@ std::string UTF8toANSI(std::string& strUTF8)
     return strAnsi;
 }
 
-std::string ANSItoUTF8(std::string& strAnsi)
+std::string GetANSIFromUTF8(std::string& strAnsi)
 {
     std::string strUTF8 = strAnsi;
 

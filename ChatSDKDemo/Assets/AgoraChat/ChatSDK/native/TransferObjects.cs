@@ -1760,6 +1760,34 @@ namespace AgoraChat
         }
     }
 
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    public class GroupSharedFileTO
+    {
+        [MarshalAs(UnmanagedType.LPTStr)]
+        public string FileName;
+        public string FileId;
+        public string FileOwner;
+        public long CreateTime;
+        public long FileSize;
+
+        public GroupSharedFileTO()
+        {
+
+        }
+
+        internal GroupSharedFile Unmarshall()
+        {
+            var result = new GroupSharedFile();
+            result.FileName = TransformTool.GetUnicodeStringFromUTF8(FileName);
+            result.FileId = FileId;
+            result.FileOwner = FileOwner;
+            result.CreateTime = CreateTime;
+            result.FileSize = FileSize;
+            return result;
+        }
+    }
+
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class GroupReadAckTO
     {

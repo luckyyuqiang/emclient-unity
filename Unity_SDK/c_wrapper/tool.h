@@ -46,8 +46,8 @@ std::string GetRightValue(const std::string& str);
 
 char* GetPointer(const char* src);
 std::string GetUTF8FromUnicode(const char* src);
-std::string UTF8toANSI(std::string& strUTF8);
-std::string ANSItoUTF8(std::string& strAnsi);
+std::string GetUTF8FromANSI(std::string& strUTF8);
+std::string GetANSIFromUTF8(std::string& strAnsi);
 
 #ifndef _WIN32
 void StartTimer(int interval, TIMER_FUNC timer_func);
