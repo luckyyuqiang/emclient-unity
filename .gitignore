@@ -142,8 +142,21 @@ sysinfo.txt
 **/*.framework
 **/*.a
 **/*.so
+**/Packages/
+**/Logs/
+**/Plugins/iOS/
+**/ProjectSettings/
+**/.vsconfig
 
 # windows sdk
 *.nupkg
 *.dll
 **/ProjectSettings/
+AgoraChatSDK/CWrapper/Wrapper/Wrapper_Common/build_win/proj
+
+# Plugins
+UnityChatDemo/Assets/AgoraChat/Plugins
+
+# Unity project files 
+*/Assembly-CSharp-Editor.csproj
+*/Assembly-CSharp.csproj
