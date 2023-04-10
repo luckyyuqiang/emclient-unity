@@ -1,9 +1,11 @@
 
 #include <mutex>
+#include <time.h>
 
 #include "message/emmessage.h"
 #include "emclient.h"
 #include "emchatmanager_interface.h"
+#include "emlog.h"
 
 #include "sdk_wrapper_internal.h"
 #include "tool.h"
@@ -147,6 +149,8 @@ namespace sdk_wrapper {
         AddMsgItem(msg_id, message_ptr);
         AddProgressItem(msg_id);
 
+        clock_t t1 = clock();
+
         EMCallbackPtr callback_ptr(new EMCallback(gCallbackObserverHandle,
             [=]()->bool {
                 string update_msg_json = JsonStringFromUpdatedMessage(msg_id);
@@ -154,6 +158,8 @@ namespace sdk_wrapper {
                 CallBack(local_cbid.c_str(), call_back_jstr.c_str());
                 DeleteMsgItem(msg_id);
                 DeleteProgressItem(msg_id);
+                clock_t t2 = clock();
+                EMLog::getInstance().getErrorLogStream() << "CheckDelay ChatManager_SendMessage success spend: " << (long)((t2 - t1) * 1000 / CLOCKS_PER_SEC);;
                 return true;
             },
             [=](const EMErrorPtr error)->bool {
@@ -162,6 +168,8 @@ namespace sdk_wrapper {
                 CallBack(local_cbid.c_str(), call_back_jstr.c_str());
                 DeleteMsgItem(msg_id);
                 DeleteProgressItem(msg_id);
+                clock_t t2 = clock();
+                EMLog::getInstance().getErrorLogStream() << "CheckDelay ChatManager_SendMessage failed spend: " << (long)((t2 - t1) * 1000 / CLOCKS_PER_SEC);
                 return true;
             },
             [=](int progress) {
@@ -170,6 +178,8 @@ namespace sdk_wrapper {
                 string call_back_jstr = MyJson::ToJsonWithProcess(local_cbid.c_str(), progress);
                 CallBackProgress(local_cbid.c_str(), call_back_jstr.c_str());
                 UpdateProgressMap(msg_id, progress);
+                clock_t t2 = clock();
+                EMLog::getInstance().getErrorLogStream() << "CheckDelay ChatManager_SendMessage process spend: " << (long)((t2 - t1) * 1000 / CLOCKS_PER_SEC);
             }
             return;
             }));

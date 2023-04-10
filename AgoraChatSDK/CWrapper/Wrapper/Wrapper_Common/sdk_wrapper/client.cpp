@@ -2,6 +2,8 @@
 
 #include "emclient.h"
 #include "emconfigmanager.h"
+#include "emcollector.h"
+#include "emlog.h"
 
 #include "tool.h"
 #include "models.h"
@@ -242,13 +244,20 @@ namespace sdk_wrapper
         string local_cbid = cbid;
 
         thread t([=]() {
+            EMTimeTag timeTag;
+            timeTag.start();
             CLIENT->logout();
+            timeTag.stop();
+            EMLog::getInstance().getErrorLogStream() << "CheckDelay CLIENT->logout spend: " <<timeTag.timeSpent();
 
+            timeTag.start();
             if(token_wrapper.autologin_config_.expireTS.size() > 0)
                 StopTimer();
 
             string call_back_jstr = MyJson::ToJsonWithSuccess(local_cbid.c_str());
             CallBack(local_cbid.c_str(), call_back_jstr.c_str());
+            timeTag.stop();
+            EMLog::getInstance().getErrorLogStream() << "CheckDelay remain in Client_Logout spend: " << timeTag.timeSpent();
         });
         t.join();
         return nullptr;
