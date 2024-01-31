@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace AgoraChat
@@ -590,6 +591,7 @@ namespace AgoraChat
             _clientImpl.DeleteMultiDeviceDelegate(multiDeviceDelegate);
         }
 
+        [Obsolete]
         public void DeInit()
         {
             _clientImpl.CleanUp();
