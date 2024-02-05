@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace AgoraChat
@@ -130,7 +131,7 @@ namespace AgoraChat
          * \~english
          * The SDK version.
          */
-        public string SdkVersion { get => "1.2.0"; }
+        public string SdkVersion { get => "1.2.1"; }
 
 
         /**
@@ -590,6 +591,7 @@ namespace AgoraChat
             _clientImpl.DeleteMultiDeviceDelegate(multiDeviceDelegate);
         }
 
+        [Obsolete]
         public void DeInit()
         {
             _clientImpl.CleanUp();
