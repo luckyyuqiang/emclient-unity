@@ -105,10 +105,10 @@ namespace AgoraChat
         {
             if (IClient.IsInit)
             {
-                /*if (SDKClient.Instance.IsLoggedIn)
+                if (SDKClient.Instance.IsLoggedIn)
                 {
                     SDKClient.Instance.Logout(false);
-                }*/
+                }
                 SDKClient.Instance.ClearResource();
             }
         }
