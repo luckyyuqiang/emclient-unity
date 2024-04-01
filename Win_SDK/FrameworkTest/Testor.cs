@@ -6203,9 +6203,23 @@ namespace WinSDKTest
 
         public void CallFunc_IGroupManager_DeclineGroupJoinApplication(string _groupId = "")
         {
-            Console.WriteLine("DeclineGroupJoinApplication only can be called in OnRequestToJoinReceivedFromGroup. ");
-            Console.WriteLine($"Here only set to accept application for group id:{_groupId}");
-            select_context.group_application_select[_groupId] = 0;
+            Console.WriteLine("Note: DeclineGroupJoinApplication only can be called in OnRequestToJoinReceivedFromGroup. ");
+            //Console.WriteLine($"Here only set to accept application for group id:{_groupId}");
+            //select_context.group_application_select[_groupId] = 0;
+
+            string groupId = GetParamValueFromContext(0);
+            string username = GetParamValueFromContext(1);
+            string reason = GetParamValueFromContext(2);
+            SDKClient.Instance.GroupManager.DeclineGroupJoinApplication(groupId, username, reason, new CallBack(
+                onSuccess: () =>
+                {
+                    Console.WriteLine($"DeclineGroupJoinApplication success.");
+                },
+                onError: (code, desc) =>
+                {
+                    Console.WriteLine($"DeclineGroupJoinApplication failed, code:{code}, desc:{desc}");
+                }
+            ));
         }
 
         public void CallFunc_IGroupManager_DestroyGroup(string _groupId = "")
