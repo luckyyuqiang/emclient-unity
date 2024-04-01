@@ -274,6 +274,7 @@ public class EMMessageHelper {
                 bodyData.put("body", EMMessageBodyHelper.voiceBodyToJson((EMVoiceMessageBody) message.getBody()));
                 bodyData.put("type", 4);
             }
+            break;
             case COMBINE: {
                 bodyData.put("body", EMMessageBodyHelper.combineBodyToJson((EMCombineMessageBody) message.getBody()));
                 bodyData.put("type", 8);
