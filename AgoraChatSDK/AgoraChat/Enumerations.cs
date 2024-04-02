@@ -490,6 +490,36 @@ namespace AgoraChat
         DOWN
     };
 
+    public enum MessageSearchScope
+    {
+        /**
+        * \~chinese
+        * 搜索范围为消息内容。
+        *
+        * \~english
+        * The search scope is message content.
+        */
+        CONTENT,
+
+        /**
+        * \~chinese
+        * 搜索范围为消息扩展字段。
+        *
+        * \~english
+        * The search scope is message ext field.
+        */
+        EXT,
+
+        /**
+        * \~chinese
+        * 搜索范围为为消息内容和消息扩展字段。
+        *
+        * \~english
+        * The search scope includes message content and message ext field.
+        */
+        ALL,
+    };
+
     /**
     * \~chinese
     * 消息状态枚举。

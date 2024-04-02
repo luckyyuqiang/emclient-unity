@@ -91,6 +91,7 @@ namespace AgoraChat
         internal const string fetchHistoryMessages = "fetchHistoryMessages";
         internal const string fetchHistoryMessagesBy = "fetchHistoryMessagesBy";
         internal const string searchChatMsgFromDB = "searchChatMsgFromDB";
+        internal const string searchChatMsgFromDBWithScope = "searchChatMsgFromDBWithScope";
         internal const string getMessage = "getMessage";
         internal const string asyncFetchGroupAcks = "asyncFetchGroupAcks";
         internal const string deleteRemoteConversation = "deleteRemoteConversation";

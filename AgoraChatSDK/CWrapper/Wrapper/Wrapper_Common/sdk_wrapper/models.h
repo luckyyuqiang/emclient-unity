@@ -137,6 +137,9 @@ namespace sdk_wrapper {
 
 		static int EMMessageSearchDirectionToInt(EMConversation::EMMessageSearchDirection direction);
 		static EMConversation::EMMessageSearchDirection EMMessageSearchDirectionFromInt(int i);
+
+        static int EMMessageSearchScopeToInt(EMConversation::EMMessageSearchScope scope);
+        static EMConversation::EMMessageSearchScope EMMessageSearchScopeFromInt(int i);
 	};
 
 	class SupportLanguage

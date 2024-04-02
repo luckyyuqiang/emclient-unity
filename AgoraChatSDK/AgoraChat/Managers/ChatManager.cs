@@ -665,9 +665,53 @@ namespace AgoraChat
             jo_param.AddWithoutNull("from", from ?? "");
             jo_param.AddWithoutNull("count", maxCount);
             jo_param.AddWithoutNull("timestamp", timestamp.ToString());
-            jo_param.AddWithoutNull("direction", direction == MessageSearchDirection.UP ? "up" : "down");
+            jo_param.AddWithoutNull("direction", direction.ToInt());
 
             JSONNode jn = NativeGet(SDKMethod.searchChatMsgFromDB, jo_param).GetReturnJsonNode();
+            return List.BaseModelListFromJsonArray<Message>(jn);
+        }
+
+        /**
+        * \~chinese
+        * 基于消息范围查询指定数量的本地消息。
+        *
+        * **注意**
+        *
+        * 若查询消息数量较大，需考虑内存消耗，每次最多可查询 200 条消息。
+        *
+        * @param keywords   查找关键字，字符串类型。
+        * @param timestamp  查询的 Unix 时间戳，单位为毫秒。
+        * @param maxCount   查询的最大消息数。
+        * @param from       消息来源，一般指会话 ID。
+        * @param direction	查询方向，详见 {@link MessageSearchDirection}。
+        * @param scope	    查询范围，详见 {@link MessageSearchScope}。
+        * @return           消息列表。
+        *
+        * \~english
+        * Queries local messages basing on message scope.
+        *
+        * **Note**
+        * If you want to query a great number of messages, pay attention to the memory consumption. A maximum number of 200 messages can be retrieved each time.
+        *
+        * @param keywords   The keyword for query. The data format is String.
+        * @param timestamp  The Unix timestamp for query, which is in milliseconds.
+        * @param maxCount   The maximum number of messages to retrieve.
+        * @param from       The message source, which is usually a conversation ID.
+        * @param direction	The query direction. See {@link MessageSearchDirection}.
+        * @param scope	    The query direction. See {@link MessageSearchScope}.
+        * @return           The list of messages.
+        */
+        public List<Message> SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, MessageSearchScope scope = MessageSearchScope.CONTENT)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("keywords", keywords);
+            jo_param.AddWithoutNull("from", from ?? "");
+            jo_param.AddWithoutNull("count", maxCount);
+            jo_param.AddWithoutNull("timestamp", timestamp.ToString());
+            jo_param.AddWithoutNull("direction", direction.ToInt());
+            jo_param.AddWithoutNull("scope", scope.ToInt());
+
+            JSONNode jn = NativeGet(SDKMethod.searchChatMsgFromDBWithScope, jo_param).GetReturnJsonNode();
             return List.BaseModelListFromJsonArray<Message>(jn);
         }
 

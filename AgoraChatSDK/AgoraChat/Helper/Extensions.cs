@@ -532,6 +532,31 @@ namespace AgoraChat
         }
     }
 
+    internal static class MessageSearchScopeHelper
+    {
+        public static int ToInt(this MessageSearchScope scope)
+        {
+            switch (scope)
+            {
+                case MessageSearchScope.CONTENT: return 0;
+                case MessageSearchScope.EXT: return 1;
+                case MessageSearchScope.ALL: return 2;
+                default: return 0;
+            }
+        }
+
+        public static MessageSearchScope ToMessageSearchScope(this int scope)
+        {
+            switch (scope)
+            {
+                case 0: return MessageSearchScope.CONTENT;
+                case 1: return MessageSearchScope.EXT;
+                case 2: return MessageSearchScope.ALL;
+                default: return MessageSearchScope.CONTENT;
+            }
+        }
+    }
+
     internal static class ConversationTypeHelper
     {
         public static int ToInt(this ConversationType type)

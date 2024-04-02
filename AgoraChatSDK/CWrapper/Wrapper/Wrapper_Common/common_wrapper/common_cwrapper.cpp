@@ -86,6 +86,7 @@ void InitManagerMap()
 	func_map_chat_manager["recallMessage"] = ChatManager_RecallMessage;
 	func_map_chat_manager["resendMessage"] = ChatManager_ResendMessage;
 	func_map_chat_manager["searchChatMsgFromDB"] = ChatManager_LoadMoreMessages;
+    func_map_chat_manager["searchChatMsgFromDBWithScope"] = ChatManager_LoadMoreMessagesWithScope;
 	func_map_chat_manager["ackConversationRead"] = ChatManager_SendReadAckForConversation;
 	func_map_chat_manager["sendMessage"] = ChatManager_SendMessage;
 	func_map_chat_manager["ackMessageRead"] = ChatManager_SendReadAckForMessage;

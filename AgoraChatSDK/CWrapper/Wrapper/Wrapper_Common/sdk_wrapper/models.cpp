@@ -1937,6 +1937,27 @@ namespace sdk_wrapper
         }
     }
 
+    int Conversation::EMMessageSearchScopeToInt(EMConversation::EMMessageSearchScope scope)
+    {
+        switch (scope)
+        {
+        case EMConversation::EMMessageSearchScope::CONTENT: return 0;
+        case EMConversation::EMMessageSearchScope::EXT: return 1;
+        case EMConversation::EMMessageSearchScope::ALL: return 2;
+        default: return 0;
+        }
+    }
+    EMConversation::EMMessageSearchScope Conversation::EMMessageSearchScopeFromInt(int i)
+    {
+        switch (i)
+        {
+        case 0: return EMConversation::EMMessageSearchScope::CONTENT;
+        case 1: return EMConversation::EMMessageSearchScope::EXT;
+        case 2: return EMConversation::EMMessageSearchScope::ALL;
+        default: return EMConversation::EMMessageSearchScope::CONTENT;
+        }
+    }
+
     string SupportLanguage::ToJson(tuple<string, string, string>& lang)
     {
         StringBuffer s;
