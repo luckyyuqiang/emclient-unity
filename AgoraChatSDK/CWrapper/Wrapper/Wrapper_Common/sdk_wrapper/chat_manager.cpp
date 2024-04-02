@@ -1559,6 +1559,35 @@ namespace sdk_wrapper {
         return CopyToPointer(json);
     }
 
+    SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_MarkConversations(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
+    {
+        if (!CheckClientInitOrNot(cbid)) return nullptr;
+
+        string local_cbid = cbid;
+
+        Document d; d.Parse(jstr);
+        vector<string> convIds = MyJson::FromJsonObjectToVector(d["convIds"]);
+        int mark = GetJsonValue_Int(d, "mark", 0);
+        bool isMarked = GetJsonValue_Bool(d, "isMarked", true);
+
+        thread t([=]() {
+            EMError error;
+            CLIENT->getChatManager().markConversation(convIds, mark, isMarked, error);
+
+            if (EMError::EM_NO_ERROR == error.mErrorCode) {
+                string call_back_jstr = MyJson::ToJsonWithSuccess(local_cbid.c_str());
+                CallBack(local_cbid.c_str(), call_back_jstr.c_str());
+            }
+            else {
+                string call_back_jstr = MyJson::ToJsonWithError(local_cbid.c_str(), error.mErrorCode, error.mDescription.c_str());
+                CallBack(local_cbid.c_str(), call_back_jstr.c_str());
+            }
+            });
+        t.detach();
+
+        return nullptr;
+    }
+
     SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_RunDelegateTester(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
     {
         if (nullptr != gChatManagerListener) {

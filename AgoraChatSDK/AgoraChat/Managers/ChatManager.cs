@@ -1396,6 +1396,37 @@ namespace AgoraChat
         }
 
         /**
+          * \~chinese
+          * 标记多个会话。
+          *
+          * 异步方法。
+          *
+          * @param conversationIds   会话 ID 列表。
+          * @param isMarked          添加或者移除标记，true：添加；false：移除。
+          * @param mark              添加或移除的标记值。
+          * @param callback          处理结果回调，详见 {@link CallBack}。
+          *
+          * \~english
+          * Mark conversations.
+          *
+          * This is an asynchronous method.
+          *
+          * @param conversationIds    The conversation ID list.
+          * @param isMarked           Add or remove mark, true: add; false: remove.
+          * @param mark               The mark value being added or removed.
+          * @param callback           Callback for the operation. See {@link CallBack}.
+          */
+        public void MarkConversations(List<string> conversationIds, bool isMarked, MarkType mark, CallBack callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("convIds", JsonObject.JsonArrayFromStringList(conversationIds));
+            jo_param.AddWithoutNull("isMarked", isMarked);
+            jo_param.AddWithoutNull("mark", (int)mark);
+
+            NativeCall(SDKMethod.markConversations, jo_param, callback);
+        }
+
+        /**
 		 * \~chinese
 		 * 注册聊天管理器的监听器。
 		 *
