@@ -330,6 +330,19 @@ namespace AgoraChat
 
         /**
         * \~chinese
+        * 将导入的消息视为已读。
+        * - `true`：是；
+        * - （默认）`false`：否。
+        *
+        * \~english
+        * Regard imported message as read.
+        * -`true`: Yes;
+        * -(Default) `false`: No.
+        */
+        public bool RegardImportMsgAsRead = false;
+
+        /**
+        * \~chinese
         * 设置 SDK 底层数据存储路径。仅用于 MacOS 和 Windows 平台端。
         *
         * 如果未设置，则由 SDK 设置为缺省路径。
@@ -451,6 +464,7 @@ namespace AgoraChat
             //jo.AddWithoutNull("useReplacedMessageContents", UseReplacedMessageContents);
             jo.AddWithoutNull("customOSType", CustomOSType);
             jo.AddWithoutNull("customDeviceName", CustomDeviceName);
+            jo.AddWithoutNull("regardImportMsgAsRead", RegardImportMsgAsRead);
 
 
             if (SDKDataPath.Length == 0)

@@ -442,6 +442,11 @@ namespace sdk_wrapper
             configs->setDeviceName(custom_device_name);
         }
 
+        if (jnode.HasMember("regardImportMsgAsRead") && jnode["regardImportMsgAsRead"].IsBool()) {
+            bool regard_import_msg_as_read = jnode["regardImportMsgAsRead"].GetBool();
+            configs->setRegardImportMsgAsRead(regard_import_msg_as_read);
+        }
+
         //TODO: need to Area code later
 
 #ifndef _WIN32
