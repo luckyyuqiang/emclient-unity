@@ -1463,6 +1463,34 @@ namespace sdk_wrapper {
         return nullptr;
     }
 
+    SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_GetPinnedInfo(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
+    {
+        if (!CheckClientInitOrNot(cbid)) return nullptr;
+
+        string local_cbid = cbid;
+
+        Document d; d.Parse(jstr);
+        string msg_id = GetJsonValue_String(d, "msgId", "");
+
+        EMMessagePtr messagePtr = CLIENT->getChatManager().getMessage(msg_id);
+
+        bool isPinned = false;
+        string operatorId = "";
+        int64_t ts = 0;
+
+        if (nullptr != messagePtr) {
+            messagePtr->pinnedInfo(isPinned, operatorId, ts);
+        }
+
+        JSON_STARTOBJ
+        writer.Key("ret");
+        PinnedInfo::ToJsonObject(writer, isPinned, operatorId, ts);
+        JSON_ENDOBJ
+
+        string json = s.GetString();
+        return CopyToPointer(json);
+    }
+
     SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_RunDelegateTester(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
     {
         if (nullptr != gChatManagerListener) {

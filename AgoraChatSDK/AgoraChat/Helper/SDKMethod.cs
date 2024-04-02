@@ -141,7 +141,7 @@ namespace AgoraChat
         internal const string getChatThread = "chatThread";
         internal const string getHasDeliverAck = "getHasDeliverAck";
         internal const string getHasReadAck = "getHasReadAck";
-
+        internal const string getPinnedInfo = "pinnedInfo";
 
         // EMChatRoomManager
         internal const string joinChatRoom = "joinChatRoom";

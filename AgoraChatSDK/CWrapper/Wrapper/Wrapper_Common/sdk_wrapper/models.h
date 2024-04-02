@@ -395,6 +395,12 @@ namespace sdk_wrapper {
 		static map<string, UserInfo> FromJsonFromServer(string json);
 	};
 
+    class PinnedInfo
+    {
+    public:
+        static void ToJsonObject(Writer<StringBuffer>& writer, bool isPinned, const string& operatorId, int64_t ts);
+    };
+
     class TokenWrapper
     {
     public:

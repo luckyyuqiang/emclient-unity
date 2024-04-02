@@ -256,6 +256,24 @@ namespace AgoraChat
             }
         }
 
+        /**
+         * \~chinese
+         * 获取当前消息的置顶信息。
+         *
+         * @return  置顶信息。
+         *
+         * \~english
+         * Gets the pinned information of the message.
+         *
+         * @return The pinned information.
+         */
+        public PinnedInfo PinnedInfo
+        {
+            get
+            {
+                return SDKClient.Instance.MessageManager.GetPinnedInfo(MsgId);
+            }
+        }
 
         /**
          * \~chinese

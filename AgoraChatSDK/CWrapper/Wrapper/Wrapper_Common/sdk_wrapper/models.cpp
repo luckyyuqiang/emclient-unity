@@ -3814,5 +3814,21 @@ namespace sdk_wrapper
             return FromJsonObjectFromServer(d);
         }        
     }
+
+    void PinnedInfo::ToJsonObject(Writer<StringBuffer>& writer, bool isPinned, const string& operatorId, int64_t ts)
+    {
+        writer.StartObject();
+        {
+            writer.Key("isPinned");
+            writer.Bool(isPinned);
+
+            writer.Key("pinnedBy");
+            writer.String(operatorId.c_str());
+
+            writer.Key("pinnedAt");
+            writer.Int64(ts);
+        }
+        writer.EndObject();
+    }
 }
 
