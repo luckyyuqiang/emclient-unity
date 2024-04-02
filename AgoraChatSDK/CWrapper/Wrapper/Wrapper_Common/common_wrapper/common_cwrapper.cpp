@@ -112,6 +112,7 @@ void InitManagerMap()
     func_map_chat_manager["pinnedInfo"] = ChatManager_GetPinnedInfo;
     func_map_chat_manager["markConversations"] = ChatManager_MarkConversations;
     func_map_chat_manager["deleteAllMessagesAndConversations"] = ChatManager_DeleteAllMessagesAndConversations;
+    func_map_chat_manager["pinMessage"] = ChatManager_PinMessage;
 
 	manager_map["EMChatManager"] = func_map_chat_manager;
 

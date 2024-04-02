@@ -1452,6 +1452,34 @@ namespace AgoraChat
         }
 
         /**
+        * \~chinese
+        * 消息置顶或取消置顶。
+        *
+        * 异步方法。
+        *
+        * @param messageId         置顶或取消置顶的消息ID。
+        * @param isPinned          是否置顶消息。true: 置顶；false：取消置顶
+        * @param callback          处理结果回调，详见 {@link CallBack}。
+        *
+        * \~english
+        * Pin or unpin the message.
+        *
+        * This is an asynchronous method.
+        *
+        * @param messageId          The message id to be pinned or unpinned.
+        * @param isPinned           Pin or unpin the message. true: pin the message; false: unpin the message
+        * @param callback           Callback for the operation. See {@link CallBack}.
+        */
+        public void PinMessage(string messageId, bool isPinned, CallBack callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("msgId", messageId);
+            jo_param.AddWithoutNull("isPinned", isPinned);
+
+            NativeCall(SDKMethod.pinMessage, jo_param, callback);
+        }
+
+        /**
 		 * \~chinese
 		 * 注册聊天管理器的监听器。
 		 *
