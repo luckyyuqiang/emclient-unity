@@ -76,6 +76,7 @@ void InitManagerMap()
 	func_map_chat_manager["getThreadConversation"] = ChatManager_ConversationWithType;
 	func_map_chat_manager["getConversationsFromServer"] = ChatManager_GetConversationsFromServer;
     func_map_chat_manager["getConversationsFromServerWithCursor"] = ChatManager_GetConversationsFromServerWithCursor;
+    func_map_chat_manager["getConversationsFromServerWithCursorAndMark"] = ChatManager_GetConversationsFromServerWithCursorAndMark;
     func_map_chat_manager["getConversationsFromServerWithPage"] = ChatManager_GetConversationsFromServerWithPage;
 	func_map_chat_manager["getUnreadMessageCount"] = ChatManager_GetUnreadMessageCount;
 	func_map_chat_manager["importMessages"] = ChatManager_InsertMessages;

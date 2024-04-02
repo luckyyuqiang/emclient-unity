@@ -1128,4 +1128,35 @@ namespace AgoraChat
         */
         MessageReactionOperateAdd = 1,
     }
+
+    /**
+    * \~chinese
+    * 标注类型。
+    *
+    * \~english
+    * mark type.
+    */
+    public enum MarkType
+    {
+        MarkType0 = 0,
+        MarkType1 = 1,
+        MarkType2 = 2,
+        MarkType3 = 3,
+        MarkType4 = 4,
+        MarkType5 = 5,
+        MarkType6 = 6,
+        MarkType7 = 7,
+        MarkType8 = 8,
+        MarkType9 = 9,
+        MarkType10 = 10,
+        MarkType11 = 11,
+        MarkType12 = 12,
+        MarkType13 = 13,
+        MarkType14 = 14,
+        MarkType15 = 15,
+        MarkType16 = 16,
+        MarkType17 = 17,
+        MarkType18 = 18,
+        MarkType19 = 19,
+    }
 }

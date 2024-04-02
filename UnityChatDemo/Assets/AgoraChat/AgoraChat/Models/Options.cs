@@ -464,6 +464,7 @@ namespace AgoraChat
             //jo.AddWithoutNull("useReplacedMessageContents", UseReplacedMessageContents);
             jo.AddWithoutNull("customOSType", CustomOSType);
             jo.AddWithoutNull("customDeviceName", CustomDeviceName);
+            jo.AddWithoutNull("regardImportMsgAsRead", RegardImportMsgAsRead);
 
 
             if (SDKDataPath.Length == 0)
