@@ -141,6 +141,7 @@ namespace AgoraChat
         internal const string loadMsgWithTime = "loadMsgWithTime";
         internal const string loadMsgWithScope = "loadMsgWithScope";
         internal const string messageCount = "messageCount";
+        internal const string pinnedMessages = "pinnedMessages";
 
         // EMMessage method
         internal const string getReactionList = "getReactionList";

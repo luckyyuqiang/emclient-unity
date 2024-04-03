@@ -254,6 +254,7 @@ void InitManagerMap()
 	func_map_conversation_manager["getConversationUnreadMsgCount"] = ConversationManager_UnreadMessagesCount;
 	func_map_conversation_manager["messageCount"] = ConversationManager_MessagesCount;
 	func_map_conversation_manager["updateConversationMessage"] = ConversationManager_UpdateMessage;
+    func_map_conversation_manager["pinnedMessages"] = ConversationManager_PinnedMessages;
 	manager_map["EMConversationManager"] = func_map_conversation_manager;
 
 

@@ -533,6 +533,22 @@ namespace AgoraChat
             return manager.MessagesCount(Id, Type);
         }
 
+        /**
+        * \~chinese
+        * 本地获取会话的置顶消息。
+        *
+        * @return           消息列表。
+        *
+        * \~english
+        * Locally obtain the pinned messages of the conversation.
+        *
+        * @return           The list of messages.
+        */
+        public List<Message> PinnedMessages()
+        {
+            return manager.PinnedMessages(Id, Type);
+        }
+
         [Preserve]
         internal Conversation() { }
 

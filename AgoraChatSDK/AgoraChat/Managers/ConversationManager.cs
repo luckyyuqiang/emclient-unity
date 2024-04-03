@@ -239,5 +239,13 @@ namespace AgoraChat
             NativeCall<List<Message>>(SDKMethod.loadMsgWithScope, jo_param, callback, process);
         }
 
+        internal List<Message> PinnedMessages(string conversationId, ConversationType conversationType)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("convId", conversationId);
+            jo_param.AddWithoutNull("convType", conversationType.ToInt());
+            JSONNode jn = NativeGet(SDKMethod.pinnedMessages, jo_param).GetReturnJsonNode();
+            return List.BaseModelListFromJsonArray<Message>(jn);
+        }
     }
 }
