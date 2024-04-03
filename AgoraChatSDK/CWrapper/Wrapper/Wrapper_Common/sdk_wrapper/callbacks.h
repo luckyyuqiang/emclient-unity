@@ -177,6 +177,32 @@ namespace sdk_wrapper {
                 CallBack(STRING_CHATMANAGER_LISTENER.c_str(), STRING_onMessageContentChanged.c_str(), json.c_str());
         }
 
+        void onMessagePinChanged(const std::string& messageId, const std::string& conversationId, bool isPinned, const std::string& operatorId, int64_t ts) {
+
+            JSON_STARTOBJ
+            writer.Key("msgId");
+            writer.String(messageId.c_str());
+
+            writer.Key("convId");
+            writer.String(conversationId.c_str());
+
+            writer.Key("isPinned");
+            writer.Bool(isPinned);
+
+            writer.Key("operatorId");
+            writer.String(operatorId.c_str());
+
+            writer.Key("ts");
+            writer.Uint64(ts);
+
+            JSON_ENDOBJ
+
+            string json = s.GetString();
+
+            if (json.size() > 0)
+                CallBack(STRING_CHATMANAGER_LISTENER.c_str(), STRING_onMessagePinChanged.c_str(), json.c_str());
+        }
+
         void onMessageIdChanged(const string& conversationId, const string& oldMsgId, const string& newMsgId) override {
             /*
             JSON_STARTOBJ

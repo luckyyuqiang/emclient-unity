@@ -1656,6 +1656,20 @@ namespace AgoraChat
                         }
                     }
                     break;
+                case SDKMethod.onMessagePinChanged:
+                    {
+                        string messageId = jsonNode["msgId"];
+                        string conversationId = jsonNode["convId"];
+                        bool isPinned = jsonNode["isPinned"].AsBool;
+                        string operatorId = jsonNode["operatorId"];
+                        long operationTime = (long)jsonNode["ts"].AsDouble;
+
+                        foreach (IChatManagerDelegate it in delegater)
+                        {
+                            it.OnMessagePinChanged(messageId, conversationId, isPinned, operatorId, operationTime);
+                        }
+                    }
+                    break;
                 case SDKMethod.onMessageIdChanged:
                     {
                         /*

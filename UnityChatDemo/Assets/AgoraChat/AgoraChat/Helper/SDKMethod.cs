@@ -326,6 +326,7 @@ namespace AgoraChat
         internal const string onMessageReactionDidChange = "messageReactionDidChange";
         internal const string onMessageIdChanged = "onMessageIdChanged";
         internal const string onMessageContentChanged = "onMessageContentChanged";
+        internal const string onMessagePinChanged = "onMessagePinChanged";
 
         // ChatThreadManagerDelegate
         internal const string onChatThreadCreate = "onChatThreadCreate";
