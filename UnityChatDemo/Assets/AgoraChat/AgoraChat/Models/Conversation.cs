@@ -549,6 +549,22 @@ namespace AgoraChat
             return manager.PinnedMessages(Id, Type);
         }
 
+        /**
+        * \~chinese
+        * 获取会话的所有标注值。
+        *
+        * @return           标注值列表。
+        *
+        * \~english
+        * Obtain the marks on the conversation.
+        *
+        * @return           The list of mark.
+        */
+        public List<MarkType> Marks()
+        {
+            return manager.Marks(Id, Type);
+        }
+
         [Preserve]
         internal Conversation() { }
 

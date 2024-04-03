@@ -555,4 +555,25 @@ namespace sdk_wrapper {
 
         return CopyToPointer(json);
     }
+
+    SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ConversationManager_Marks(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
+    {
+        if (!CheckClientInitOrNot(cbid)) return nullptr;
+
+        Document d; d.Parse(jstr);
+        string conv_id = GetJsonValue_String(d, "convId", "");
+        int int_type = GetJsonValue_Int(d, "convType", 0);
+        EMConversation::EMConversationType type = Conversation::ConversationTypeFromInt(int_type);
+
+        EMConversationPtr conversation = CLIENT->getChatManager().conversationWithType(conv_id, type, true);
+        uint64_t ret = (uint64_t)conversation->markValue();
+
+        JSON_STARTOBJ
+        writer.Key("ret");
+        writer.Uint64(ret);
+        JSON_ENDOBJ
+
+        string json = s.GetString();
+        return CopyToPointer(json);
+    }
 }

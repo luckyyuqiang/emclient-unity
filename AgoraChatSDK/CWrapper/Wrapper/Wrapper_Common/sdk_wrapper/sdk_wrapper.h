@@ -255,6 +255,7 @@ SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ConversationManager_UnreadMessagesC
 SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ConversationManager_MessagesCount(const char* jstr, const char* cbid = nullptr, char* buf = nullptr);
 SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ConversationManager_UpdateMessage(const char* jstr, const char* cbid = nullptr, char* buf = nullptr);
 SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ConversationManager_PinnedMessages(const char* jstr, const char* cbid = nullptr, char* buf = nullptr);
+SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ConversationManager_Marks(const char* jstr, const char* cbid = nullptr, char* buf = nullptr);
 
 // PresenceManager ================================================================
 SDK_WRAPPER_API void SDK_WRAPPER_CALL PresenceManager_AddListener();

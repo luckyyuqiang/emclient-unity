@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AgoraChat.SimpleJSON;
 
 namespace AgoraChat
@@ -246,6 +247,33 @@ namespace AgoraChat
             jo_param.AddWithoutNull("convType", conversationType.ToInt());
             JSONNode jn = NativeGet(SDKMethod.pinnedMessages, jo_param).GetReturnJsonNode();
             return List.BaseModelListFromJsonArray<Message>(jn);
+        }
+
+        internal List<MarkType> Marks(string conversationId, ConversationType conversationType)
+        {
+            List<MarkType> marks = new List<MarkType>();
+
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("convId", conversationId);
+            jo_param.AddWithoutNull("convType", conversationType.ToInt());
+            JSONNode jn = NativeGet(SDKMethod.marks, jo_param).GetReturnJsonNode();
+            long markValue = jn.IsObject ? (long)jn.AsObject.AsDouble : 0;
+
+            int offset = 0;
+            HashSet<MarkType> types = new HashSet<MarkType>();
+            MarkType[] allValues = (MarkType[])Enum.GetValues(typeof(MarkType));
+
+            do
+            {
+                if ((markValue & 1) > 0 && offset < allValues.Length)
+                {
+                    types.Add(allValues[offset]);
+                }
+                offset++;
+                markValue = markValue >> 1;
+            } while (markValue > 0);
+
+            return new List<MarkType>(types);
         }
     }
 }
