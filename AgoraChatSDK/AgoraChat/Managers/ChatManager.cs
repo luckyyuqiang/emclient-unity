@@ -1480,6 +1480,32 @@ namespace AgoraChat
         }
 
         /**
+         * \~chinese
+         * 从服务端获取指定会话的置顶消息列表。
+         *
+         * @param conversationId    会话ID。
+         * @param callback          成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
+         *
+         * \~english
+         * Get pinned messages in the conversation from server.
+         *
+         * @param msg               The conversation ID.
+         * @param callback          If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
+         */
+        public void GetPinnedMessagesFromServer(string conversationId, ValueCallBack<List<Message>> callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("convId", conversationId);
+
+            Process process = (_, jsonNode) =>
+            {
+                return List.BaseModelListFromJsonArray<Message>(jsonNode);
+            };
+
+            NativeCall<List<Message>>(SDKMethod.getPinnedMessagesFromServer, jo_param, callback, process);
+        }
+
+        /**
 		 * \~chinese
 		 * 注册聊天管理器的监听器。
 		 *

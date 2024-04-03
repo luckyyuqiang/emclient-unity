@@ -112,6 +112,7 @@ namespace AgoraChat
         internal const string markConversations = "markConversations";
         internal const string deleteAllMessagesAndConversations = "deleteAllMessagesAndConversations";
         internal const string pinMessage = "pinMessage";
+        internal const string getPinnedMessagesFromServer = "getPinnedMessagesFromServer";
 
         /// EMMessage listener
         internal const string onMessageProgressUpdate = "onMessageProgressUpdate";
