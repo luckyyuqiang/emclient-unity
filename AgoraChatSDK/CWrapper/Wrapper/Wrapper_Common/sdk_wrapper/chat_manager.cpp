@@ -586,7 +586,7 @@ namespace sdk_wrapper {
 
         return CopyToPointer(json);
     }
-
+    /*
     SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_MarkAllConversationsAsRead(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
     {
         if (!CheckClientInitOrNot(nullptr)) return nullptr;
@@ -604,6 +604,26 @@ namespace sdk_wrapper {
                     ret = false;
             }
         }
+
+        JSON_STARTOBJ
+        writer.Key("ret");
+        writer.Bool(ret);
+        JSON_ENDOBJ
+
+        string json = s.GetString();
+        return CopyToPointer(json);
+    }
+    */
+    SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_MarkAllConversationsAsRead(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
+    {
+        if (!CheckClientInitOrNot(nullptr)) return nullptr;
+
+        bool ret = true;
+
+        EMError error;
+        CLIENT->getChatManager().markAllConversationsAsRead(error);
+
+        if (error.mErrorCode != EMError::EM_NO_ERROR) ret = false;
 
         JSON_STARTOBJ
         writer.Key("ret");
