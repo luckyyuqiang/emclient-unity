@@ -1135,7 +1135,16 @@ namespace AgoraChat
         * \~english
         * A conversation is deleted.
         */
-        CONVERSATION_DELETED = 62
+        CONVERSATION_DELETED = 62,
+
+        /**
+        * \~chinese
+        * 会话被标记或取消标记。
+        *
+        * \~english
+        * A conversation is marked or unmarked.
+        */
+        CONVERSATION_MARK = 63
     };
 
     public enum MessageReactionOperate
