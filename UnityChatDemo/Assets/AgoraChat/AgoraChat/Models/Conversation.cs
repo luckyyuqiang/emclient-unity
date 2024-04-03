@@ -492,6 +492,34 @@ namespace AgoraChat
         }
 
         /**
+        * \~chinese
+        * 加载指定范围内满足条件的消息。
+        *
+        * @param keywords   查找关键字，字符串类型。
+        * @param scope	    查询范围，详见 {@link MessageSearchScope}。
+        * @param timestamp  查询的 Unix 时间戳，单位为毫秒。
+        * @param maxCount   查询的最大消息数。
+        * @param from       消息来源，一般指会话 ID。
+        * @param direction	查询方向，详见 {@link MessageSearchDirection}。
+        * @return           消息列表。
+        *
+        * \~english
+        * Load messages within a specified scope that meet the conditions.
+        *
+        * @param keywords   The keyword for query. The data format is String.
+        * @param scope	    The query direction. See {@link MessageSearchScope}.
+        * @param timestamp  The Unix timestamp for query, which is in milliseconds.
+        * @param maxCount   The maximum number of messages to retrieve.
+        * @param from       The message source, which is usually a conversation ID.
+        * @param direction	The query direction. See {@link MessageSearchDirection}.
+        * @return           The list of messages.
+        */
+        public void LoadMessagesWithScope(string keywords, MessageSearchScope scope = MessageSearchScope.CONTENT, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, ValueCallBack < List<Message>> callback = null)
+        {
+            manager.LoadMessagesWithScope(Id, Type, keywords, timestamp, maxCount, from, direction, scope, callback);
+        }
+
+        /**
          * \~chinese
          * 获取 SDK 本地数据库中会话的全部消息数目。
          * @return 会话的全部消息数量。
