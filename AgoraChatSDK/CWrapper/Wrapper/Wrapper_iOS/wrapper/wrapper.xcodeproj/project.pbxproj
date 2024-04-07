@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4543E1C82BC2A25000429413 /* Mode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543E1C72BC2A25000429413 /* Mode.m */; };
 		4578AED32BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */; };
 		4578AED52BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */; };
 		4597E80F2B875E1200D70B6D /* EMContact+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4597E80E2B875E1200D70B6D /* EMContact+Helper.m */; };
@@ -129,6 +130,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4543E1C62BC2A23700429413 /* Mode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mode.h; sourceTree = "<group>"; };
+		4543E1C72BC2A25000429413 /* Mode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mode.m; sourceTree = "<group>"; };
 		4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMMessagePinInfo+Helper.h"; sourceTree = "<group>"; };
 		4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "EMMessagePinInfo+Helper.m"; sourceTree = "<group>"; };
 		4597E80D2B875DBF00D70B6D /* EMContact+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMContact+Helper.h"; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 				90319C602935FC1E000D01BE /* EMUserInfo+Helper.m */,
 				4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */,
 				4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */,
+				4543E1C62BC2A23700429413 /* Mode.h */,
+				4543E1C72BC2A25000429413 /* Mode.m */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 				90319CB92935FC1E000D01BE /* EMPushOptions+Helper.m in Sources */,
 				90319C902935FC1E000D01BE /* EMUserInfoManagerWrapper.m in Sources */,
 				90319CC22935FC1E000D01BE /* EMConversation+Helper.m in Sources */,
+				4543E1C82BC2A25000429413 /* Mode.m in Sources */,
 				90319CB02935FC1E000D01BE /* EMPageResult+Helper.m in Sources */,
 				90319CCC2935FC1E000D01BE /* EMTranslateLanguage+Helper.m in Sources */,
 				90319CBA2935FC1E000D01BE /* EMGroupMessageAck+Helper.m in Sources */,

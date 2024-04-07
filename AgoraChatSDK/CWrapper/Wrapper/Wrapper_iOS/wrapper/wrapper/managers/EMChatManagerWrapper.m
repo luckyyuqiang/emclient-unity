@@ -18,7 +18,7 @@
 #import "EMUtil.h"
 #import "EMHelper.h"
 #import "EMWrapperCallback.h"
-
+#import "Mode.h"
 
 
 @interface EMChatManagerWrapper () 
@@ -531,7 +531,7 @@
     NSString *from = param[@"from"];
     //EMMessageSearchDirection direction = [self searchDirectionFromString:param[@"direction"]];
     EMMessageSearchDirection direction = [param[@"direction"] intValue] == 0 ? EMMessageSearchDirectionUp : EMMessageSearchDirectionDown;
-    EMMessageSearchScope scope = [self searchScopeFromInt:[param[@"scope"] intValue]];
+    EMMessageSearchScope scope = [Mode searchScopeFromInt:[param[@"scope"] intValue]];
 
     [EMClient.sharedClient.chatManager loadMessagesWithKeyword:keywords
                                                      timestamp:timestamp
@@ -1116,18 +1116,6 @@
         return EMMessageSearchDirectionUp;
     }else {
         return EMMessageSearchDirectionDown;
-    }
-}
-
-- (EMMessageSearchScope)searchScopeFromInt:(int)scope {
-    if (scope == 0) {
-        return EMMessageSearchScopeContent;
-    } else if (scope == 1) {
-        return EMMessageSearchScopeExt;
-    } else if (scope == 2) {
-        return EMMessageSearchScopeAll;
-    } else {
-        return EMMessageSearchScopeContent;
     }
 }
 
