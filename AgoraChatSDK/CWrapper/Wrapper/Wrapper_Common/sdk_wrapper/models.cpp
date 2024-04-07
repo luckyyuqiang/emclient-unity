@@ -3845,8 +3845,8 @@ namespace sdk_wrapper
     {
         writer.StartObject();
         {
-            writer.Key("isPinned");
-            writer.Bool(isPinned);
+            //writer.Key("isPinned");
+            //writer.Bool(isPinned);
 
             writer.Key("pinnedBy");
             writer.String(operatorId.c_str());

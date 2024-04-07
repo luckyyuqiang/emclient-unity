@@ -1562,20 +1562,25 @@ namespace sdk_wrapper {
 
         EMMessagePtr messagePtr = CLIENT->getChatManager().getMessage(msg_id);
 
-        bool isPinned = false;
-        string operatorId = "";
-        int64_t ts = 0;
+        string json = "";
 
         if (nullptr != messagePtr) {
+            bool isPinned = false;
+            string operatorId = "";
+            int64_t ts = 0;
+
             messagePtr->pinnedInfo(isPinned, operatorId, ts);
+
+            if (isPinned == true) {
+                JSON_STARTOBJ
+                writer.Key("ret");
+                PinnedInfo::ToJsonObject(writer, isPinned, operatorId, ts);
+                JSON_ENDOBJ
+
+                json = s.GetString();
+            }
         }
 
-        JSON_STARTOBJ
-        writer.Key("ret");
-        PinnedInfo::ToJsonObject(writer, isPinned, operatorId, ts);
-        JSON_ENDOBJ
-
-        string json = s.GetString();
         return CopyToPointer(json);
     }
 
