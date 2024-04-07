@@ -36,6 +36,7 @@
     data[@"osType"] = @(self.customOSType);
     data[@"deviceName"] = self.customDeviceName;
     //data[@"useReplacedMessageContents"] = @(self.useReplacedMessageContents);
+    data[@"regardImportMsgAsRead"] = @(self.regardImportMessagesAsRead);
     
     return data;
 }
@@ -76,6 +77,10 @@
 
     //options.useReplacedMessageContents = [aJson[@"useReplacedMessageContents"] boolValue];
     
+    if(aJson[@"regardImportMsgAsRead"]) {
+        options.regardImportMessagesAsRead = [aJson[@"regardImportMsgAsRead"] boolValue];
+    }
+
     return options;
 }
 @end
