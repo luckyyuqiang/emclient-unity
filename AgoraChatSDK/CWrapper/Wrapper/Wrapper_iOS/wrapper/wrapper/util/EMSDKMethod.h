@@ -142,6 +142,7 @@ static NSString *const groupAckCount = @"groupAckCount";
 static NSString *const getChatThread = @"chatThread";
 static NSString *const getHasDeliverAck = @"getHasDeliverAck";
 static NSString *const getHasReadAck = @"getHasReadAck";
+static NSString *const getPinnedInfo = @"pinnedInfo";
 
 
 // EMChatRoomManager
