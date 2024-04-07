@@ -125,6 +125,8 @@
         ret = [self deleteAllMessagesAndConversations:params callback:callback];
     }else if ([method isEqualToString:pinMessage]) {
         ret = [self pinMessage:params callback:callback];
+    }else if ([method isEqualToString:getPinnedMessagesFromServer]) {
+        ret = [self getPinnedMessagesFromServer:params callback:callback];
     }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
@@ -975,6 +977,22 @@
             [weakSelf wrapperCallback:callback error:aError object:nil];
         }];
     }
+
+    return nil;
+}
+
+- (NSString *)getPinnedMessagesFromServer:(NSDictionary *)param
+                                 callback:(EMWrapperCallback *)callback {
+    __weak EMChatManagerWrapper * weakSelf = self;
+
+    [EMClient.sharedClient.chatManager getPinnedMessagesFromServer:param[@"convId"]
+                                                        completion:^(NSArray<EMChatMessage *> * _Nullable messages, EMError * _Nullable error) {
+        NSMutableArray *jsonMsgs = [NSMutableArray array];
+        for (EMChatMessage *msg in messages) {
+            [jsonMsgs addObject:[msg toJson]];
+        }
+        [weakSelf wrapperCallback:callback error:error object:jsonMsgs];
+    }];
 
     return nil;
 }
