@@ -271,11 +271,12 @@
 
 - (NSString *)markAllMessagesAsRead:(NSDictionary *)param
                            callback:(EMWrapperCallback *)callback {
-    NSArray *conList = [EMClient.sharedClient.chatManager getAllConversations];
-    for (EMConversation *con in conList) {
-        [con markAllMessagesAsRead:nil];
-    }
+    //NSArray *conList = [EMClient.sharedClient.chatManager getAllConversations];
+    //for (EMConversation *con in conList) {
+    //    [con markAllMessagesAsRead:nil];
+    //}
     
+    [EMClient.sharedClient.chatManager markAllConversationsAsRead];
     return [[EMHelper getReturnJsonObject:@(YES)] toJsonString];
 }
 
