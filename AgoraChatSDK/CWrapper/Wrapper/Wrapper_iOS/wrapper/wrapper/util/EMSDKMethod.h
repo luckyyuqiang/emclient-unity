@@ -87,6 +87,7 @@ static NSString *const importMessages = @"importMessages";
 static NSString *const loadAllConversations = @"loadAllConversations";
 static NSString *const getConversationsFromServer = @"getConversationsFromServer";
 static NSString *const getConversationsFromServerWithCursor = @"getConversationsFromServerWithCursor";
+static NSString *const getConversationsFromServerWithCursorAndMark = @"getConversationsFromServerWithCursorAndMark";
 static NSString *const pinConversation = @"pinConversation";
 static NSString *const modifyMessage = @"modifyMessage";
 static NSString *const deleteConversation = @"deleteConversation";

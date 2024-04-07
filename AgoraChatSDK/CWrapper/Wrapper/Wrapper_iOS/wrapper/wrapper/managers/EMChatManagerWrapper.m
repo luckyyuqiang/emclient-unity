@@ -115,6 +115,8 @@
         ret = [self modifyMessage:params callback:callback];
     }else if ([method isEqualToString:downloadCombineMessages]) {
         ret = [self downloadCombineMessages:params callback:callback];
+    }else if ([method isEqualToString:getConversationsFromServerWithCursorAndMark]) {
+        ret = [self getConversationsFromServerWithCursorAndMark:params callback:callback];
     }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
@@ -705,13 +707,36 @@
         [EMClient.sharedClient.chatManager getPinnedConversationsFromServerWithCursor:cursor pageSize:limit completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
             [weakSelf wrapperCallback:callback error:error object:[result toJson]];
         }];
-    }else {
+    } else {
         [EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:cursor pageSize:limit completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
             [weakSelf wrapperCallback:callback error:error object:[result toJson]];
         }];
     }
     
     
+    return nil;
+}
+
+- (NSString *)getConversationsFromServerWithCursorAndMark:(NSDictionary *)params
+                                                 callback:(EMWrapperCallback *)callback {
+    __weak EMChatManagerWrapper * weakSelf = self;
+
+    BOOL needMark = [params[@"needMark"] boolValue];
+    int mark = [params[@"mark"] intValue];
+    NSString *cursor = params[@"cursor"];
+    int limit = [params[@"limit"] intValue];
+
+    if(needMark) {
+        EMConversationFilter* filter = [[EMConversationFilter alloc] initWithMark:mark pageSize:limit];
+
+        [EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:cursor filter:filter completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
+            [weakSelf wrapperCallback:callback error:error object:[result toJson]];
+        }];
+    } else {
+        [EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:cursor pageSize:limit completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
+            [weakSelf wrapperCallback:callback error:error object:[result toJson]];
+        }];
+    }
     return nil;
 }
 
