@@ -79,6 +79,8 @@
         ret = [self fetchHistoryMessagesBy:params callback:callback];
     }else if([method isEqualToString:searchChatMsgFromDB]) {
         ret = [self searchChatMsgFromDB:params callback:callback];
+    }else if([method isEqualToString:searchChatMsgFromDBWithScope]) {
+        ret = [self searchChatMsgFromDBWithScope:params callback:callback];
     }else if([method isEqualToString:getMessage]) {
         ret = [self getMessage:params callback:callback];
     }else if([method isEqualToString:asyncFetchGroupAcks]) {
@@ -485,9 +487,10 @@
     __weak EMChatManagerWrapper * weakSelf = self;
     NSString *keywords = param[@"keywords"];
     long long timestamp = [param[@"timestamp"] longLongValue];
-    int maxCount = [param[@"maxCount"] intValue];
+    int maxCount = [param[@"count"] intValue];
     NSString *from = param[@"from"];
-    EMMessageSearchDirection direction = [self searchDirectionFromString:param[@"direction"]];
+    //EMMessageSearchDirection direction = [self searchDirectionFromString:param[@"direction"]];
+    EMMessageSearchDirection direction = [param[@"direction"] intValue] == 0 ? EMMessageSearchDirectionUp : EMMessageSearchDirectionDown;
     [EMClient.sharedClient.chatManager loadMessagesWithKeyword:keywords
                                                      timestamp:timestamp
                                                          count:maxCount
@@ -507,6 +510,40 @@
         [weakSelf wrapperCallback:callback error:nil object:msgList];
     }];
     
+    return nil;
+}
+
+- (NSString *)searchChatMsgFromDBWithScope:(NSDictionary *)param
+                         callback:(EMWrapperCallback *)callback {
+    __weak EMChatManagerWrapper * weakSelf = self;
+    NSString *keywords = param[@"keywords"];
+    long long timestamp = [param[@"timestamp"] longLongValue];
+    int maxCount = [param[@"count"] intValue];
+    NSString *from = param[@"from"];
+    //EMMessageSearchDirection direction = [self searchDirectionFromString:param[@"direction"]];
+    EMMessageSearchDirection direction = [param[@"direction"] intValue] == 0 ? EMMessageSearchDirectionUp : EMMessageSearchDirectionDown;
+    EMMessageSearchScope scope = [self searchScopeFromInt:[param[@"scope"] intValue]];
+
+    [EMClient.sharedClient.chatManager loadMessagesWithKeyword:keywords
+                                                     timestamp:timestamp
+                                                         count:maxCount
+                                                      fromUser:from
+                                               searchDirection:direction
+                                                         scope:scope
+                                                    completion:^(NSArray *aMessages, EMError *aError)
+     {
+        if (aError) {
+            [weakSelf wrapperCallback:callback error:aError object:nil];
+            return;
+        }
+        NSMutableArray *msgList = [NSMutableArray array];
+        for (EMChatMessage *msg in aMessages) {
+            [msgList addObject:[msg toJson]];
+        }
+
+        [weakSelf wrapperCallback:callback error:nil object:msgList];
+    }];
+
     return nil;
 }
 
@@ -984,5 +1021,16 @@
     }
 }
 
+- (EMMessageSearchScope)searchScopeFromInt:(int)scope {
+    if (scope == 0) {
+        return EMMessageSearchScopeContent;
+    } else if (scope == 1) {
+        return EMMessageSearchScopeExt;
+    } else if (scope == 2) {
+        return EMMessageSearchScopeAll;
+    } else {
+        return EMMessageSearchScopeContent;
+    }
+}
 
 @end

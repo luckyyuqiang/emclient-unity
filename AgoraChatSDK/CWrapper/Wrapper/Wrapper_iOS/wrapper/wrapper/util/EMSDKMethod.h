@@ -94,6 +94,7 @@ static NSString *const deleteConversation = @"deleteConversation";
 static NSString *const fetchHistoryMessages = @"fetchHistoryMessages";
 static NSString *const fetchHistoryMessagesBy = @"fetchHistoryMessagesBy";
 static NSString *const searchChatMsgFromDB = @"searchChatMsgFromDB";
+static NSString *const searchChatMsgFromDBWithScope = @"searchChatMsgFromDBWithScope";
 static NSString *const getMessage = @"getMessage";
 static NSString *const asyncFetchGroupAcks = @"asyncFetchGroupAcks";
 static NSString *const deleteRemoteConversation = @"deleteRemoteConversation";
