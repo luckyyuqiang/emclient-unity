@@ -112,6 +112,7 @@ static NSString *const removeMessagesFromServerWithTs = @"removeMessagesFromServ
 static NSString *const downloadCombineMessages = @"downloadCombineMessages";
 static NSString *const markConversations = @"markConversations";
 static NSString *const deleteAllMessagesAndConversations = @"deleteAllMessagesAndConversations";
+static NSString *const pinMessage = @"pinMessage";
 
 /// EMMessage listener
 static NSString *const onMessageProgressUpdate = @"onMessageProgressUpdate";

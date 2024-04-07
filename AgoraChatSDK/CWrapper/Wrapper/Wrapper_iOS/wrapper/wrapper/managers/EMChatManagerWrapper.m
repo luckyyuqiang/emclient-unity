@@ -123,6 +123,8 @@
         ret = [self markConversations:params callback:callback];
     }else if ([method isEqualToString:deleteAllMessagesAndConversations]) {
         ret = [self deleteAllMessagesAndConversations:params callback:callback];
+    }else if ([method isEqualToString:pinMessage]) {
+        ret = [self pinMessage:params callback:callback];
     }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
@@ -954,6 +956,28 @@
     return nil;
 }
 
+- (NSString *)pinMessage:(NSDictionary *)param
+                callback:(EMWrapperCallback *)callback
+{
+    BOOL isPinned = [param[@"isPinned"] boolValue];
+    __weak EMChatManagerWrapper * weakSelf = self;
+
+    if (isPinned){
+        [EMClient.sharedClient.chatManager pinMessage:param[@"msgId"]
+                                           completion:^(EMChatMessage* message, EMError *aError)
+         {
+            [weakSelf wrapperCallback:callback error:aError object:nil];
+        }];
+    } else {
+        [EMClient.sharedClient.chatManager unpinMessage:param[@"msgId"]
+                                             completion:^(EMChatMessage* message, EMError *aError)
+         {
+            [weakSelf wrapperCallback:callback error:aError object:nil];
+        }];
+    }
+
+    return nil;
+}
 
 - (void)registerEaseListener {
     [EMClient.sharedClient.chatManager addDelegate:self delegateQueue:nil];
