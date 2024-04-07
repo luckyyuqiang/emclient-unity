@@ -327,6 +327,7 @@ static NSString *const onConversationsUpdate = @"onConversationsUpdate";
 static NSString *const onConversationRead = @"onConversationRead";
 static NSString *const onMessageReactionDidChange = @"messageReactionDidChange";
 static NSString *const onMessageContentChanged = @"onMessageContentChanged";
+static NSString *const onMessagePinChanged = @"onMessagePinChanged";
 
 // ChatThreadManagerDelegate
 static NSString *const onChatThreadCreate = @"onChatThreadCreate";

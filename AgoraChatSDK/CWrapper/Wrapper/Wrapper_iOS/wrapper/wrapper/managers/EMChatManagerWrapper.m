@@ -1098,6 +1098,17 @@
     
 }
 
+- (void)onMessagePinChanged:(NSString* _Nonnull)messageId conversationId:(NSString* _Nonnull)conversationId operation:(EMMessagePinOperation)pinOperation pinInfo:(EMMessagePinInfo* _Nonnull)pinInfo {
+    NSDictionary *info = @{
+        @"msgId": messageId,
+        @"convId": conversationId,
+        @"isPinned": (pinOperation == EMMessagePin) ? @(YES) : @(NO),
+        @"operatorId": pinInfo.operatorId,
+        @"ts": @(pinInfo.pinTime)
+    };
+    [EMWrapperHelper.shared.listener onReceive:chatListener method:onMessagePinChanged info:info.toJsonString];
+}
+
 #pragma mark - action
 
 - (EMMessageSearchDirection)searchDirectionFromString:(NSString *)str {
