@@ -142,6 +142,7 @@ static NSString *const loadMsgWithMsgType = @"loadMsgWithMsgType";
 static NSString *const loadMsgWithTime = @"loadMsgWithTime";
 static NSString *const loadMsgWithScope = @"loadMsgWithScope";
 static NSString *const messageCount = @"messageCount";
+static NSString *const pinnedMessages = @"pinnedMessages";
 
 // EMMessage method
 static NSString *const getReactionList = @"getReactionList";

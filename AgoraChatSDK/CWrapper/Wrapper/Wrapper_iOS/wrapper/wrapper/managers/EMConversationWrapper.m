@@ -82,6 +82,9 @@
     else if([removeMessages isEqualToString:method]) {
         ret = [self removeMessages:params callback:callback];
     }
+    else if([pinnedMessages isEqualToString:method]) {
+        ret = [self pinnedMessages:params callback:callback];
+    }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
     }
@@ -298,6 +301,16 @@
     return [[EMHelper getReturnJsonObject:error == nil ? @(YES) : @(NO)] toJsonString];
 }
 
+- (NSString *)pinnedMessages:(NSDictionary *)params
+                                 callback:(EMWrapperCallback *)callback {
+    EMConversation *conversation = [self conversationWithParam: params];
+    NSArray *aMessages = [conversation pinnedMessages];
+    NSMutableArray *jsonMsgs = [NSMutableArray array];
+    for (EMChatMessage *msg in aMessages) {
+        [jsonMsgs addObject:[msg toJson]];
+    }
+    return [[EMHelper getReturnJsonObject:jsonMsgs] toJsonString];
+}
 
 - (EMConversation *)conversationWithParam:(NSDictionary *)param
 {
