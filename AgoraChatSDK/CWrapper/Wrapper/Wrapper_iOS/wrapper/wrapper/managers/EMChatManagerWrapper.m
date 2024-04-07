@@ -121,6 +121,8 @@
         ret = [self getConversationsFromServerWithCursorAndMark:params callback:callback];
     }else if ([method isEqualToString:markConversations]) {
         ret = [self markConversations:params callback:callback];
+    }else if ([method isEqualToString:deleteAllMessagesAndConversations]) {
+        ret = [self deleteAllMessagesAndConversations:params callback:callback];
     }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
@@ -933,6 +935,21 @@
             [weakSelf wrapperCallback:callback error:aError object:nil];
         }];
     }
+
+    return nil;
+}
+
+- (NSString *)deleteAllMessagesAndConversations:(NSDictionary *)param
+                                    callback:(EMWrapperCallback *)callback
+{
+    BOOL clearServerData = [param[@"clearServerData"] boolValue];
+    __weak EMChatManagerWrapper * weakSelf = self;
+
+    [EMClient.sharedClient.chatManager deleteAllMessagesAndConversations:clearServerData
+                                                              completion:^(EMError *aError)
+     {
+        [weakSelf wrapperCallback:callback error:aError object:nil];
+    }];
 
     return nil;
 }
