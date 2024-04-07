@@ -110,6 +110,7 @@ static NSString *const fetchConversationsFromServerWithPage = @"fetchConversatio
 static NSString *const removeMessagesFromServerWithMsgIds = @"removeMessagesFromServerWithMsgIds";
 static NSString *const removeMessagesFromServerWithTs = @"removeMessagesFromServerWithTs";
 static NSString *const downloadCombineMessages = @"downloadCombineMessages";
+static NSString *const markConversations = @"markConversations";
 
 /// EMMessage listener
 static NSString *const onMessageProgressUpdate = @"onMessageProgressUpdate";

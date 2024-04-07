@@ -119,6 +119,8 @@
         ret = [self downloadCombineMessages:params callback:callback];
     }else if ([method isEqualToString:getConversationsFromServerWithCursorAndMark]) {
         ret = [self getConversationsFromServerWithCursorAndMark:params callback:callback];
+    }else if ([method isEqualToString:markConversations]) {
+        ret = [self markConversations:params callback:callback];
     }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
@@ -554,7 +556,7 @@
     __weak EMChatManagerWrapper * weakSelf = self;
     NSString *conversationId = param[@"convId"];
     EMConversationType type = EMConversationTypeChat;
-    BOOL isDeleteRemoteMessage = [param[@"isDeleteRemoteMessage"] boolValue];
+    BOOL isDeleteRemoteMessage = [param[@"isDeleteServerMessages"] boolValue];
     int intType = [param[@"convType"] intValue];
     if (intType == 0) {
         type = EMConversationTypeChat;
@@ -907,6 +909,31 @@
         [weakSelf wrapperCallback:callback error:aError object:nil];
     }];
     
+    return nil;
+}
+
+- (NSString *)markConversations:(NSDictionary *)param
+                                   callback:(EMWrapperCallback *)callback
+{
+    BOOL isMarked = [param[@"isMarked"] boolValue];
+    __weak EMChatManagerWrapper * weakSelf = self;
+
+    if (isMarked){
+        [EMClient.sharedClient.chatManager addConversationMark:param[@"convIds"]
+                                                          mark:[param[@"mark"] intValue]
+                                                    completion:^(EMError *aError)
+         {
+            [weakSelf wrapperCallback:callback error:aError object:nil];
+        }];
+    } else {
+        [EMClient.sharedClient.chatManager removeConversationMark:param[@"convIds"]
+                                                             mark:[param[@"mark"] intValue]
+                                                       completion:^(EMError *aError)
+         {
+            [weakSelf wrapperCallback:callback error:aError object:nil];
+        }];
+    }
+
     return nil;
 }
 
