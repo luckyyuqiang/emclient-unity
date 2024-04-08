@@ -80,6 +80,7 @@ public class EMSDKMethod {
     public static final String loadAllConversations = "loadAllConversations";
     public static final String getConversationsFromServer = "getConversationsFromServer";
     public static final String getConversationsFromServerWithCursor = "getConversationsFromServerWithCursor";
+    public static final String getConversationsFromServerWithCursorAndMark = "getConversationsFromServerWithCursorAndMark";
     public static final String pinConversation = "pinConversation";
     public static final String deleteConversation = "deleteConversation";
     public static final String fetchHistoryMessages = "fetchHistoryMessages";

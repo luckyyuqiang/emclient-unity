@@ -6,6 +6,7 @@ import com.hyphenate.EMError;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMConversationFilter;
 import com.hyphenate.chat.EMCursorResult;
 import com.hyphenate.chat.EMFetchMessageOption;
 import com.hyphenate.chat.EMGroupReadAck;
@@ -90,6 +91,8 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             ret = getConversationsFromServer(jsonObject, callback);
         } else if (EMSDKMethod.getConversationsFromServerWithCursor.equals(method)){
             ret = getConversationsFromServerWithCursor(jsonObject, callback);
+        } else if (EMSDKMethod.getConversationsFromServerWithCursorAndMark.equals(method)){
+            ret = getConversationsFromServerWithCursorAndMark(jsonObject, callback);
         } else if (EMSDKMethod.pinConversation.equals(method)) {
             ret = pinConversation(jsonObject, callback);
         } else if (EMSDKMethod.deleteConversation.equals(method)) {
@@ -400,6 +403,43 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
         int limit = params.optInt("limit");
         if (pinOnly) {
             EMClient.getInstance().chatManager().asyncFetchPinnedConversationsFromServer(limit, cursor, new EMCommonValueCallback<EMCursorResult<EMConversation>>(callback) {
+                @Override
+                public void onSuccess(EMCursorResult<EMConversation> object) {
+                    JSONObject jo = null;
+                    try {
+                        jo = EMCursorResultHelper.toJson(object);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
+                        updateObject(jo);
+                    }
+                }
+            });
+        }else {
+            EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cursor, new EMCommonValueCallback<EMCursorResult<EMConversation>>(callback){
+                public void onSuccess(EMCursorResult<EMConversation> object) {
+                    JSONObject jo = null;
+                    try {
+                        jo = EMCursorResultHelper.toJson(object);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
+                        updateObject(jo);
+                    }
+                }
+            });
+        }
+        return null;
+    }
+
+    private String getConversationsFromServerWithCursorAndMark(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        boolean needMark = params.optBoolean("needMark");
+        int mark = params.optInt("mark");
+        String cursor = params.optString("cursor");
+        int limit = params.optInt("limit");
+        if (needMark) {
+            EMConversationFilter filter = new EMConversationFilter(markTypeFromInt(mark), limit);
+            EMClient.getInstance().chatManager().asyncGetConversationsFromServerWithCursor(cursor, filter, new EMCommonValueCallback<EMCursorResult<EMConversation>>(callback) {
                 @Override
                 public void onSuccess(EMCursorResult<EMConversation> object) {
                     JSONObject jo = null;
@@ -851,6 +891,53 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             return EMConversation.EMConversationType.GroupChat;
         }else {
             return EMConversation.EMConversationType.ChatRoom;
+        }
+    }
+
+    private EMConversation.EMMarkType markTypeFromInt(int intType) {
+        switch(intType) {
+            case 0:
+                return EMConversation.EMMarkType.MARK_0;
+            case 1:
+                return EMConversation.EMMarkType.MARK_1;
+            case 2:
+                return EMConversation.EMMarkType.MARK_2;
+            case 3:
+                return EMConversation.EMMarkType.MARK_3;
+            case 4:
+                return EMConversation.EMMarkType.MARK_4;
+            case 5:
+                return EMConversation.EMMarkType.MARK_5;
+            case 6:
+                return EMConversation.EMMarkType.MARK_6;
+            case 7:
+                return EMConversation.EMMarkType.MARK_7;
+            case 8:
+                return EMConversation.EMMarkType.MARK_8;
+            case 9:
+                return EMConversation.EMMarkType.MARK_9;
+            case 10:
+                return EMConversation.EMMarkType.MARK_10;
+            case 11:
+                return EMConversation.EMMarkType.MARK_11;
+            case 12:
+                return EMConversation.EMMarkType.MARK_12;
+            case 13:
+                return EMConversation.EMMarkType.MARK_13;
+            case 14:
+                return EMConversation.EMMarkType.MARK_14;
+            case 15:
+                return EMConversation.EMMarkType.MARK_15;
+            case 16:
+                return EMConversation.EMMarkType.MARK_16;
+            case 17:
+                return EMConversation.EMMarkType.MARK_17;
+            case 18:
+                return EMConversation.EMMarkType.MARK_18;
+            case 19:
+                return EMConversation.EMMarkType.MARK_19;
+            default:
+                return EMConversation.EMMarkType.MARK_0;
         }
     }
 }
