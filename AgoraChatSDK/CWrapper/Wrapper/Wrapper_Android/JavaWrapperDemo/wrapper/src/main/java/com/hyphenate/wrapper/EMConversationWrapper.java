@@ -67,6 +67,9 @@ public class EMConversationWrapper extends EMBaseWrapper {
         else if (EMSDKMethod.loadMsgWithTime.equals(method)) {
             ret = loadMsgWithTime(jsonObject, callback);
         }
+        else if (EMSDKMethod.loadMsgWithScope.equals(method)) {
+            ret = loadMsgWithScope(jsonObject, callback);
+        }
         else if(EMSDKMethod.messageCount.equals(method)) {
             ret = messageCount(jsonObject, callback);
         }
@@ -239,6 +242,24 @@ public class EMConversationWrapper extends EMBaseWrapper {
         long endTime = params.getLong("endTime");
         int count = params.getInt("count");
         List<EMMessage> msgList = conversation.searchMsgFromDB(startTime, endTime, count);
+        JSONArray jsonArray = new JSONArray();
+        for(EMMessage msg: msgList) {
+            jsonArray.put(EMMessageHelper.toJson(msg));
+        }
+        onSuccess(jsonArray, callback);
+        return null;
+    }
+
+    private String loadMsgWithScope(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        EMConversation conversation = conversationWithParam(params);
+        String keywords = params.getString("keywords");
+        String sender = params.getString("from");
+        int count = params.getInt("count");
+        long timestamp = params.getLong("timestamp");
+        EMConversation.EMSearchDirection direction = params.getInt("direction") == 0 ? EMConversation.EMSearchDirection.UP : EMConversation.EMSearchDirection.DOWN;
+        EMConversation.EMMessageSearchScope scope = EMMode.searchScopeFromInt(params.getInt("scope"));
+
+        List<EMMessage> msgList = conversation.searchMsgFromDB(keywords, timestamp, count, sender, direction, scope);
         JSONArray jsonArray = new JSONArray();
         for(EMMessage msg: msgList) {
             jsonArray.put(EMMessageHelper.toJson(msg));
