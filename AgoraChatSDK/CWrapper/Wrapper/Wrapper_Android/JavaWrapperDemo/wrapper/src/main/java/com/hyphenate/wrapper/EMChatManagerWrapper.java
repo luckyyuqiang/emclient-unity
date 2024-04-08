@@ -139,6 +139,8 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             ret = downloadCombineMessages(jsonObject, callback);
         } else if (EMSDKMethod.markConversations.equals(method)) {
             ret = markConversations(jsonObject, callback);
+        } else if (EMSDKMethod.deleteAllMessagesAndConversations.equals(method)) {
+            ret = deleteAllMessagesAndConversations(jsonObject, callback);
         }
         else {
             super.onMethodCall(method, jsonObject, callback);
@@ -933,6 +935,12 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
         } else {
             EMClient.getInstance().chatManager().asyncRemoveConversationMark(convIds, mark, new EMCommonCallback(callback));
         }
+        return null;
+    }
+
+    private String deleteAllMessagesAndConversations(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        boolean clearServerData = params.optBoolean("clearServerData");
+        EMClient.getInstance().chatManager().asyncDeleteAllMsgsAndConversations(clearServerData, new EMCommonCallback(callback));
         return null;
     }
     
