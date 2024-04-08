@@ -86,6 +86,7 @@ public class EMSDKMethod {
     public static final String fetchHistoryMessages = "fetchHistoryMessages";
     public static final String fetchHistoryMessagesBy = "fetchHistoryMessagesBy";
     public static final String searchChatMsgFromDB = "searchChatMsgFromDB";
+    public static final String searchChatMsgFromDBWithScope = "searchChatMsgFromDBWithScope";
     public static final String getMessage = "getMessage";
     public static final String asyncFetchGroupAcks = "asyncFetchGroupAcks";
     public static final String deleteRemoteConversation = "deleteRemoteConversation";
