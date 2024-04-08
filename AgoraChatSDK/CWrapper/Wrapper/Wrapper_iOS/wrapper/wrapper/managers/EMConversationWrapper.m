@@ -85,6 +85,9 @@
     else if([pinnedMessages isEqualToString:method]) {
         ret = [self pinnedMessages:params callback:callback];
     }
+    else if([marks isEqualToString:method]) {
+        ret = [self marks:params callback:callback];
+    }
     else {
         ret = [super onMethodCall:method params:params callback:callback];
     }
@@ -302,7 +305,7 @@
 }
 
 - (NSString *)pinnedMessages:(NSDictionary *)params
-                                 callback:(EMWrapperCallback *)callback {
+                    callback:(EMWrapperCallback *)callback {
     EMConversation *conversation = [self conversationWithParam: params];
     NSArray *aMessages = [conversation pinnedMessages];
     NSMutableArray *jsonMsgs = [NSMutableArray array];
@@ -310,6 +313,12 @@
         [jsonMsgs addObject:[msg toJson]];
     }
     return [[EMHelper getReturnJsonObject:jsonMsgs] toJsonString];
+}
+
+- (NSString *)marks:(NSDictionary *)params callback:(EMWrapperCallback *)callback {
+    EMConversation *conversation = [self conversationWithParam: params];
+    NSArray *mks = [conversation marks];
+    return [[EMHelper getReturnJsonObject:mks] toJsonString];
 }
 
 - (EMConversation *)conversationWithParam:(NSDictionary *)param
