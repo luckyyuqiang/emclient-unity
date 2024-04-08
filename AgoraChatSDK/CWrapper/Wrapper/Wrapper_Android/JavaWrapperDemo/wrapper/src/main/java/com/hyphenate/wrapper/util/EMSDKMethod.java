@@ -104,6 +104,7 @@ public class EMSDKMethod {
     public static final String removeMessagesFromServerWithTs = "removeMessagesFromServerWithTs";
     public static final String modifyMessage = "modifyMessage";
     public static final String downloadCombineMessages = "downloadCombineMessages";
+    public static final String pinnedInfo = "pinnedInfo";
 
     /// EMMessage listener
     public static final String onMessageProgressUpdate = "onMessageProgressUpdate";

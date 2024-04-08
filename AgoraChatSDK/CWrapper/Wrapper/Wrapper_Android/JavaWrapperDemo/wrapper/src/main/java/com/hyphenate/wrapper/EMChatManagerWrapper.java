@@ -12,6 +12,7 @@ import com.hyphenate.chat.EMGroupReadAck;
 import com.hyphenate.chat.EMLanguage;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
+import com.hyphenate.chat.EMMessagePinInfo;
 import com.hyphenate.chat.EMMessageReaction;
 import com.hyphenate.chat.EMMessageReactionChange;
 import com.hyphenate.exceptions.HyphenateException;
@@ -29,6 +30,7 @@ import com.hyphenate.wrapper.helper.EMMessageBodyHelper;
 import com.hyphenate.wrapper.helper.EMMessageHelper;
 import com.hyphenate.wrapper.helper.EMMessageReactionChangeHelper;
 import com.hyphenate.wrapper.helper.EMMessageReactionHelper;
+import com.hyphenate.wrapper.helper.EMPinnedInfoHelper;
 import com.hyphenate.wrapper.helper.HyphenateExceptionHelper;
 import com.hyphenate.wrapper.listeners.EMWrapperMessageListener;
 import com.hyphenate.wrapper.util.EMHelper;
@@ -130,6 +132,8 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             ret = modifyMessage(jsonObject, callback);
         } else if (EMSDKMethod.downloadCombineMessages.equals(method)) {
             ret = downloadCombineMessages(jsonObject, callback);
+        } else if (EMSDKMethod.pinnedInfo.equals(method)) {
+            ret = getPinnedInfo(jsonObject, callback);
         }
         else {
             super.onMethodCall(method, jsonObject, callback);
@@ -832,6 +836,18 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
         return null;
     }
 
+    private String getPinnedInfo(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        String msgId = params.getString("msgId");
+        final EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
+        String ret = "";
+        if (null != msg) {
+            EMMessagePinInfo pinnedInfo = msg.pinnedInfo();
+            if (null != pinnedInfo) {
+                ret = EMHelper.getReturnJsonObject(EMPinnedInfoHelper.toJson(pinnedInfo)).toString();
+            }
+        }
+        return ret;
+    }
     
     private void registerEaseListener(){
         emWrapperMessageListener = new EMWrapperMessageListener();
