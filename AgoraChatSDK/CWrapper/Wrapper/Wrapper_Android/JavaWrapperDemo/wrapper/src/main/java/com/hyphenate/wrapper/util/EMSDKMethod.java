@@ -108,6 +108,7 @@ public class EMSDKMethod {
     public static final String downloadCombineMessages = "downloadCombineMessages";
     public static final String markConversations = "markConversations";
     public static final String deleteAllMessagesAndConversations = "deleteAllMessagesAndConversations";
+    public static final String pinMessage = "pinMessage";
 
 
     /// EMMessage listener

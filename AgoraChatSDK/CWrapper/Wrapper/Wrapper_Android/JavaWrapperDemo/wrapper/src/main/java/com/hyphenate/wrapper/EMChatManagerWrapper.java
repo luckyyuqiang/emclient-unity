@@ -141,6 +141,8 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             ret = markConversations(jsonObject, callback);
         } else if (EMSDKMethod.deleteAllMessagesAndConversations.equals(method)) {
             ret = deleteAllMessagesAndConversations(jsonObject, callback);
+        } else if (EMSDKMethod.pinMessage.equals(method)) {
+            ret = pinMessage(jsonObject, callback);
         }
         else {
             super.onMethodCall(method, jsonObject, callback);
@@ -941,6 +943,17 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
     private String deleteAllMessagesAndConversations(JSONObject params, EMWrapperCallback callback) throws JSONException {
         boolean clearServerData = params.optBoolean("clearServerData");
         EMClient.getInstance().chatManager().asyncDeleteAllMsgsAndConversations(clearServerData, new EMCommonCallback(callback));
+        return null;
+    }
+
+    private String pinMessage(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        String msgId = params.optString("msgId");
+        boolean isPinned = params.optBoolean("isPinned");
+        if (isPinned) {
+            EMClient.getInstance().chatManager().asyncPinMessage(msgId, new EMCommonCallback(callback));
+        } else {
+            EMClient.getInstance().chatManager().asyncUnPinMessage(msgId, new EMCommonCallback(callback));
+        }
         return null;
     }
     
