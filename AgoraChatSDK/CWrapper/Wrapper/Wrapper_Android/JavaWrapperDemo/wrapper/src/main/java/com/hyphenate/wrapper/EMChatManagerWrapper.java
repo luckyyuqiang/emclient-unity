@@ -132,8 +132,6 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             ret = modifyMessage(jsonObject, callback);
         } else if (EMSDKMethod.downloadCombineMessages.equals(method)) {
             ret = downloadCombineMessages(jsonObject, callback);
-        } else if (EMSDKMethod.pinnedInfo.equals(method)) {
-            ret = getPinnedInfo(jsonObject, callback);
         }
         else {
             super.onMethodCall(method, jsonObject, callback);
@@ -834,19 +832,6 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             }
         });
         return null;
-    }
-
-    private String getPinnedInfo(JSONObject params, EMWrapperCallback callback) throws JSONException {
-        String msgId = params.getString("msgId");
-        final EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
-        String ret = "";
-        if (null != msg) {
-            EMMessagePinInfo pinnedInfo = msg.pinnedInfo();
-            if (null != pinnedInfo) {
-                ret = EMHelper.getReturnJsonObject(EMPinnedInfoHelper.toJson(pinnedInfo)).toString();
-            }
-        }
-        return ret;
     }
     
     private void registerEaseListener(){
