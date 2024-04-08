@@ -52,6 +52,9 @@ public class EMOptionsHelper {
         if (json.has("osType")) {
             options.setCustomOSPlatform(json.optInt("osType"));
         }
+        if (json.has("regardImportMsgAsRead")) {
+            options.setRegardImportedMsgAsRead(json.optBoolean("regardImportMsgAsRead"));
+        }
 
         if (json.has("pushConfig")) {
             EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
