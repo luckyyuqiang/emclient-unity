@@ -324,6 +324,7 @@ public class EMSDKMethod {
     public static final String onConversationRead = "onConversationRead";
     public static final String onMessageReactionDidChange = "messageReactionDidChange";
     public static final String onMessageContentChanged = "onMessageContentChanged";
+    public static final String onMessagePinChanged = "onMessagePinChanged";
 
     // ChatThreadManagerDelegate
     public static final String onChatThreadCreate = "onChatThreadCreate";
