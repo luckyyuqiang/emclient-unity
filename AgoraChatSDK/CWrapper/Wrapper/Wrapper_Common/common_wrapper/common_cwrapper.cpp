@@ -109,7 +109,6 @@ void InitManagerMap()
     func_map_chat_manager["removeEarlierHistoryMessages"] = ChatManager_RemoveEarlierHistoryMessages;
     func_map_chat_manager["modifyMessage"] = ChatManager_ModifyMessage;
     func_map_chat_manager["downloadCombineMessages"] = ChatManager_DownloadCombineMessages;
-    func_map_chat_manager["pinnedInfo"] = ChatManager_GetPinnedInfo;
     func_map_chat_manager["markConversations"] = ChatManager_MarkConversations;
     func_map_chat_manager["deleteAllMessagesAndConversations"] = ChatManager_DeleteAllMessagesAndConversations;
     func_map_chat_manager["pinMessage"] = ChatManager_PinMessage;
@@ -123,6 +122,7 @@ void InitManagerMap()
 	func_map_message_manager["getHasReadAck"] = ChatManager_GetHasReadAck;
 	func_map_message_manager["getReactionList"] = ChatManager_GetReactionListForMsg;
 	func_map_message_manager["chatThread"] = ChatManager_GetChatThreadForMsg;
+    func_map_message_manager["pinnedInfo"] = ChatManager_GetPinnedInfo;
 	manager_map["EMMessageManager"] = func_map_message_manager;
 
 
