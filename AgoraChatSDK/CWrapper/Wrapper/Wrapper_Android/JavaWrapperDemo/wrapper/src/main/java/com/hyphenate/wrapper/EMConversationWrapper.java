@@ -75,6 +75,8 @@ public class EMConversationWrapper extends EMBaseWrapper {
         }
         else if(EMSDKMethod.removeMessages.equals(method)) {
             ret = removeMessages(jsonObject, callback);
+        } else if(EMSDKMethod.pinnedMessages.equals(method)) {
+            ret = pinnedMessages(jsonObject, callback);
         } else {
             ret = super.onMethodCall(method, jsonObject, callback);
         }
@@ -280,6 +282,15 @@ public class EMConversationWrapper extends EMBaseWrapper {
         return EMHelper.getReturnJsonObject(conversation.removeMessages(startTs, endTs)).toString();
     }
 
+    private String pinnedMessages(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        EMConversation conversation = conversationWithParam(params);
+        List<EMMessage> msgList = conversation.pinnedMessages();
+        JSONArray jsonArray = new JSONArray();
+        for(EMMessage msg: msgList) {
+            jsonArray.put(EMMessageHelper.toJson(msg));
+        }
+        return EMHelper.getReturnJsonObject(jsonArray).toString();
+    }
 
     private EMConversation conversationWithParam(JSONObject params ) throws JSONException {
         String con_id = params.getString("convId");
