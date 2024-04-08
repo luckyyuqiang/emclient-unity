@@ -137,6 +137,8 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
             ret = modifyMessage(jsonObject, callback);
         } else if (EMSDKMethod.downloadCombineMessages.equals(method)) {
             ret = downloadCombineMessages(jsonObject, callback);
+        } else if (EMSDKMethod.markConversations.equals(method)) {
+            ret = markConversations(jsonObject, callback);
         }
         else {
             super.onMethodCall(method, jsonObject, callback);
@@ -919,6 +921,18 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
                 }
             }
         });
+        return null;
+    }
+
+    private String markConversations(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        List<String> convIds = EMHelper.stringListFromJsonArray(params.getJSONArray("convIds"));
+        boolean isMarked = params.optBoolean("isMarked");
+        EMConversation.EMMarkType mark = markTypeFromInt(params.optInt("mark"));
+        if (isMarked) {
+            EMClient.getInstance().chatManager().asyncAddConversationMark(convIds, mark, new EMCommonCallback(callback));
+        } else {
+            EMClient.getInstance().chatManager().asyncRemoveConversationMark(convIds, mark, new EMCommonCallback(callback));
+        }
         return null;
     }
     
