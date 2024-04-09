@@ -717,6 +717,8 @@ namespace sdk_wrapper {
     {
         if (!CheckClientInitOrNot(cbid)) return nullptr;
 
+        string local_cbid = cbid;
+
         Document d; d.Parse(jstr);
 
         string keywords = GetJsonValue_String(d, "keywords", "");
@@ -729,24 +731,24 @@ namespace sdk_wrapper {
         int var_direction = GetJsonValue_Int(d, "direction", 0);
         EMConversation::EMMessageSearchDirection direction = Conversation::EMMessageSearchDirectionFromInt(var_direction);
 
-        EMMessageList messageList = CLIENT->getChatManager().loadMoreMessages(ts, keywords, count, from, direction);
+        thread t([=]() {
+            EMMessageList messageList = CLIENT->getChatManager().loadMoreMessages(ts, keywords, count, from, direction);
 
-        string json = "";
+            string json = Message::ToJson(messageList);
+            string call_back_jstr = MyJson::ToJsonWithSuccessResult(local_cbid.c_str(), json.c_str());
+            CallBack(local_cbid.c_str(), call_back_jstr.c_str());
 
-        if (messageList.size() > 0) {
-            JSON_STARTOBJ
-            writer.Key("ret");
-            Message::ToJsonObjectWithMessageList(writer, messageList);
-            JSON_ENDOBJ
-            json = s.GetString();
-        }
+            });
+        t.detach();
 
-        return CopyToPointer(json);
+        return nullptr;
     }
 
     SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_LoadMoreMessagesWithScope(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)
     {
         if (!CheckClientInitOrNot(cbid)) return nullptr;
+
+        string local_cbid = cbid;
 
         Document d; d.Parse(jstr);
 
@@ -763,19 +765,17 @@ namespace sdk_wrapper {
         int var_scope = GetJsonValue_Int(d, "scope", 0);
         EMConversation::EMMessageSearchScope scope = Conversation::EMMessageSearchScopeFromInt(var_scope);
 
-        EMMessageList messageList = CLIENT->getChatManager().loadMoreMessages(ts, keywords, count, from, direction, scope);
+        thread t([=]() {
+            EMMessageList messageList = CLIENT->getChatManager().loadMoreMessages(ts, keywords, count, from, direction, scope);
 
-        string json = "";
+            string json = Message::ToJson(messageList);
+            string call_back_jstr = MyJson::ToJsonWithSuccessResult(local_cbid.c_str(), json.c_str());
+            CallBack(local_cbid.c_str(), call_back_jstr.c_str());
 
-        if (messageList.size() > 0) {
-            JSON_STARTOBJ
-            writer.Key("ret");
-            Message::ToJsonObjectWithMessageList(writer, messageList);
-            JSON_ENDOBJ
-            json = s.GetString();
-        }
+            });
+        t.detach();
 
-        return CopyToPointer(json);
+        return nullptr;
     }
 
     SDK_WRAPPER_API const char* SDK_WRAPPER_CALL ChatManager_SendReadAckForConversation(const char* jstr, const char* cbid = nullptr, char* buf = nullptr)

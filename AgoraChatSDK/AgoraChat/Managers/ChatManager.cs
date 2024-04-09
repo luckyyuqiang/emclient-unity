@@ -643,7 +643,7 @@ namespace AgoraChat
 		 * @param maxCount   查询的最大消息数。
 		 * @param from       消息来源，一般指会话 ID。
 		 * @param direction	 查询方向，详见 {@link MessageSearchDirection}。
-		 * @return           消息列表。
+		 * @param callback   成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
 		 *
 		 * \~english
 		 * Queries local messages.
@@ -656,9 +656,9 @@ namespace AgoraChat
 		 * @param maxCount   The maximum number of messages to retrieve.
 		 * @param from       The message source, which is usually a conversation ID.
 		 * @param direction	 The query direction. See {@link MessageSearchDirection}.
-		 * @return           The list of messages.
+		 * @param callback   If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
 		 */
-        public List<Message> SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP)
+        public void SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, ValueCallBack<List<Message>> callback = null)
         {
             JSONObject jo_param = new JSONObject();
             jo_param.AddWithoutNull("keywords", keywords);
@@ -667,8 +667,12 @@ namespace AgoraChat
             jo_param.AddWithoutNull("timestamp", timestamp.ToString());
             jo_param.AddWithoutNull("direction", direction.ToInt());
 
-            JSONNode jn = NativeGet(SDKMethod.searchChatMsgFromDB, jo_param).GetReturnJsonNode();
-            return List.BaseModelListFromJsonArray<Message>(jn);
+            Process process = (_, jsonNode) =>
+            {
+                return List.BaseModelListFromJsonArray<Message>(jsonNode);
+            };
+
+            NativeCall<List<Message>>(SDKMethod.searchChatMsgFromDB, jo_param, callback, process);
         }
 
         /**
@@ -685,7 +689,7 @@ namespace AgoraChat
         * @param from       消息来源，一般指会话 ID。
         * @param direction	查询方向，详见 {@link MessageSearchDirection}。
         * @param scope	    查询范围，详见 {@link MessageSearchScope}。
-        * @return           消息列表。
+        * @param callback   成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
         *
         * \~english
         * Queries local messages basing on message scope.
@@ -699,9 +703,9 @@ namespace AgoraChat
         * @param from       The message source, which is usually a conversation ID.
         * @param direction	The query direction. See {@link MessageSearchDirection}.
         * @param scope	    The query direction. See {@link MessageSearchScope}.
-        * @return           The list of messages.
+        * @param callback   If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
         */
-        public List<Message> SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, MessageSearchScope scope = MessageSearchScope.CONTENT)
+        public void SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, MessageSearchScope scope = MessageSearchScope.CONTENT, ValueCallBack<List<Message>> callback = null)
         {
             JSONObject jo_param = new JSONObject();
             jo_param.AddWithoutNull("keywords", keywords);
@@ -711,8 +715,12 @@ namespace AgoraChat
             jo_param.AddWithoutNull("direction", direction.ToInt());
             jo_param.AddWithoutNull("scope", scope.ToInt());
 
-            JSONNode jn = NativeGet(SDKMethod.searchChatMsgFromDBWithScope, jo_param).GetReturnJsonNode();
-            return List.BaseModelListFromJsonArray<Message>(jn);
+            Process process = (_, jsonNode) =>
+            {
+                return List.BaseModelListFromJsonArray<Message>(jsonNode);
+            };
+
+            NativeCall<List<Message>>(SDKMethod.searchChatMsgFromDBWithScope, jo_param, callback, process);
         }
 
         /**
