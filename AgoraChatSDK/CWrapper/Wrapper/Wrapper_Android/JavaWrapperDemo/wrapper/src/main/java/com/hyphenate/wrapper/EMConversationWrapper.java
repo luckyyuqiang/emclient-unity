@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Set;
 
 public class EMConversationWrapper extends EMBaseWrapper {
     public String onMethodCall(String method, JSONObject jsonObject, EMWrapperCallback callback) throws JSONException {
@@ -77,6 +78,8 @@ public class EMConversationWrapper extends EMBaseWrapper {
             ret = removeMessages(jsonObject, callback);
         } else if(EMSDKMethod.pinnedMessages.equals(method)) {
             ret = pinnedMessages(jsonObject, callback);
+        } else if(EMSDKMethod.marks.equals(method)) {
+            ret = marks(jsonObject, callback);
         } else {
             ret = super.onMethodCall(method, jsonObject, callback);
         }
@@ -288,6 +291,16 @@ public class EMConversationWrapper extends EMBaseWrapper {
         JSONArray jsonArray = new JSONArray();
         for(EMMessage msg: msgList) {
             jsonArray.put(EMMessageHelper.toJson(msg));
+        }
+        return EMHelper.getReturnJsonObject(jsonArray).toString();
+    }
+
+    private String marks(JSONObject params, EMWrapperCallback callback) throws JSONException {
+        EMConversation conversation = conversationWithParam(params);
+        Set<EMConversation.EMMarkType> marks = conversation.marks();
+        JSONArray jsonArray = new JSONArray();
+        for(EMConversation.EMMarkType mark: marks) {
+            jsonArray.put(EMMode.intFromMarkType(mark));
         }
         return EMHelper.getReturnJsonObject(jsonArray).toString();
     }
