@@ -357,6 +357,21 @@ namespace AgoraChat
 
         /**
          * \~chinese
+         * 只读。
+         * 内容是否被替换：
+         * - `true`：是；
+         * - `false`：否。
+         *
+         * \~english
+         * ReadOnly.
+         * Whether the content of message is replaced:
+         * - `true`: Yes.
+         * - `false`: No.
+         */
+        public bool IsContentReplaced = false;
+
+        /**
+         * \~chinese
          * 获取子区概览信息。
          *
          * 子区概览信息仅在创建子区后携带。
@@ -846,7 +861,7 @@ namespace AgoraChat
                     MessageOnlineState = jo["messageOnlineState"].AsBool;
                     IsThread = jo["isThread"].AsBool;
                     Broadcast = jo["broadcast"].AsBool;
-                    //IsContentReplaced = jo["isContentReplaced"].AsBool;
+                    IsContentReplaced = jo["isContentReplaced"].AsBool;
                 }
             }
         }
@@ -878,7 +893,7 @@ namespace AgoraChat
             jo.AddWithoutNull("messageOnlineState", MessageOnlineState);
             jo.AddWithoutNull("isThread", IsThread);
             jo.AddWithoutNull("broadcast", Broadcast);
-            //jo.AddWithoutNull("isContentReplaced", IsContentReplaced);
+            jo.AddWithoutNull("isContentReplaced", IsContentReplaced);
 
             if (null != _receiverList && _receiverList.Count > 0)
             {
