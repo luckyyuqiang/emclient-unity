@@ -80,6 +80,15 @@ namespace sdk_wrapper
         return s.GetString();
     }
 
+    void MyJson::ToJsonObject(Writer<StringBuffer>& writer, const vector<int>& vec)
+    {
+        writer.StartArray();
+        for (int i = 0; i < vec.size(); i++) {
+            writer.Int(vec[i]);
+        }
+        writer.EndArray();
+    }
+
     void MyJson::ToJsonObject(Writer<StringBuffer>& writer, const vector<string>& vec)
     {
         writer.StartArray();

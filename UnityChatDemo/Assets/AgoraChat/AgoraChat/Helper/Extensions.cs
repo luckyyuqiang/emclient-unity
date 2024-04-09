@@ -162,11 +162,34 @@ namespace AgoraChat
             return list;
         }
 
+        internal static List<int> IntListFromJsonArray(JSONNode jsonNode)
+        {
+            List<int> list = new List<int>();
+            if (jsonNode != null && jsonNode.IsArray)
+            {
+                foreach (JSONNode item in jsonNode.AsArray)
+                {
+                    if (item.IsNumber)
+                    {
+                        list.Add(item.AsInt);
+                    }
+                }
+            }
+            return list;
+        }
+
         internal static List<string> StringListFromJsonString(string json)
         {
             if (json == null) return new List<string>();
             JSONNode jn = JSON.Parse(json);
             return StringListFromJsonArray(jn);
+        }
+
+        internal static List<int> IntListFromJsonString(string json)
+        {
+            if (json == null) return new List<int>();
+            JSONNode jn = JSON.Parse(json);
+            return IntListFromJsonArray(jn);
         }
 
         internal static List<T> BaseModelListFromJsonArray<T>(JSONNode jn) where T : BaseModel

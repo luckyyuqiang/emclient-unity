@@ -41,6 +41,8 @@ namespace sdk_wrapper {
 		static string ToJsonWithSuccessResult(const char* cbid, const char* jstr);
 		static string ToJsonWithProcess(const char* cbid, int process);
 
+        static void ToJsonObject(Writer<StringBuffer>& writer, const vector<int>& vec);
+
 		static void ToJsonObject(Writer<StringBuffer>& writer, const vector<string>& vec);
 		static vector<string> FromJsonObjectToVector(const Value& jnode, bool filter = false);
 

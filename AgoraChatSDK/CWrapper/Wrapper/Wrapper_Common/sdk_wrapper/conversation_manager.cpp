@@ -566,11 +566,19 @@ namespace sdk_wrapper {
         EMConversation::EMConversationType type = Conversation::ConversationTypeFromInt(int_type);
 
         EMConversationPtr conversation = CLIENT->getChatManager().conversationWithType(conv_id, type, true);
-        uint64_t ret = (uint64_t)conversation->markValue();
+        uint64_t markValue = (uint64_t)conversation->markValue();
+
+        std::vector<int> marks;
+        for (int offset = 0; markValue > 0; ++offset) {
+            if (markValue & 1) {
+                marks.push_back(offset);
+            }
+            markValue = markValue >> 1;
+        }
 
         JSON_STARTOBJ
         writer.Key("ret");
-        writer.Uint64(ret);
+        MyJson::ToJsonObject(writer, marks);
         JSON_ENDOBJ
 
         string json = s.GetString();

@@ -257,23 +257,14 @@ namespace AgoraChat
             jo_param.AddWithoutNull("convId", conversationId);
             jo_param.AddWithoutNull("convType", conversationType.ToInt());
             JSONNode jn = NativeGet(SDKMethod.marks, jo_param).GetReturnJsonNode();
-            long markValue = jn.IsObject ? (long)jn.AsObject.AsDouble : 0;
+            List<int> marks_int = List.IntListFromJsonArray(jn);
 
-            int offset = 0;
-            HashSet<MarkType> types = new HashSet<MarkType>();
-            MarkType[] allValues = (MarkType[])Enum.GetValues(typeof(MarkType));
-
-            do
+            foreach (int i in marks_int)
             {
-                if ((markValue & 1) > 0 && offset < allValues.Length)
-                {
-                    types.Add(allValues[offset]);
-                }
-                offset++;
-                markValue = markValue >> 1;
-            } while (markValue > 0);
+                marks.Add((MarkType)i);
+            }
 
-            return new List<MarkType>(types);
+            return marks;
         }
     }
 }
