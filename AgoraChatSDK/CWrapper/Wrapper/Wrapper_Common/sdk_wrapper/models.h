@@ -41,6 +41,8 @@ namespace sdk_wrapper {
 		static string ToJsonWithSuccessResult(const char* cbid, const char* jstr);
 		static string ToJsonWithProcess(const char* cbid, int process);
 
+        static void ToJsonObject(Writer<StringBuffer>& writer, const vector<int>& vec);
+
 		static void ToJsonObject(Writer<StringBuffer>& writer, const vector<string>& vec);
 		static vector<string> FromJsonObjectToVector(const Value& jnode, bool filter = false);
 
@@ -137,6 +139,9 @@ namespace sdk_wrapper {
 
 		static int EMMessageSearchDirectionToInt(EMConversation::EMMessageSearchDirection direction);
 		static EMConversation::EMMessageSearchDirection EMMessageSearchDirectionFromInt(int i);
+
+        static int EMMessageSearchScopeToInt(EMConversation::EMMessageSearchScope scope);
+        static EMConversation::EMMessageSearchScope EMMessageSearchScopeFromInt(int i);
 	};
 
 	class SupportLanguage
@@ -394,6 +399,12 @@ namespace sdk_wrapper {
 		static string ToJsonForServer(UserInfo& ui);
 		static map<string, UserInfo> FromJsonFromServer(string json);
 	};
+
+    class PinnedInfo
+    {
+    public:
+        static void ToJsonObject(Writer<StringBuffer>& writer, bool isPinned, const string& operatorId, int64_t ts);
+    };
 
     class TokenWrapper
     {

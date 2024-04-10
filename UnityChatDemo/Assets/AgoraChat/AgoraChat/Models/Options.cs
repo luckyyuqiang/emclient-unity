@@ -286,6 +286,20 @@ namespace AgoraChat
         public bool EnableEmptyConversation = false;
 
         /**
+        * \~chinese
+        * 是否允许使用替换的消息内容。
+        * - `true`：是；
+        * - （默认）`false`：否。
+        *
+        * \~english
+        * Permit to use replaced message contents or not.
+        * -`true`: Yes;
+        * -(Default) `false`: No.
+        *
+        */
+        public bool UseReplacedMessageContents = false;
+
+        /**
          *  \~chinese
          *  自定义系统类型。
          *
@@ -327,6 +341,19 @@ namespace AgoraChat
         * The UUID for the current device.
         */
         public string MyUUID = "";
+
+        /**
+        * \~chinese
+        * 将导入的消息视为已读。
+        * - `true`：是；
+        * - （默认）`false`：否。
+        *
+        * \~english
+        * Regard imported message as read.
+        * -`true`: Yes;
+        * -(Default) `false`: No.
+        */
+        public bool RegardImportMsgAsRead = false;
 
         /**
         * \~chinese
@@ -448,9 +475,10 @@ namespace AgoraChat
             jo.AddWithoutNull("enableDnsConfig", EnableDNSConfig);
             jo.AddWithoutNull("myUUID", MyUUID);
             jo.AddWithoutNull("enableEmptyConversation", EnableEmptyConversation);
-            //jo.AddWithoutNull("useReplacedMessageContents", UseReplacedMessageContents);
+            jo.AddWithoutNull("useReplacedMessageContents", UseReplacedMessageContents);
             jo.AddWithoutNull("customOSType", CustomOSType);
             jo.AddWithoutNull("customDeviceName", CustomDeviceName);
+            jo.AddWithoutNull("regardImportMsgAsRead", RegardImportMsgAsRead);
 
 
             if (SDKDataPath.Length == 0)

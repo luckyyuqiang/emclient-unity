@@ -80,6 +80,15 @@ namespace sdk_wrapper
         return s.GetString();
     }
 
+    void MyJson::ToJsonObject(Writer<StringBuffer>& writer, const vector<int>& vec)
+    {
+        writer.StartArray();
+        for (int i = 0; i < vec.size(); i++) {
+            writer.Int(vec[i]);
+        }
+        writer.EndArray();
+    }
+
     void MyJson::ToJsonObject(Writer<StringBuffer>& writer, const vector<string>& vec)
     {
         writer.StartArray();
@@ -440,6 +449,11 @@ namespace sdk_wrapper
         if (jnode.HasMember("customDeviceName") && jnode["customDeviceName"].IsString()) {
             string custom_device_name = jnode["customDeviceName"].GetString();
             configs->setDeviceName(custom_device_name);
+        }
+
+        if (jnode.HasMember("regardImportMsgAsRead") && jnode["regardImportMsgAsRead"].IsBool()) {
+            bool regard_import_msg_as_read = jnode["regardImportMsgAsRead"].GetBool();
+            configs->setRegardImportMsgAsRead(regard_import_msg_as_read);
         }
 
         //TODO: need to Area code later
@@ -1929,6 +1943,27 @@ namespace sdk_wrapper
         case 0: return EMConversation::EMMessageSearchDirection::UP;
         case 1: return EMConversation::EMMessageSearchDirection::DOWN;
         default: return EMConversation::EMMessageSearchDirection::UP;
+        }
+    }
+
+    int Conversation::EMMessageSearchScopeToInt(EMConversation::EMMessageSearchScope scope)
+    {
+        switch (scope)
+        {
+        case EMConversation::EMMessageSearchScope::CONTENT: return 0;
+        case EMConversation::EMMessageSearchScope::EXT: return 1;
+        case EMConversation::EMMessageSearchScope::ALL: return 2;
+        default: return 0;
+        }
+    }
+    EMConversation::EMMessageSearchScope Conversation::EMMessageSearchScopeFromInt(int i)
+    {
+        switch (i)
+        {
+        case 0: return EMConversation::EMMessageSearchScope::CONTENT;
+        case 1: return EMConversation::EMMessageSearchScope::EXT;
+        case 2: return EMConversation::EMMessageSearchScope::ALL;
+        default: return EMConversation::EMMessageSearchScope::CONTENT;
         }
     }
 
@@ -3813,6 +3848,22 @@ namespace sdk_wrapper
         else {
             return FromJsonObjectFromServer(d);
         }        
+    }
+
+    void PinnedInfo::ToJsonObject(Writer<StringBuffer>& writer, bool isPinned, const string& operatorId, int64_t ts)
+    {
+        writer.StartObject();
+        {
+            //writer.Key("isPinned");
+            //writer.Bool(isPinned);
+
+            writer.Key("pinnedBy");
+            writer.String(operatorId.c_str());
+
+            writer.Key("pinnedAt");
+            writer.Int64(ts);
+        }
+        writer.EndObject();
     }
 }
 

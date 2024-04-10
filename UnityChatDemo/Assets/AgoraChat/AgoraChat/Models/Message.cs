@@ -256,6 +256,26 @@ namespace AgoraChat
             }
         }
 
+        /**
+         * \~chinese
+         * 获取当前消息的置顶信息。
+         * 如果没有置顶则返回空。
+         *
+         * @return  置顶信息。
+         *
+         * \~english
+         * Gets the pinned information of the message.
+         * If the message is pinned, then return null.
+         *
+         * @return The pinned information.
+         */
+        public PinnedInfo PinnedInfo
+        {
+            get
+            {
+                return SDKClient.Instance.MessageManager.GetPinnedInfo(MsgId);
+            }
+        }
 
         /**
          * \~chinese
@@ -334,6 +354,21 @@ namespace AgoraChat
          * - `false`: No.
          */
         public bool Broadcast = false;
+
+        /**
+         * \~chinese
+         * 只读。
+         * 内容是否被替换：
+         * - `true`：是；
+         * - `false`：否。
+         *
+         * \~english
+         * ReadOnly.
+         * Whether the content of message is replaced:
+         * - `true`: Yes.
+         * - `false`: No.
+         */
+        public bool IsContentReplaced = false;
 
         /**
          * \~chinese
@@ -826,7 +861,7 @@ namespace AgoraChat
                     MessageOnlineState = jo["messageOnlineState"].AsBool;
                     IsThread = jo["isThread"].AsBool;
                     Broadcast = jo["broadcast"].AsBool;
-                    //IsContentReplaced = jo["isContentReplaced"].AsBool;
+                    IsContentReplaced = jo["isContentReplaced"].AsBool;
                 }
             }
         }
@@ -858,7 +893,7 @@ namespace AgoraChat
             jo.AddWithoutNull("messageOnlineState", MessageOnlineState);
             jo.AddWithoutNull("isThread", IsThread);
             jo.AddWithoutNull("broadcast", Broadcast);
-            //jo.AddWithoutNull("isContentReplaced", IsContentReplaced);
+            jo.AddWithoutNull("isContentReplaced", IsContentReplaced);
 
             if (null != _receiverList && _receiverList.Count > 0)
             {

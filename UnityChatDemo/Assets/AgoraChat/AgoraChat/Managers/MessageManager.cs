@@ -48,5 +48,13 @@ namespace AgoraChat
             JSONNode jn = NativeGet(SDKMethod.getChatThread, jo_param).GetReturnJsonNode();
             return ModelHelper.CreateWithJsonObject<ChatThread>(jn);
         }
+
+        internal PinnedInfo GetPinnedInfo(string messageId)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("msgId", messageId);
+            JSONNode jn = NativeGet(SDKMethod.getPinnedInfo, jo_param).GetReturnJsonNode();
+            return ModelHelper.CreateWithJsonObject<PinnedInfo>(jn);
+        }
     }
 }

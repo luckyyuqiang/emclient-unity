@@ -394,6 +394,52 @@ namespace AgoraChat
         }
 
         /**
+         * \~chinese
+         * 根据标注等参数从服务器获取相关会话对象。
+         *
+         * @param needMark    是否只获取带标注的会话：
+         * - `true`：是。只获带标注的会话。SDK 按照会话置顶时间倒序返回。
+         * - `false`：否。
+         * @param mark：      标注值；
+         * @param cursor      开始获取数据的游标位置。
+         * @param limit       每页返回的会话数。取值范围为 [1,50]。
+         * @param callback    获取的会话列表，详见 {@link ValueCallBack}。
+         *
+         * \~english
+         * Gets the conversations from the server basing on the mark.
+         *
+         * @param needMark    Whether to return marked conversations only:
+         * - `true`: Yes. The SDK only returns marked conversations in the reverse chronological order of their pinning.
+         * - `false`: No.
+         *
+         * @param mark        The mark value used for searching.
+         * @param cursor      The position from which to start getting data.
+         * @param limit       The number of conversations that you expect to get on each page. The value range is [1,50].
+         * @param callback    The list of obtained conversations. See {@link ValueCallBack}.
+         */
+        public void GetConversationsFromServerWithCursor(bool needMark, MarkType mark, string cursor = "", int limit = 20, ValueCallBack<CursorResult<Conversation>> callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("needMark", needMark);
+            jo_param.AddWithoutNull("mark", (int)mark);
+            jo_param.AddWithoutNull("cursor", cursor);
+            jo_param.AddWithoutNull("limit", limit);
+
+            Process process = (_, jsonNode) =>
+            {
+                CursorResult<Conversation> cursor_conversation = new CursorResult<Conversation>(_, (jn) =>
+                {
+                    return ModelHelper.CreateWithJsonObject<Conversation>(jn);
+                });
+
+                cursor_conversation.FromJsonObject(jsonNode.AsObject);
+                return cursor_conversation;
+            };
+
+            NativeCall<CursorResult<Conversation>>(SDKMethod.getConversationsFromServerWithCursorAndMark, jo_param, callback, process);
+        }
+
+        /**
 	     * \~chinese
 	     * 获取未读消息数。
 		 * 
@@ -597,7 +643,7 @@ namespace AgoraChat
 		 * @param maxCount   查询的最大消息数。
 		 * @param from       消息来源，一般指会话 ID。
 		 * @param direction	 查询方向，详见 {@link MessageSearchDirection}。
-		 * @return           消息列表。
+		 * @param callback   成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
 		 *
 		 * \~english
 		 * Queries local messages.
@@ -610,19 +656,71 @@ namespace AgoraChat
 		 * @param maxCount   The maximum number of messages to retrieve.
 		 * @param from       The message source, which is usually a conversation ID.
 		 * @param direction	 The query direction. See {@link MessageSearchDirection}.
-		 * @return           The list of messages.
+		 * @param callback   If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
 		 */
-        public List<Message> SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP)
+        public void SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, ValueCallBack<List<Message>> callback = null)
         {
             JSONObject jo_param = new JSONObject();
             jo_param.AddWithoutNull("keywords", keywords);
             jo_param.AddWithoutNull("from", from ?? "");
             jo_param.AddWithoutNull("count", maxCount);
             jo_param.AddWithoutNull("timestamp", timestamp.ToString());
-            jo_param.AddWithoutNull("direction", direction == MessageSearchDirection.UP ? "up" : "down");
+            jo_param.AddWithoutNull("direction", direction.ToInt());
 
-            JSONNode jn = NativeGet(SDKMethod.searchChatMsgFromDB, jo_param).GetReturnJsonNode();
-            return List.BaseModelListFromJsonArray<Message>(jn);
+            Process process = (_, jsonNode) =>
+            {
+                return List.BaseModelListFromJsonArray<Message>(jsonNode);
+            };
+
+            NativeCall<List<Message>>(SDKMethod.searchChatMsgFromDB, jo_param, callback, process);
+        }
+
+        /**
+        * \~chinese
+        * 基于消息范围查询指定数量的本地消息。
+        *
+        * **注意**
+        *
+        * 若查询消息数量较大，需考虑内存消耗，每次最多可查询 200 条消息。
+        *
+        * @param keywords   查找关键字，字符串类型。
+        * @param timestamp  查询的 Unix 时间戳，单位为毫秒。
+        * @param maxCount   查询的最大消息数。
+        * @param from       消息来源，一般指会话 ID。
+        * @param direction	查询方向，详见 {@link MessageSearchDirection}。
+        * @param scope	    查询范围，详见 {@link MessageSearchScope}。
+        * @param callback   成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
+        *
+        * \~english
+        * Queries local messages basing on message scope.
+        *
+        * **Note**
+        * If you want to query a great number of messages, pay attention to the memory consumption. A maximum number of 200 messages can be retrieved each time.
+        *
+        * @param keywords   The keyword for query. The data format is String.
+        * @param timestamp  The Unix timestamp for query, which is in milliseconds.
+        * @param maxCount   The maximum number of messages to retrieve.
+        * @param from       The message source, which is usually a conversation ID.
+        * @param direction	The query direction. See {@link MessageSearchDirection}.
+        * @param scope	    The query direction. See {@link MessageSearchScope}.
+        * @param callback   If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
+        */
+        public void SearchMsgFromDB(string keywords, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, MessageSearchScope scope = MessageSearchScope.CONTENT, ValueCallBack<List<Message>> callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("keywords", keywords);
+            jo_param.AddWithoutNull("from", from ?? "");
+            jo_param.AddWithoutNull("count", maxCount);
+            jo_param.AddWithoutNull("timestamp", timestamp.ToString());
+            jo_param.AddWithoutNull("direction", direction.ToInt());
+            jo_param.AddWithoutNull("scope", scope.ToInt());
+
+            Process process = (_, jsonNode) =>
+            {
+                return List.BaseModelListFromJsonArray<Message>(jsonNode);
+            };
+
+            NativeCall<List<Message>>(SDKMethod.searchChatMsgFromDBWithScope, jo_param, callback, process);
         }
 
         /**
@@ -1306,6 +1404,116 @@ namespace AgoraChat
         }
 
         /**
+        * \~chinese
+        * 标记多个会话。
+        *
+        * 异步方法。
+        *
+        * @param conversationIds   会话 ID 列表。
+        * @param isMarked          添加或者移除标记，true：添加；false：移除。
+        * @param mark              添加或移除的标记值。
+        * @param callback          处理结果回调，详见 {@link CallBack}。
+        *
+        * \~english
+        * Mark conversations.
+        *
+        * This is an asynchronous method.
+        *
+        * @param conversationIds    The conversation ID list.
+        * @param isMarked           Add or remove mark, true: add; false: remove.
+        * @param mark               The mark value being added or removed.
+        * @param callback           Callback for the operation. See {@link CallBack}.
+        */
+        public void MarkConversations(List<string> conversationIds, bool isMarked, MarkType mark, CallBack callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("convIds", JsonObject.JsonArrayFromStringList(conversationIds));
+            jo_param.AddWithoutNull("isMarked", isMarked);
+            jo_param.AddWithoutNull("mark", (int)mark);
+
+            NativeCall(SDKMethod.markConversations, jo_param, callback);
+        }
+
+        /**
+        * \~chinese
+        * 移除所有消息和会话。
+        *
+        * 异步方法。
+        *
+        * @param clearServerData   是否清除服务端数据。true: 清除；false：不清除
+        * @param callback          处理结果回调，详见 {@link CallBack}。
+        *
+        * \~english
+        * Delete all message and conversations.
+        *
+        * This is an asynchronous method.
+        *
+        * @param clearServerData    Clear server data or not. true: clear; false: not clear
+        * @param callback           Callback for the operation. See {@link CallBack}.
+        */
+        public void DeleteAllMessagesAndConversations(bool clearServerData, CallBack callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("clearServerData", clearServerData);
+
+            NativeCall(SDKMethod.deleteAllMessagesAndConversations, jo_param, callback);
+        }
+
+        /**
+        * \~chinese
+        * 消息置顶或取消置顶。
+        *
+        * 异步方法。
+        *
+        * @param messageId         置顶或取消置顶的消息ID。
+        * @param isPinned          是否置顶消息。true: 置顶；false：取消置顶
+        * @param callback          处理结果回调，详见 {@link CallBack}。
+        *
+        * \~english
+        * Pin or unpin the message.
+        *
+        * This is an asynchronous method.
+        *
+        * @param messageId          The message id to be pinned or unpinned.
+        * @param isPinned           Pin or unpin the message. true: pin the message; false: unpin the message
+        * @param callback           Callback for the operation. See {@link CallBack}.
+        */
+        public void PinMessage(string messageId, bool isPinned, CallBack callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("msgId", messageId);
+            jo_param.AddWithoutNull("isPinned", isPinned);
+
+            NativeCall(SDKMethod.pinMessage, jo_param, callback);
+        }
+
+        /**
+         * \~chinese
+         * 从服务端获取指定会话的置顶消息列表。
+         *
+         * @param conversationId    会话ID。
+         * @param callback          成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
+         *
+         * \~english
+         * Get pinned messages in the conversation from server.
+         *
+         * @param msg               The conversation ID.
+         * @param callback          If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
+         */
+        public void GetPinnedMessagesFromServer(string conversationId, ValueCallBack<List<Message>> callback = null)
+        {
+            JSONObject jo_param = new JSONObject();
+            jo_param.AddWithoutNull("convId", conversationId);
+
+            Process process = (_, jsonNode) =>
+            {
+                return List.BaseModelListFromJsonArray<Message>(jsonNode);
+            };
+
+            NativeCall<List<Message>>(SDKMethod.getPinnedMessagesFromServer, jo_param, callback, process);
+        }
+
+        /**
 		 * \~chinese
 		 * 注册聊天管理器的监听器。
 		 *
@@ -1453,6 +1661,20 @@ namespace AgoraChat
                         foreach (IChatManagerDelegate it in delegater)
                         {
                             it.OnMessageContentChanged(msg, operatorId, operationTime);
+                        }
+                    }
+                    break;
+                case SDKMethod.onMessagePinChanged:
+                    {
+                        string messageId = jsonNode["msgId"];
+                        string conversationId = jsonNode["convId"];
+                        bool isPinned = jsonNode["isPinned"].AsBool;
+                        string operatorId = jsonNode["operatorId"];
+                        long operationTime = (long)jsonNode["ts"].AsDouble;
+
+                        foreach (IChatManagerDelegate it in delegater)
+                        {
+                            it.OnMessagePinChanged(messageId, conversationId, isPinned, operatorId, operationTime);
                         }
                     }
                     break;
