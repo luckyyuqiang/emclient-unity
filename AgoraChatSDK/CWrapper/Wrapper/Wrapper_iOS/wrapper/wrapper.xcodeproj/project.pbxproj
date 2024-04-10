@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4543E1C82BC2A25000429413 /* Mode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543E1C72BC2A25000429413 /* Mode.m */; };
+		4578AED32BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */; };
+		4578AED52BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */; };
 		4597E80F2B875E1200D70B6D /* EMContact+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4597E80E2B875E1200D70B6D /* EMContact+Helper.m */; };
 		45F88D192B81EF2A0051DFEE /* HyphenateChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90319D0D29360033000D01BE /* HyphenateChat.framework */; };
 		90319C812935FC1E000D01BE /* EMMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90319C2A2935FC1E000D01BE /* EMMessageManager.m */; };
@@ -127,6 +130,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4543E1C62BC2A23700429413 /* Mode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mode.h; sourceTree = "<group>"; };
+		4543E1C72BC2A25000429413 /* Mode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mode.m; sourceTree = "<group>"; };
+		4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMMessagePinInfo+Helper.h"; sourceTree = "<group>"; };
+		4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "EMMessagePinInfo+Helper.m"; sourceTree = "<group>"; };
 		4597E80D2B875DBF00D70B6D /* EMContact+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMContact+Helper.h"; sourceTree = "<group>"; };
 		4597E80E2B875E1200D70B6D /* EMContact+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "EMContact+Helper.m"; sourceTree = "<group>"; };
 		90319C1F2935FBE3000D01BE /* wrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = wrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -379,6 +386,10 @@
 				90319C782935FC1E000D01BE /* EMTranslateLanguage+Helper.m */,
 				90319C742935FC1E000D01BE /* EMUserInfo+Helper.h */,
 				90319C602935FC1E000D01BE /* EMUserInfo+Helper.m */,
+				4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */,
+				4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */,
+				4543E1C62BC2A23700429413 /* Mode.h */,
+				4543E1C72BC2A25000429413 /* Mode.m */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -436,6 +447,7 @@
 				90319CC82935FC1E000D01BE /* EMUserInfo+Helper.h in Headers */,
 				90319CB82935FC1E000D01BE /* EMSilentModeTime+Helper.h in Headers */,
 				90319CAD2935FC1E000D01BE /* EaseModeToJson.h in Headers */,
+				4578AED32BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h in Headers */,
 				90319CB32935FC1E000D01BE /* EMChatThread+Helper.h in Headers */,
 				90319C8A2935FC1E000D01BE /* EMRoomManagerWrapper.h in Headers */,
 				90319C9A2935FC1E000D01BE /* EMChatThreadManagerWrapper.h in Headers */,
@@ -568,6 +580,7 @@
 				90319CB92935FC1E000D01BE /* EMPushOptions+Helper.m in Sources */,
 				90319C902935FC1E000D01BE /* EMUserInfoManagerWrapper.m in Sources */,
 				90319CC22935FC1E000D01BE /* EMConversation+Helper.m in Sources */,
+				4543E1C82BC2A25000429413 /* Mode.m in Sources */,
 				90319CB02935FC1E000D01BE /* EMPageResult+Helper.m in Sources */,
 				90319CCC2935FC1E000D01BE /* EMTranslateLanguage+Helper.m in Sources */,
 				90319CBA2935FC1E000D01BE /* EMGroupMessageAck+Helper.m in Sources */,
@@ -592,6 +605,7 @@
 				90319C952935FC1E000D01BE /* EMRoomManagerWrapper.m in Sources */,
 				90319C972935FC1E000D01BE /* EMConversationWrapper.m in Sources */,
 				90319C812935FC1E000D01BE /* EMMessageManager.m in Sources */,
+				4578AED52BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m in Sources */,
 				908CE3D0293D913600348C1A /* NSDictionary+Category.m in Sources */,
 				90319CCB2935FC1E000D01BE /* EMError+Helper.m in Sources */,
 				90319CD12935FC1E000D01BE /* EMSilentModeTime+Helper.m in Sources */,

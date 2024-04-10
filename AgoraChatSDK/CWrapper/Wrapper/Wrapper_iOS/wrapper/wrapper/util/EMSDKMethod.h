@@ -87,12 +87,14 @@ static NSString *const importMessages = @"importMessages";
 static NSString *const loadAllConversations = @"loadAllConversations";
 static NSString *const getConversationsFromServer = @"getConversationsFromServer";
 static NSString *const getConversationsFromServerWithCursor = @"getConversationsFromServerWithCursor";
+static NSString *const getConversationsFromServerWithCursorAndMark = @"getConversationsFromServerWithCursorAndMark";
 static NSString *const pinConversation = @"pinConversation";
 static NSString *const modifyMessage = @"modifyMessage";
 static NSString *const deleteConversation = @"deleteConversation";
 static NSString *const fetchHistoryMessages = @"fetchHistoryMessages";
 static NSString *const fetchHistoryMessagesBy = @"fetchHistoryMessagesBy";
 static NSString *const searchChatMsgFromDB = @"searchChatMsgFromDB";
+static NSString *const searchChatMsgFromDBWithScope = @"searchChatMsgFromDBWithScope";
 static NSString *const getMessage = @"getMessage";
 static NSString *const asyncFetchGroupAcks = @"asyncFetchGroupAcks";
 static NSString *const deleteRemoteConversation = @"deleteRemoteConversation";
@@ -108,6 +110,10 @@ static NSString *const fetchConversationsFromServerWithPage = @"fetchConversatio
 static NSString *const removeMessagesFromServerWithMsgIds = @"removeMessagesFromServerWithMsgIds";
 static NSString *const removeMessagesFromServerWithTs = @"removeMessagesFromServerWithTs";
 static NSString *const downloadCombineMessages = @"downloadCombineMessages";
+static NSString *const markConversations = @"markConversations";
+static NSString *const deleteAllMessagesAndConversations = @"deleteAllMessagesAndConversations";
+static NSString *const pinMessage = @"pinMessage";
+static NSString *const getPinnedMessagesFromServer = @"getPinnedMessagesFromServer";
 
 /// EMMessage listener
 static NSString *const onMessageProgressUpdate = @"onMessageProgressUpdate";
@@ -134,7 +140,10 @@ static NSString *const loadMsgWithStartId = @"loadMsgWithStartId";
 static NSString *const loadMsgWithKeywords = @"loadMsgWithKeywords";
 static NSString *const loadMsgWithMsgType = @"loadMsgWithMsgType";
 static NSString *const loadMsgWithTime = @"loadMsgWithTime";
+static NSString *const loadMsgWithScope = @"loadMsgWithScope";
 static NSString *const messageCount = @"messageCount";
+static NSString *const pinnedMessages = @"pinnedMessages";
+static NSString *const marks = @"marks";
 
 // EMMessage method
 static NSString *const getReactionList = @"getReactionList";
@@ -142,6 +151,7 @@ static NSString *const groupAckCount = @"groupAckCount";
 static NSString *const getChatThread = @"chatThread";
 static NSString *const getHasDeliverAck = @"getHasDeliverAck";
 static NSString *const getHasReadAck = @"getHasReadAck";
+static NSString *const getPinnedInfo = @"pinnedInfo";
 
 
 // EMChatRoomManager
@@ -320,6 +330,7 @@ static NSString *const onConversationsUpdate = @"onConversationsUpdate";
 static NSString *const onConversationRead = @"onConversationRead";
 static NSString *const onMessageReactionDidChange = @"messageReactionDidChange";
 static NSString *const onMessageContentChanged = @"onMessageContentChanged";
+static NSString *const onMessagePinChanged = @"onMessagePinChanged";
 
 // ChatThreadManagerDelegate
 static NSString *const onChatThreadCreate = @"onChatThreadCreate";

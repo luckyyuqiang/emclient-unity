@@ -35,7 +35,8 @@
     data[@"enableEmptyConversation"] = @(self.loadEmptyConversations);
     data[@"osType"] = @(self.customOSType);
     data[@"deviceName"] = self.customDeviceName;
-    //data[@"useReplacedMessageContents"] = @(self.useReplacedMessageContents);
+    data[@"useReplacedMessageContents"] = @(self.useReplacedMessageContents);
+    data[@"regardImportMsgAsRead"] = @(self.regardImportMessagesAsRead);
     
     return data;
 }
@@ -74,8 +75,12 @@
         options.customOSType = [aJson[@"osType"] intValue];
     }
 
-    //options.useReplacedMessageContents = [aJson[@"useReplacedMessageContents"] boolValue];
+    options.useReplacedMessageContents = [aJson[@"useReplacedMessageContents"] boolValue];
     
+    if(aJson[@"regardImportMsgAsRead"]) {
+        options.regardImportMessagesAsRead = [aJson[@"regardImportMsgAsRead"] boolValue];
+    }
+
     return options;
 }
 @end
