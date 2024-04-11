@@ -199,7 +199,7 @@ namespace AgoraChat
          * @param messageId      The message ID where the pinned status has changed.
          * @param conversationId The conversation ID to which the message belongs.
          * @param operatorId     The user ID of the operator that pinned or unpinned the message last time.
-         * @param operationTime  The timestamp of the last pinning operation of the message. It is a UNIX timestamp in milliseconds..
+         * @param operationTime  The timestamp of the last pinning operation of the message. It is a UNIX timestamp in milliseconds.
          */
         void OnMessagePinChanged(string messageId, string conversationId, bool isPinned, string operatorId, long operationTime);
     }
