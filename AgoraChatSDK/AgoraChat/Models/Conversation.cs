@@ -497,7 +497,7 @@ namespace AgoraChat
         *
         * @param keywords   查找关键字，字符串类型。
         * @param scope	    查询范围，详见 {@link MessageSearchScope}。
-        * @param timestamp  查询的 Unix 时间戳，单位为毫秒。
+        * @param timestamp  查询的起始时间戳。默认值为 `-1`，表示当前时间戳。
         * @param maxCount   查询的最大消息数。
         * @param from       消息来源，一般指会话 ID。
         * @param direction	查询方向，详见 {@link MessageSearchDirection}。
@@ -508,7 +508,7 @@ namespace AgoraChat
         *
         * @param keywords   The keyword for query. The data format is String.
         * @param scope	    The query direction. See {@link MessageSearchScope}.
-        * @param timestamp  The Unix timestamp for query, which is in milliseconds.
+        * @param timestamp  The starting Unix timestamp for query. The default value is `-1`, indicating the current Unix timestamp.
         * @param maxCount   The maximum number of messages to retrieve.
         * @param from       The message source, which is usually a conversation ID.
         * @param direction	The query direction. See {@link MessageSearchDirection}.

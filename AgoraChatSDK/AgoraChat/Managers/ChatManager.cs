@@ -1462,6 +1462,7 @@ namespace AgoraChat
         /**
         * \~chinese
         * 消息置顶或取消置顶。
+        * 仅支持群组消息。
         *
         * 异步方法。
         *
@@ -1471,6 +1472,7 @@ namespace AgoraChat
         *
         * \~english
         * Pin or unpin the message.
+        * Only used for group message.
         *
         * This is an asynchronous method.
         *
