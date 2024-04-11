@@ -259,13 +259,11 @@ namespace AgoraChat
         /**
          * \~chinese
          * 获取当前消息的置顶信息。
-         * 如果没有置顶则返回空。
          *
          * @return  置顶信息。
          *
          * \~english
          * Gets the pinned information of the message.
-         * If the message is pinned, then return null.
          *
          * @return The pinned information.
          */

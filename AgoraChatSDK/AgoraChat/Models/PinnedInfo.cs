@@ -18,21 +18,25 @@ namespace AgoraChat
         /**
          * \~chinese
          * 置顶操作者ID。
+         * 如果没有置顶信息，则该值为空串。
          *
          * \~english
          * The user ID who pinned the message.
+         * If not pinned, then this value should be empty string.
          * 
          */
-        public string PinnedBy { get; private set; }
+        public string PinnedBy;
 
         /**
          * \~chinese
          * 置顶时间。
+         * 如果没有置顶信息，则该值为0。
          *
          * \~english
          * The time stamp where the message is pinned.
+         * If not pinned, then this value should be zero.
          */
-        public long PinnedAt { get; private set; }
+        public long PinnedAt;
 
         [Preserve]
         internal PinnedInfo() { }
