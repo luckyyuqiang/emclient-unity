@@ -873,6 +873,7 @@ public class ChatManagerTest : MonoBehaviour, IChatManagerDelegate
         });
 
         config.AddField("Keyword");
+        config.AddField("scope");
         config.AddField("LoadCount");
 
         UIManager.DefaultInputAlert(transform, config);
@@ -1459,7 +1460,12 @@ public class ChatManagerTest : MonoBehaviour, IChatManagerDelegate
 
             SDKClient.Instance.ChatManager.GetPinnedMessagesFromServer(convId, new ValueCallBack<List<Message>>(
                 onSuccess: (list) => {
-                    UIManager.DefaultAlert(transform, $"找到的消息条数: {list.Count}");
+                    string str = "";
+                    foreach(var it in list)
+                    {
+                        str = str + ", msgid:" + it.MsgId + "," + ", pinnedBy:" + it.PinnedInfo.PinnedBy + ", pinnedAt:" + it.PinnedInfo.PinnedAt + ";";
+                    }
+                    UIManager.DefaultAlert(transform, $"找到的消息条数: {list.Count} and content: {str}");
                 },
                 onError: (code, desc) => {
                     UIManager.DefaultAlert(transform, "未找到消息");

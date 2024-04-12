@@ -563,7 +563,12 @@ public class ConversationManagerTest : MonoBehaviour
 
         Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
         List<Message> list = conv.PinnedMessages();
-        UIManager.DefaultAlert(transform, $"找到的消息条数: {list.Count}");
+        string str = "";
+        foreach (var it in list)
+        {
+            str = str + ", msgid:" + it.MsgId + "," + ", pinnedBy:" + it.PinnedInfo.PinnedBy + ", pinnedAt:" + it.PinnedInfo.PinnedAt + ";";
+        }
+        UIManager.DefaultAlert(transform, $"找到的消息条数: {list.Count}, pinnedinfo: {str}");
     }
 
     // Start is called before the first frame update
