@@ -397,9 +397,6 @@ namespace AgoraChat
          * \~chinese
          * 根据标注等参数从服务器获取相关会话对象。
          *
-         * @param needMark    是否只获取带标注的会话：
-         * - `true`：是。只获带标注的会话。SDK 按照会话置顶时间倒序返回。
-         * - `false`：否。
          * @param mark：      标注值；
          * @param cursor      开始获取数据的游标位置。
          * @param limit       每页返回的会话数。取值范围为 [1,50]。
@@ -408,19 +405,15 @@ namespace AgoraChat
          * \~english
          * Gets the conversations from the server basing on the mark.
          *
-         * @param needMark    Whether to return marked conversations only:
-         * - `true`: Yes. The SDK only returns marked conversations in the reverse chronological order of their pinning.
-         * - `false`: No.
-         *
          * @param mark        The mark value used for searching.
          * @param cursor      The position from which to start getting data.
          * @param limit       The number of conversations that you expect to get on each page. The value range is [1,50].
          * @param callback    The list of obtained conversations. See {@link ValueCallBack}.
          */
-        public void GetConversationsFromServerWithCursor(bool needMark, MarkType mark, string cursor = "", int limit = 20, ValueCallBack<CursorResult<Conversation>> callback = null)
+        public void GetConversationsFromServerWithCursor(MarkType mark, string cursor = "", int limit = 20, ValueCallBack<CursorResult<Conversation>> callback = null)
         {
             JSONObject jo_param = new JSONObject();
-            jo_param.AddWithoutNull("needMark", needMark);
+            jo_param.AddWithoutNull("needMark", true);
             jo_param.AddWithoutNull("mark", (int)mark);
             jo_param.AddWithoutNull("cursor", cursor);
             jo_param.AddWithoutNull("limit", limit);

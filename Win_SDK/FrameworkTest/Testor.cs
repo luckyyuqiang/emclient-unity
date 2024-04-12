@@ -675,7 +675,6 @@ namespace WinSDKTest
             param.Clear();
 
             menu_index = 1;
-            param.Add(menu_index, "needMark (bool)"); menu_index++;
             param.Add(menu_index, "mark (int)"); menu_index++;
             param.Add(menu_index, "cursor (string)"); menu_index++;
             param.Add(menu_index, "limit (int)"); menu_index++;
@@ -3408,14 +3407,13 @@ namespace WinSDKTest
             ));
         }
 
-        public void CallFunc_IChatManager_GetConversationsFromServerWithCursorWithMark(string conversationId_input = "", int type_input = -1, bool createIfNeed_input = true)
+        public void CallFunc_IChatManager_GetConversationsFromServerWithCursorWithMark()
         {
-            bool needMark = GetParamValueFromContext(0).CompareTo("true") == 0 ? true : false;
-            int mark = GetIntFromString(GetParamValueFromContext(1));
-            string cursor = GetParamValueFromContext(2);
-            int limit = GetIntFromString(GetParamValueFromContext(3));
+            int mark = GetIntFromString(GetParamValueFromContext(0));
+            string cursor = GetParamValueFromContext(1);
+            int limit = GetIntFromString(GetParamValueFromContext(2));
 
-            SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor(needMark, (MarkType)mark, cursor, limit, new ValueCallBack<CursorResult<Conversation>>(
+            SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor((MarkType)mark, cursor, limit, new ValueCallBack<CursorResult<Conversation>>(
              onSuccess: (result) =>
              {
                  Console.WriteLine($"GetConversationsFromServerWithCursorWithMark found num: {result.Data.Count}, nextcursor: {result.Cursor}");
