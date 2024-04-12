@@ -283,9 +283,35 @@ namespace AgoraChat
          * @param callback 	    The login result callback. See {@link CallBack}.
          *
          */
+        [Obsolete]
         public void Login(string userId, string pwdOrToken, bool isToken = false, CallBack callback = null)
         {
             _clientImpl.Login(userId, pwdOrToken, isToken, callback);
+        }
+
+        /**
+         * \~chinese
+         * 使用密码或 token 登录服务器。
+         *
+         * 异步方法。
+         *
+         * @param userId        用户 ID，必填。
+         * @param token         token。 该参数必填。
+         * @param callback        登录结果回调，详见 {@link CallBack}。
+         *
+         * \~english
+         * Logs in to the chat server with a password or token.
+         *
+         * This is an asynchronous method.
+         *
+         * @param userId 		The user ID. Ensure that you set this parameter.
+         * @param token     	The token of the user. Ensure that you set this parameter.
+         * @param callback 	    The login result callback. See {@link CallBack}.
+         *
+         */
+        public void LoginWithToken(string userId, string token, CallBack callback = null)
+        {
+            _clientImpl.Login(userId, token, true, callback);
         }
 
         /**
