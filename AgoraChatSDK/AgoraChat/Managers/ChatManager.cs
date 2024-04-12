@@ -639,7 +639,7 @@ namespace AgoraChat
 		 * 若查询消息数量较大，需考虑内存消耗，每次最多可查询 200 条消息。
 		 *
 		 * @param keywords   查找关键字，字符串类型。
-		 * @param timestamp  查询的 Unix 时间戳，单位为毫秒。
+		 * @param timestamp  查询的起始时间戳，单位为毫秒。
 		 * @param maxCount   查询的最大消息数。
 		 * @param from       消息来源，一般指会话 ID。
 		 * @param direction	 查询方向，详见 {@link MessageSearchDirection}。
@@ -652,7 +652,7 @@ namespace AgoraChat
 		 * If you want to query a great number of messages, pay attention to the memory consumption. A maximum number of 200 messages can be retrieved each time.
 		 *
 		 * @param keywords   The keyword for query. The data format is String.
-		 * @param timestamp  The Unix timestamp for query, which is in milliseconds.
+		 * @param timestamp  The starting Unix timestamp for query, which is in milliseconds.
 		 * @param maxCount   The maximum number of messages to retrieve.
 		 * @param from       The message source, which is usually a conversation ID.
 		 * @param direction	 The query direction. See {@link MessageSearchDirection}.
@@ -684,7 +684,7 @@ namespace AgoraChat
         * 若查询消息数量较大，需考虑内存消耗，每次最多可查询 200 条消息。
         *
         * @param keywords   查找关键字，字符串类型。
-        * @param timestamp  查询的 Unix 时间戳，单位为毫秒。
+        * @param timestamp  查询的起始时间戳，单位为毫秒。
         * @param maxCount   查询的最大消息数。
         * @param from       消息来源，一般指会话 ID。
         * @param direction	查询方向，详见 {@link MessageSearchDirection}。
@@ -698,7 +698,7 @@ namespace AgoraChat
         * If you want to query a great number of messages, pay attention to the memory consumption. A maximum number of 200 messages can be retrieved each time.
         *
         * @param keywords   The keyword for query. The data format is String.
-        * @param timestamp  The Unix timestamp for query, which is in milliseconds.
+        * @param timestamp  The starting Unix timestamp for query, which is in milliseconds.
         * @param maxCount   The maximum number of messages to retrieve.
         * @param from       The message source, which is usually a conversation ID.
         * @param direction	The query direction. See {@link MessageSearchDirection}.

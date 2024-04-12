@@ -379,7 +379,7 @@ namespace AgoraChat
          *
          * @param type              加载消息类型。该参数必填。
          * @param sender            消息发送方的用户 ID。该参数必填。
-         * @param timestamp         查询的起始 Unix 时间戳。默认值为 `-1`，表示当前 Unix 时间戳。
+         * @param timestamp         查询的起始 Unix 时间戳，单位为毫秒。
          * @param count             加载的最大消息数目。默认值为 `20`。
          * @param direction         消息加载方向。默认按消息中的时间戳（{@link SortMessageByServerTime}）的倒序加载，详见 {@link MessageSearchDirection}。
          * @param callback          加载结果回调，成功返回消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
@@ -391,7 +391,7 @@ namespace AgoraChat
          *
          * @param type              The type of messages to load. Ensure that you set this parameter.
          * @param sender            The user ID of the message sender. Ensure that you set this parameter.
-         * @param timestamp         The starting Unix timestamp for query. The default value is `-1`, indicating the current Unix timestamp.
+         * @param timestamp         The starting Unix timestamp for query, which is in milliseconds.
          * @param count             The maximum number of messages to load. The default value is `20`.
          * @param direction         The message loading direction. By default, the SDK loads messages in the reverse chronological order of the Unix timestamp ({@link SortMessageByServerTime}) in the message. See {@link MessageSearchDirection}.
          * @param callback          The loading result callback. If success, a list of loaded messages are returned; otherwise, an error is returned. See {@link ValueCallBack}.
@@ -435,7 +435,7 @@ namespace AgoraChat
          *
          * @param keywords          查询使用的关键字。
          * @param sender            消息发送方的用户 ID。
-         * @param timestamp         查询的起始时间戳。默认值为 `-1`，表示当前时间戳。
+         * @param timestamp         查询的起始时间戳，单位为毫秒。
          * @param count             加载的最大消息数目，默认值为 `20`。
          * @param direction         消息加载方向。默认按消息中的时间戳的倒序加载，详见 {@link MessageSearchDirection}。
          * @param callback          加载结果回调，成功返回消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
@@ -447,7 +447,7 @@ namespace AgoraChat
          *
          * @param keywords          The keywords for query.
          * @param sender            The user ID of the message sender.
-         * @param timestamp         The starting Unix timestamp for query. The default value is `-1`, indicating the current Unix timestamp.
+         * @param timestamp         The starting Unix timestamp for query, which is in milliseconds.
          * @param count             The maximum number of messages to load. The default value is `20`.
          * @param direction         The message loading direction. By default, the SDK loads messages in the reverse chronological order of the Unix timestamp ({@link SortMessageByServerTime}) in the messages. See {@link MessageSearchDirection}.
          * @param callback          The loading result callback. If success, a list of loaded messages are returned; otherwise, an error is returned. See {@link ValueCallBack}.
@@ -497,7 +497,7 @@ namespace AgoraChat
         *
         * @param keywords   查找关键字，字符串类型。
         * @param scope	    查询范围，详见 {@link MessageSearchScope}。
-        * @param timestamp  查询的起始时间戳。默认值为 `-1`，表示当前时间戳。
+        * @param timestamp  查询的起始时间戳。单位为毫秒。
         * @param maxCount   查询的最大消息数。
         * @param from       消息来源，一般指会话 ID。
         * @param direction	查询方向，详见 {@link MessageSearchDirection}。
@@ -508,7 +508,7 @@ namespace AgoraChat
         *
         * @param keywords   The keyword for query. The data format is String.
         * @param scope	    The query direction. See {@link MessageSearchScope}.
-        * @param timestamp  The starting Unix timestamp for query. The default value is `-1`, indicating the current Unix timestamp.
+        * @param timestamp  The starting Unix timestamp for query, which is in milliseconds.
         * @param maxCount   The maximum number of messages to retrieve.
         * @param from       The message source, which is usually a conversation ID.
         * @param direction	The query direction. See {@link MessageSearchDirection}.
