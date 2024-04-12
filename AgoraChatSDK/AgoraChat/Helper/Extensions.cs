@@ -524,6 +524,7 @@ namespace AgoraChat
                 case 60: return MultiDevicesOperation.CONVERSATION_PINNED;
                 case 61: return MultiDevicesOperation.CONVERSATION_UNPINNED;
                 case 62: return MultiDevicesOperation.CONVERSATION_DELETED;
+                case 63: return MultiDevicesOperation.CONVERSATION_MARK;
                 default: return MultiDevicesOperation.UNKNOWN;
             }
         }

@@ -3360,6 +3360,7 @@ namespace sdk_wrapper
         case EMMultiDevicesListener::MultiDevicesOperation::CONVERSATION_PINNED: return 60;
         case EMMultiDevicesListener::MultiDevicesOperation::CONVERSATION_UNPINNED: return 61;
         case EMMultiDevicesListener::MultiDevicesOperation::CONVERSATION_DELETED: return 62;
+        case EMMultiDevicesListener::MultiDevicesOperation::CONVERSATION_MARK: return 63;
         default:
             return -1;
         }
