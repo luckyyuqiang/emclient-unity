@@ -601,12 +601,14 @@ public class Main : MonoBehaviour, IConnectionDelegate, IChatManagerDelegate, IR
 
     public void OnMessagesReceived(List<Message> messages)
     {
-        List<string> msgs = new List<string>();
+        List<string> contents = new List<string>();
         foreach (var msg in messages)
         {
-            msgs.Add(msg.ToJsonObject().ToString());
+            contents.Add(msg.ToJsonObject().ToString());
+            string pinStr = "PinnedBy:" + msg.PinnedInfo.PinnedBy + " PinnedAt:" + msg.PinnedInfo.PinnedAt.ToString();
+            contents.Add(pinStr);
         }
-        Debug.Log($"ChatManager1 OnMessagesReceived {string.Join(", ", msgs.ToArray())}");
+        Debug.Log($"ChatManager1 OnMessagesReceived {string.Join(", ", contents.ToArray())}");
     }
 
     public void OnCmdMessagesReceived(List<Message> messages)
@@ -687,6 +689,11 @@ public class Main : MonoBehaviour, IConnectionDelegate, IChatManagerDelegate, IR
     public void OnMessageContentChanged(Message msg, string operatorId, long operationTime)
     {
         Debug.Log($"ChatManager11 OnMessageContentChanged change msgId:{msg.MsgId}, operatorId:{operatorId}, operationTime:{operationTime}");
+    }
+
+    public void OnMessagePinChanged(string messageId, string conversationId, bool isPinned, string operatorId, long operationTime)
+    {
+        Debug.Log($"ChatManager12 OnMessagePinChanged msgId:{messageId}, convId:{conversationId}, isPinned:{isPinned}, operatorId:{operatorId}, operationTime:{operationTime}");
     }
 
     public void OnContactAdded(string username)
