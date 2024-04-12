@@ -619,7 +619,7 @@ namespace sdk_wrapper
 
             gMultiDevicesListener->onRoamDeleteMultiDevicesEvent("convId", "deviceId", usernames, 123456);
 
-            gMultiDevicesListener->onConversationMultiDevicesEvent(EMMultiDevicesListener::MultiDevicesOperation::CONVERSATION_PINNED, "convId", EMConversation::EMConversationType::CHAT);
+            gMultiDevicesListener->onConversationMultiDevicesEvent(EMMultiDevicesListener::MultiDevicesOperation::CONVERSATION_MARK, "convId", EMConversation::EMConversationType::CHAT);
         }
 
         return nullptr;

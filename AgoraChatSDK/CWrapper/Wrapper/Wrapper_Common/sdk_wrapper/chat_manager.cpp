@@ -1730,6 +1730,7 @@ namespace sdk_wrapper {
             gChatManagerListener->onUpdateConversationList(conversationList);
             gChatManagerListener->onReceiveReadAckForConversation("fromUsername", "toUsername");
             gChatManagerListener->onMessageIdChanged("user", "oldMsgId", "newMsgId");
+            gChatManagerListener->onMessagePinChanged("msgId", "convId", true, "me", 1712802152000);
         }
 
         if (nullptr != gReactionManagerListener) {
