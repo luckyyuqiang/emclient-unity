@@ -621,7 +621,7 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
 
     private String searchChatMsgFromDB(JSONObject params, EMWrapperCallback callback) throws JSONException {
         String keywords = params.getString("keywords");
-        long timeStamp = params.getLong("timeStamp");
+        long timeStamp = params.getLong("timestamp");
         int count = params.getInt("count");
         String from = params.getString("from");
         EMConversation.EMSearchDirection direction = searchDirectionFromInt(params.getInt("direction"));
@@ -644,7 +644,7 @@ public class EMChatManagerWrapper extends EMBaseWrapper {
 
     private String searchChatMsgFromDBWithScope(JSONObject params, EMWrapperCallback callback) throws JSONException {
         String keywords = params.getString("keywords");
-        long timeStamp = params.getLong("timeStamp");
+        long timeStamp = params.getLong("timestamp");
         int count = params.getInt("count");
         String from = params.getString("from");
         EMConversation.EMSearchDirection direction = searchDirectionFromInt(params.getInt("direction"));
