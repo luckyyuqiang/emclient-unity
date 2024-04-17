@@ -37,6 +37,7 @@
     data[@"deviceName"] = self.customDeviceName;
     data[@"useReplacedMessageContents"] = @(self.useReplacedMessageContents);
     data[@"regardImportMsgAsRead"] = @(self.regardImportMessagesAsRead);
+    data[@"includeSendMessageInMessageListener"] = @(self.includeSendMessageInMessageListener);
     
     return data;
 }
@@ -75,10 +76,16 @@
         options.customOSType = [aJson[@"osType"] intValue];
     }
 
-    options.useReplacedMessageContents = [aJson[@"useReplacedMessageContents"] boolValue];
+    if(aJson[@"useReplacedMessageContents"]) {
+        options.useReplacedMessageContents = [aJson[@"useReplacedMessageContents"] boolValue];
+    }
     
     if(aJson[@"regardImportMsgAsRead"]) {
         options.regardImportMessagesAsRead = [aJson[@"regardImportMsgAsRead"] boolValue];
+    }
+
+    if(aJson[@"includeSendMessageInMessageListener"]) {
+        options.includeSendMessageInMessageListener = [aJson[@"includeSendMessageInMessageListener"] boolValue];
     }
 
     return options;
