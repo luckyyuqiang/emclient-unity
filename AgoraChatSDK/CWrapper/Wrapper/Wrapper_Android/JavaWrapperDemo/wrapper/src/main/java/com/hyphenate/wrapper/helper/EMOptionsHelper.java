@@ -55,6 +55,9 @@ public class EMOptionsHelper {
         if (json.has("regardImportMsgAsRead")) {
             options.setRegardImportedMsgAsRead(json.optBoolean("regardImportMsgAsRead"));
         }
+        if (json.has("includeSendMessageInMessageListener")) {
+            options.setIncludeSendMessageInMessageListener(json.optBoolean("includeSendMessageInMessageListener"));
+        }
 
         if (json.has("pushConfig")) {
             EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
