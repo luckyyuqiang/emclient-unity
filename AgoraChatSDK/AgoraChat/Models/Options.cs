@@ -300,6 +300,20 @@ namespace AgoraChat
         public bool UseReplacedMessageContents = false;
 
         /**
+        * \~chinese
+        * 设置发送成功的消息是否在 {@link IChatManagerDelegate#OnMessagesReceived} 中回调给用户。
+        * - `true`：是；
+        * - （默认）`false`：否。
+        *
+        * \~english
+        * Sets whether the sent message is included in {@link IChatManagerDelegate#OnMessagesReceived}.
+        * -`true`: Yes;
+        * -(Default) `false`: No.
+        *
+        */
+        public bool IncludeSendMessageInMessageListener = false;
+
+        /**
          *  \~chinese
          *  自定义系统类型。
          *
@@ -479,6 +493,7 @@ namespace AgoraChat
             jo.AddWithoutNull("customOSType", CustomOSType);
             jo.AddWithoutNull("customDeviceName", CustomDeviceName);
             jo.AddWithoutNull("regardImportMsgAsRead", RegardImportMsgAsRead);
+            jo.AddWithoutNull("includeSendMessageInMessageListener", IncludeSendMessageInMessageListener);
 
 
             if (SDKDataPath.Length == 0)

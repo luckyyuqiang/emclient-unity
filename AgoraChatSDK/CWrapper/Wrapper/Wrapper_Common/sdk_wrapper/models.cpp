@@ -456,6 +456,11 @@ namespace sdk_wrapper
             configs->setRegardImportMsgAsRead(regard_import_msg_as_read);
         }
 
+        if (jnode.HasMember("includeSendMessageInMessageListener") && jnode["includeSendMessageInMessageListener"].IsBool()) {
+            bool include_send_message_in_message_listener = jnode["includeSendMessageInMessageListener"].GetBool();
+            configs->setIncludeSendMessageInMessageListener(include_send_message_in_message_listener);
+        }
+
         //TODO: need to Area code later
 
 #ifndef _WIN32

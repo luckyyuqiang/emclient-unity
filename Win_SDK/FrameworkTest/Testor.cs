@@ -2207,6 +2207,7 @@ namespace WinSDKTest
             options.EnableEmptyConversation = true;
             options.UseReplacedMessageContents = true;
             options.RegardImportMsgAsRead = true;
+            //options.IncludeSendMessageInMessageListener = true;
             //options.IsAutoDownload = true;
 
             // 沙箱环境
