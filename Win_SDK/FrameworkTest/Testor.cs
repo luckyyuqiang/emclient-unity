@@ -3697,6 +3697,39 @@ namespace WinSDKTest
             ));
         }
 
+        static public void Message_Forwrad(string msgId)
+        {
+            // messageId 为要转发的消息 ID。
+            //string messageId = "xxx";
+            string messageId = msgId;
+
+            // 当根据消息id被获取到消息时，里面会自动带有原来消息的body内容和扩展属性
+            Message targetMessage = SDKClient.Instance.ChatManager.LoadMessage(messageId);
+
+            if (targetMessage != null)
+            {
+                // to: 单聊为对端用户 ID，群聊为群组 ID，聊天室聊天为聊天室 ID。
+                //string to = "the conversationId you want to send to";
+                string to = "yqtest1";
+
+                // 根据to和消息体创建新消息
+                Message newMessage = Message.CreateSendMessage(to, targetMessage.Body);
+                newMessage.Attributes = targetMessage.Attributes;
+
+                //聊天类型默认为单聊MessageType.Chat。对于群聊或者聊天室，需要将 MessageType 设置为MessageType.Group 或 MessageType.Room。
+                //newMessage.MessageType = MessageType.Group;
+
+                SDKClient.Instance.ChatManager.SendMessage(ref newMessage, new CallBack(
+                    onSuccess: () => {
+                        Console.WriteLine($"SendTxtMessage success. msgid:{newMessage.MsgId}");
+                    },
+                    onError: (code, desc) => {
+                        Console.WriteLine($"SendTxtMessage failed, code:{code}, desc:{desc}");
+                    }
+                ));
+            }
+        }
+
         public void CallFunc_IChatManager_SendTxtMessage(string _to="", string _text="")
         {
             string to = "";
@@ -10067,6 +10100,7 @@ namespace WinSDKTest
             foreach (var it in messages)
             {                
                 Console.WriteLine($"===========================");
+                //Testor.Message_Forwrad(it.MsgId);
                 Utils.PrintMessage(it);
                 Console.WriteLine($"===========================");
             }
