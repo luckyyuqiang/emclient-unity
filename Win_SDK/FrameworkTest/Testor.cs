@@ -279,6 +279,201 @@ namespace WinSDKTest
         }
     }
 
+    class MyCase
+    {
+        static public void Message_Forwrad(string msgId)
+        {
+            // messageId 为要转发的消息 ID。
+            //string messageId = "xxx";
+            string messageId = msgId;
+
+            // 当根据消息id被获取到消息时，里面会自动带有原来消息的body内容和扩展属性
+            Message targetMessage = SDKClient.Instance.ChatManager.LoadMessage(messageId);
+
+            if (targetMessage != null)
+            {
+                // to: 单聊为对端用户 ID，群聊为群组 ID，聊天室聊天为聊天室 ID。
+                //string to = "the conversationId you want to send to";
+                string to = "yqtest1";
+
+                // 根据to和消息体创建新消息
+                Message newMessage = Message.CreateSendMessage(to, targetMessage.Body);
+                newMessage.Attributes = targetMessage.Attributes;
+
+                //聊天类型默认为单聊MessageType.Chat。对于群聊或者聊天室，需要将 MessageType 设置为MessageType.Group 或 MessageType.Room。
+                //newMessage.MessageType = MessageType.Group;
+
+                SDKClient.Instance.ChatManager.SendMessage(ref newMessage, new CallBack(
+                    onSuccess: () => {
+                        Console.WriteLine($"SendTxtMessage success. msgid:{newMessage.MsgId}");
+                    },
+                    onError: (code, desc) => {
+                        Console.WriteLine($"SendTxtMessage failed, code:{code}, desc:{desc}");
+                    }
+                ));
+            }
+        }
+
+        static public void SendTxtMessage_AddReaction_RemoveReaction(int repeatNum)
+        {
+            string content;
+            for (int i = 0; i < repeatNum; i++)
+            {
+                // 构造消息
+                content = "hello-" + i.ToString();
+                Message msg = Message.CreateTextSendMessage("238510777892867", content); // 238510777892867 is room id
+                msg.MessageType = MessageType.Room;
+
+                Console.WriteLine($"Send a new message ========================================");
+                // 发送消息
+                SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+
+                    onSuccess: () => {
+                        Console.WriteLine($"SendTxtMessage success. msgid:{msg.MsgId}");
+
+                        // 发送成功后，添加reaction
+                        string reaction = "reaction1";
+                        Console.WriteLine($"add reaction -----------------------");
+                        SDKClient.Instance.ChatManager.AddReaction(msg.MsgId, reaction, new CallBack(
+                            onSuccess: () =>
+                            {
+                                Console.WriteLine($"{msg.MsgId} AddReaction {reaction} success.");
+                            },
+                            onError: (code, desc) =>
+                            {
+                                Console.WriteLine($"{msg.MsgId} AddReaction {reaction} failed, code:{code}, desc:{desc}");
+                            }
+                        ));
+
+                        // 发送成功后，睡眠1s, 添加reaction
+                        Thread.Sleep(1000);
+                        reaction = "reaction2";
+                        Console.WriteLine($"add reaction -----------------------");
+                        SDKClient.Instance.ChatManager.AddReaction(msg.MsgId, reaction, new CallBack(
+                            onSuccess: () =>
+                            {
+                                Console.WriteLine($"{msg.MsgId} AddReaction {reaction} success.");
+                            },
+                            onError: (code, desc) =>
+                            {
+                                Console.WriteLine($"{msg.MsgId} AddReaction {reaction} failed, code:{code}, desc:{desc}");
+                            }
+                        ));
+
+                        // 发送成功后，睡眠1s, 添加reaction
+                        Thread.Sleep(1000);
+                        reaction = "reaction3";
+                        Console.WriteLine($"add reaction -----------------------");
+                        SDKClient.Instance.ChatManager.AddReaction(msg.MsgId, reaction, new CallBack(
+                            onSuccess: () =>
+                            {
+                                Console.WriteLine($"{msg.MsgId} AddReaction {reaction} success.");
+                            },
+                            onError: (code, desc) =>
+                            {
+                                Console.WriteLine($"{msg.MsgId} AddReaction {reaction} failed, code:{code}, desc:{desc}");
+                            }
+                        ));
+
+                        // 发送成功后，睡眠1s, 移除reaction
+                        Thread.Sleep(1000);
+                        reaction = "reaction1";
+                        Console.WriteLine($"remove reaction ---------------------");
+                        SDKClient.Instance.ChatManager.RemoveReaction(msg.MsgId, reaction, new CallBack(
+                             onSuccess: () =>
+                             {
+                                 Console.WriteLine($"{msg.MsgId} RemoveReaction {reaction} success.");
+                             },
+                             onError: (code, desc) =>
+                             {
+                                 Console.WriteLine($"{msg.MsgId} RemoveReaction {reaction} failed, code:{code}, desc:{desc}");
+                             }
+                        ));
+
+                    },
+                    onError: (code, desc) => {
+                        Console.WriteLine($"SendTxtMessage failed, code:{code}, desc:{desc}");
+                    }
+                ));
+
+                // 等待下一轮发送消息
+                Console.WriteLine($"Selected q to quit. other to continue... ");
+                string key = Console.ReadLine();
+                if (key.CompareTo("q") == 0)
+                {
+                    Console.WriteLine($"quit now.");
+                    break;
+                }
+            }
+        }
+
+        static public void FetchHistoryMessagesFromServerBy_untill_complete(string input_cursor)
+        {
+            string conversationId = "238510777892867";
+
+            ConversationType type = ConversationType.Group;
+
+            string cursor = input_cursor;
+
+            int pageSize = 20;
+
+            bool needOption = true;
+
+            FetchServerMessagesOption option = null;
+
+            if (needOption)
+            {
+                option = new FetchServerMessagesOption();
+                option.IsSave = false;
+                option.Direction = MessageSearchDirection.UP;
+                option.From = "yqtest";
+                MessageBodyType msgType = MessageBodyType.TXT;
+                option.MsgTypes = new List<MessageBodyType>();
+                option.MsgTypes.Add(msgType);
+                option.StartTime = -1;
+                option.EndTime = -1;
+            }
+
+            SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServerBy(conversationId, type, cursor, pageSize, option, new ValueCallBack<CursorResult<Message>>(
+                onSuccess: (result) =>
+                {
+                    if (0 == result.Data.Count || result.Cursor.Length == 0)
+                    {
+                        Console.WriteLine("No history messages.");
+                        return;
+                    }
+                    Console.WriteLine($"FetchHistoryMessagesFromServerBy: found {result.Data.Count} messages, cursor: {result.Cursor} ============");
+                    foreach (var msg in result.Data)
+                    {
+                        List<MessageReaction> reactions = msg.ReactionList();
+                        foreach (var lit in reactions)
+                        {
+                            Console.WriteLine($"-----------------");
+                            string userlist = string.Join(",", lit.UserList.ToArray());
+                            Console.WriteLine($"reaction: Reaction:{lit.Reaction},count:{lit.Count},userlist:{userlist}; state:{lit.State}");
+                        }
+                    }
+
+                    // 等待获取消息
+                    Console.WriteLine($"Selected q to quit. other to continue... ");
+                    string key = Console.ReadLine();
+                    if (key.CompareTo("q") == 0)
+                    {
+                        Console.WriteLine($"quit now.");
+                    }
+                    else
+                    {
+                        FetchHistoryMessagesFromServerBy_untill_complete(result.Cursor);
+                    }
+                },
+                onError: (code, desc) =>
+                {
+                    Console.WriteLine($"FetchHistoryMessagesFromServerBy failed, code:{code}, desc:{desc}");
+                }
+            ));
+        }
+    }
+
     /*
      * leve11 menu=======
      * Please select test manager below:
@@ -3233,6 +3428,9 @@ namespace WinSDKTest
 
         public void CallFunc_IChatManager_FetchHistoryMessagesFromServerBy()
         {
+            //MyCase.FetchHistoryMessagesFromServerBy_untill_complete("");
+            //return;
+
             string conversationId = GetParamValueFromContext(0);
 
             ConversationType type = ConversationType.Chat;
@@ -3697,41 +3895,11 @@ namespace WinSDKTest
             ));
         }
 
-        static public void Message_Forwrad(string msgId)
-        {
-            // messageId 为要转发的消息 ID。
-            //string messageId = "xxx";
-            string messageId = msgId;
-
-            // 当根据消息id被获取到消息时，里面会自动带有原来消息的body内容和扩展属性
-            Message targetMessage = SDKClient.Instance.ChatManager.LoadMessage(messageId);
-
-            if (targetMessage != null)
-            {
-                // to: 单聊为对端用户 ID，群聊为群组 ID，聊天室聊天为聊天室 ID。
-                //string to = "the conversationId you want to send to";
-                string to = "yqtest1";
-
-                // 根据to和消息体创建新消息
-                Message newMessage = Message.CreateSendMessage(to, targetMessage.Body);
-                newMessage.Attributes = targetMessage.Attributes;
-
-                //聊天类型默认为单聊MessageType.Chat。对于群聊或者聊天室，需要将 MessageType 设置为MessageType.Group 或 MessageType.Room。
-                //newMessage.MessageType = MessageType.Group;
-
-                SDKClient.Instance.ChatManager.SendMessage(ref newMessage, new CallBack(
-                    onSuccess: () => {
-                        Console.WriteLine($"SendTxtMessage success. msgid:{newMessage.MsgId}");
-                    },
-                    onError: (code, desc) => {
-                        Console.WriteLine($"SendTxtMessage failed, code:{code}, desc:{desc}");
-                    }
-                ));
-            }
-        }
-
         public void CallFunc_IChatManager_SendTxtMessage(string _to="", string _text="")
         {
+            //MyCase.SendTxtMessage_AddReaction_RemoveReaction(99);
+            //return;
+
             string to = "";
             string text = "";
 
@@ -10100,7 +10268,7 @@ namespace WinSDKTest
             foreach (var it in messages)
             {                
                 Console.WriteLine($"===========================");
-                //Testor.Message_Forwrad(it.MsgId);
+                //MyCase.Message_Forwrad(it.MsgId);
                 Utils.PrintMessage(it);
                 Console.WriteLine($"===========================");
             }
