@@ -490,32 +490,39 @@ namespace AgoraChat
         DOWN
     };
 
+    /**
+    * \~chinese
+    * 消息搜索范围枚举类型。
+    *
+    * \~english
+    * The message search scopes.
+    */
     public enum MessageSearchScope
     {
         /**
         * \~chinese
-        * 搜索范围为消息内容。
+        * 按消息内容搜索。
         *
         * \~english
-        * The search scope is message content.
+        * Search by message content.
         */
         CONTENT,
 
         /**
         * \~chinese
-        * 搜索范围为消息扩展字段。
+        * 按消息扩展属性搜索。
         *
         * \~english
-        * The search scope is message ext field.
+        * Search by message extension.
         */
         EXT,
 
         /**
         * \~chinese
-        * 搜索范围为为消息内容和消息扩展字段。
+        * 按消息内容和扩展属性搜索。
         *
         * \~english
-        * The search scope includes message content and message ext field.
+        * Search by message content and extension.
         */
         ALL,
     };
@@ -1170,10 +1177,10 @@ namespace AgoraChat
 
     /**
     * \~chinese
-    * 标注类型。
+    * 会话标记。
     *
     * \~english
-    * mark type.
+    * The conversation marks.
     */
     public enum MarkType
     {

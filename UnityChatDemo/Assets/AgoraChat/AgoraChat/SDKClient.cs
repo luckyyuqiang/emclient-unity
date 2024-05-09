@@ -383,7 +383,7 @@ namespace AgoraChat
          *
          * 当用户通过声网 token 登录时，在 {@link IConnectionDelegate} 回调中收到 token 即将过期的通知时可更新 token，避免因 token 失效产生未知问题。
          *
-         * 此方法已过时，建议使用RenewToken方法
+         * 此方法已过时，建议使用 RenewToken 方法
          *
          * @param token 新的声网 token。
          *
@@ -392,7 +392,7 @@ namespace AgoraChat
          *
          * If you log in with an Agora token and are notified by a callback method {@link IConnectionDelegate} that the token is to be expired, you can call this method to update the token to avoid unknown issues caused by an invalid token.
          *
-         * This method is obsolete; it is recommended to use the 'RenewToken' method.
+         * This method is deprecated. Use the 'RenewToken' method instead.
          *
          * @param token The new Agora token.
          */

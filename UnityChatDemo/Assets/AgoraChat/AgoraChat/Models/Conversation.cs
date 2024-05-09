@@ -361,6 +361,7 @@ namespace AgoraChat
          *
          * \~english
          * Loads a message.
+         *
          * The SDK first retrieves the message from the memory. If no message is found, the SDK retrieves it from the local database and loads it.
          *
          * @param messageId         The ID of the message to load.
@@ -420,7 +421,7 @@ namespace AgoraChat
          * @param startMessageId    The starting message ID for loading. If this parameter is set as "" or `null`, the SDK will load from the latest message.
          * @param count             The maximum number of messages to load. The default value is `20`.
            @param direction         The message loading direction. By default, the SDK loads messages in the reverse chronological order of the Unix timestamp ({@link SortMessageByServerTime}) in the messages. See {@link MessageSearchDirection}.
-         * @param callback            The loading result callback. If success, a list of loaded messages are returned; otherwise, an error is returned. See {@link ValueCallBack}.
+         * @param callback          The loading result callback. If success, a list of loaded messages are returned; otherwise, an error is returned. See {@link ValueCallBack}.
          */
         public void LoadMessages(string startMessageId = null, int count = 20, MessageSearchDirection direction = MessageSearchDirection.UP, ValueCallBack<List<Message>> callback = null)
         {
@@ -434,7 +435,7 @@ namespace AgoraChat
          * SDK 首先在内存中查找消息，若在内存中未找到，SDK 会在本地数据库查询并加载。
          *
          * @param keywords          查询使用的关键字。
-         * @param sender            消息发送方的用户 ID。
+         * @param sender            消息发送方的用户 ID。 若不设置该参数，SDK 搜索消息时会忽略该参数。
          * @param timestamp         查询的起始时间戳，单位为毫秒。
          * @param count             加载的最大消息数目，默认值为 `20`。
          * @param direction         消息加载方向。默认按消息中的时间戳的倒序加载，详见 {@link MessageSearchDirection}。
@@ -446,7 +447,7 @@ namespace AgoraChat
          * The SDK first retrieves the messages from the memory. If no message is found, the SDK will retrieve them from the local database and load them.
          *
          * @param keywords          The keywords for query.
-         * @param sender            The user ID of the message sender.
+         * @param sender            The user ID of the message sender. If you do not set this parameter, the SDK ignores this parameter when retrieving messages.
          * @param timestamp         The starting Unix timestamp for query, which is in milliseconds.
          * @param count             The maximum number of messages to load. The default value is `20`.
          * @param direction         The message loading direction. By default, the SDK loads messages in the reverse chronological order of the Unix timestamp ({@link SortMessageByServerTime}) in the messages. See {@link MessageSearchDirection}.
@@ -484,7 +485,7 @@ namespace AgoraChat
          * @param startTimeStamp    The starting Unix timestamp for query.
          * @param endTimeStamp      The ending Unix timestamp for query.
          * @param count             The maximum number of messages to load. The default value is `20`.
-         * @param callback            The loading result callback. If success, a list of loaded messages are returned; otherwise, an error is returned. See {@link ValueCallBack}.
+         * @param callback          The loading result callback. If success, a list of loaded messages are returned; otherwise, an error is returned. See {@link ValueCallBack}.
          */
         public void LoadMessagesWithTime(long startTime, long endTime, int count = 20, ValueCallBack<List<Message>> callback = null)
         {
@@ -499,20 +500,20 @@ namespace AgoraChat
         * @param scope	    查询范围，详见 {@link MessageSearchScope}。
         * @param timestamp  查询的起始时间戳。单位为毫秒。
         * @param maxCount   查询的最大消息数。
-        * @param from       消息来源，一般指会话 ID。
+        * @param from       消息发送方的用户 ID。若不设置该参数，SDK 搜索消息时会忽略该参数。
         * @param direction	查询方向，详见 {@link MessageSearchDirection}。
         * @return           消息列表。
         *
         * \~english
-        * Load messages within a specified scope that meet the conditions.
+        * Loads messages within a specified scope that meet the conditions.
         *
         * @param keywords   The keyword for query. The data format is String.
         * @param scope	    The query direction. See {@link MessageSearchScope}.
         * @param timestamp  The starting Unix timestamp for query, which is in milliseconds.
         * @param maxCount   The maximum number of messages to retrieve.
-        * @param from       The message source, which is usually a conversation ID.
+        * @param from       The user ID of the message sender. If you do not set this parameter, the SDK ignores this parameter when retrieving messages.
         * @param direction	The query direction. See {@link MessageSearchDirection}.
-        * @return           The list of messages.
+        * @return           The list of retrieved messages.
         */
         public void LoadMessagesWithScope(string keywords, MessageSearchScope scope = MessageSearchScope.CONTENT, long timestamp = 0, int maxCount = 20, string from = null, MessageSearchDirection direction = MessageSearchDirection.UP, ValueCallBack < List<Message>> callback = null)
         {
@@ -537,12 +538,12 @@ namespace AgoraChat
         * \~chinese
         * 本地获取会话的置顶消息。
         *
-        * @return           消息列表。
+        * @return           置顶消息列表。
         *
         * \~english
-        * Locally obtain the pinned messages of the conversation.
+        * Gets the list of pinned messages in the local conversation.
         *
-        * @return           The list of messages.
+        * @return           The list of pinned messages.
         */
         public List<Message> PinnedMessages()
         {
@@ -551,14 +552,14 @@ namespace AgoraChat
 
         /**
         * \~chinese
-        * 获取会话的所有标注值。
+        * 获取会话的所有标记。
         *
-        * @return           标注值列表。
+        * @return           会话标记列表。
         *
         * \~english
-        * Obtain the marks on the conversation.
+        * Gets the marks of the conversation.
         *
-        * @return           The list of mark.
+        * @return           The list of conversation marks.
         */
         public List<MarkType> Marks()
         {

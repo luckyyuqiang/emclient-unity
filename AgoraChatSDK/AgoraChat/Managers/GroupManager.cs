@@ -429,7 +429,7 @@ namespace AgoraChat
          * @param desc          The group description. It is optional. Pass `null` if you do not want to set this parameter.
 	     * @param inviteMembers The group member array. The group owner ID is optional. This parameter cannot be `null`.
 	     * @param inviteReason  The group joining invitation. It is optional. Pass `null` if you do not want to set this parameter.
-         * @param callback        The operation callback. See {@link CallBack}.
+         * @param callback      The operation callback. See {@link CallBack}.
          */
         public void CreateGroup(string groupName, GroupOptions options, string desc = null, List<string> inviteMembers = null, string inviteReason = null, ValueCallBack<Group> callback = null)
         {
@@ -502,7 +502,7 @@ namespace AgoraChat
 		 * @param groupId  	The group ID.
 		 * @param userId 	The ID of the user who sends the request to join the group.
 		 * @param reason   	The reason for declining the group request.
-		 * @param callback    The operation callback. See {@link CallBack}.
+		 * @param callback  The operation callback. See {@link CallBack}.
 		 */
         public void DeclineGroupJoinApplication(string groupId, string userId, string reason = null, CallBack callback = null)
         {
@@ -1368,7 +1368,7 @@ namespace AgoraChat
 		 *
 		 * @param groupId 		The group ID.
 		 * @param announcement 	The group announcement.
-		 * @param callback	The operation callback. See {@link CallBack}.
+		 * @param callback	    The operation callback. See {@link CallBack}.
 		 */
         public void UpdateGroupAnnouncement(string groupId, string announcement, CallBack callback = null)
         {
@@ -1473,19 +1473,19 @@ namespace AgoraChat
 		 * 异步方法。
 		 *
 		 * @param groupId 	    群组 ID。
-		 * @param userIds 	    要获取自定义属性的群成员的用户 ID 数组。
+		 * @param userIds 	    要获取自定义属性的群成员的用户 ID 数组。最多可传 10 个用户 ID。
 		 * @param attrs     	要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些群成员的所有自定义属性。
-		 * @param attrs     	操作结果回调，详见 {@link ValueCallBack}。
+		 * @param callback     	操作结果回调，详见 {@link ValueCallBack}。
 		 *
 		 *
 		 * \~english
-		 * Fetch group members custom attributes.
+		 * Gets custom attributes of multiple group members by attribute key.
 		 *
 		 * This is an asynchronous method.
 		 *
 		 * @param groupId 	    The group ID.
-		 * @param userIds    	User name ID list.
-		 * @param attrs         The custom attribute list.
+		 * @param userIds    	The array of user IDs of group members whose custom attributes are retrieved. You can pass in a maximum of 10 user IDs.
+		 * @param attrs         The array of keys of custom attributes to be retrieved. If this parameter is an empty array or not passed in, the SDK returns all custom attributes of these group members.
 		 * @param callback	    The operation callback. See {@link ValueCallBack}.
 		 */
         public void FetchMemberAttributes(string groupId, List<string> userIds, List<string> attrs, ValueCallBack<Dictionary<string, Dictionary<string, string>>> callback = null)
@@ -1505,15 +1505,15 @@ namespace AgoraChat
 
         /**
         * \~chinese
-        * 获取我加入的群组数。
+        * 从服务器获取当前用户已加入的群组数量。
         *
         * 异步方法。
         *
-        * @param attrs     	操作结果回调，详见 {@link ValueCallBack}。
+        * @param callback     	操作结果回调，详见 {@link ValueCallBack}。
         *
         *
         * \~english
-        * Fetch total count of my joined groups.
+        * Gets the number of groups joined by the current user.
         *
         * This is an asynchronous method.
         *

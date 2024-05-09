@@ -69,7 +69,7 @@ namespace AgoraChat
         *                       - `true` 是子区会话；
         *                       - `false` 不是子区会话。
         *
-            * @return               会话是否成功删除：
+        * @return               会话是否成功删除：
         *                       - `true` ：是；
         *                       - `false` ：否。
         *
@@ -83,7 +83,7 @@ namespace AgoraChat
         *                           - `true`: Yes.
         *                           - `false`: No.
         *
-            * @return 					Whether the conversation is successfully deleted:
+        * @return 					Whether the conversation is successfully deleted:
         *                           - `true`: Yes. 
         *                           - `false`: No.
         */
@@ -172,9 +172,9 @@ namespace AgoraChat
 		 *                              If `null` is passed, the SDK gets messages in the reverse chronological order of when the server received the messages.
 	     * @param count 				The number of messages that you expect to get on each page.
 	     * @param direction     		The direction in which the message is fetched. MessageSearchDirection can be set with following:
-         *                   				- `UP`: fetch messages before the timestamp of the specified message ID;
-         *                  				- `DOWN`: fetch messages after the timestamp of the specified message ID.
-	     * @param callback				The result callback. Returns the list of obtained messages.
+         *                   				- `UP`: Gets messages before the timestamp of the specified message ID;
+         *                  				- `DOWN`: Gets messages after the timestamp of the specified message ID.
+	     * @param callback				The result callback. Returns the list of obtained messages. 
 	     */
         public void FetchHistoryMessagesFromServer(string conversationId, ConversationType type = ConversationType.Chat, string startMessageId = null, int count = 20, MessageSearchDirection direction = MessageSearchDirection.UP, ValueCallBack<CursorResult<Message>> callback = null)
         {
@@ -216,7 +216,7 @@ namespace AgoraChat
 	     * @param callback              结果回调，返回消息列表。
 	     *
 	     * \~english
-	     * Gets historical messages of a conversation from the server according the parameter configuration class for pulling historical messages `FetchServerMessagesOption`.
+	     * Gets historical messages of a conversation from the server according to the parameter configuration class for pulling historical messages `FetchServerMessagesOption`.
 	     *
 	     * Historical messages of a conversation can be obtained with pagination.
 	     *
@@ -306,7 +306,7 @@ namespace AgoraChat
 	     * 
 	     * The SDK wil return `null` if the conversation is not found.
 	     *
-	     * @param threadId 			The threadId ID.
+	     * @param threadId 			The thread ID.
 	     * 
 	     * @return 		            The conversation found. Returns `null` if the conversation is not found.
 	     */
@@ -395,16 +395,16 @@ namespace AgoraChat
 
         /**
          * \~chinese
-         * 根据标注等参数从服务器获取相关会话对象。
+         * 根据标记等参数从服务器获取相关会话对象。
          *
-         * @param mark：      标注值；
+         * @param mark：      会话标记。
          * @param cursor      开始获取数据的游标位置。
          * @param limit       每页返回的会话数。取值范围为 [1,50]。
          * @param callback    获取的会话列表，详见 {@link ValueCallBack}。
          *
          * \~english
-         * Gets the conversations from the server basing on the mark.
-         *
+         * Gets the conversations from the server based on the conversation mark.
+         * 
          * @param mark        The mark value used for searching.
          * @param cursor      The position from which to start getting data.
          * @param limit       The number of conversations that you expect to get on each page. The value range is [1,50].
@@ -634,20 +634,21 @@ namespace AgoraChat
 		 * @param keywords   查找关键字，字符串类型。
 		 * @param timestamp  查询的起始时间戳，单位为毫秒。
 		 * @param maxCount   查询的最大消息数。
-		 * @param from       消息来源，一般指会话 ID。
+		 * @param from       消息发送方的用户 ID。若不设置该参数，SDK 搜索消息时会忽略该参数。
 		 * @param direction	 查询方向，详见 {@link MessageSearchDirection}。
 		 * @param callback   成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
 		 *
 		 * \~english
-		 * Queries local messages.
+		 * Retrieves local messages of a certain quantity.
 		 * 
 		 * **Note**
 		 * If you want to query a great number of messages, pay attention to the memory consumption. A maximum number of 200 messages can be retrieved each time.
 		 *
 		 * @param keywords   The keyword for query. The data format is String.
-		 * @param timestamp  The starting Unix timestamp for query, which is in milliseconds.
+		 * @param timestamp  The starting Unix timestamp for query, which is in milliseconds. After this parameter is set, the SDK retrieves messages, starting from the specified one, according to the message search direction.
+		 *                   If you set this parameter as a negative value, the SDK retrieves messages, starting from the current time, in the descending order of the the Unix timestamp included in them.
 		 * @param maxCount   The maximum number of messages to retrieve.
-		 * @param from       The message source, which is usually a conversation ID.
+		 * @param from       The user ID of the message sender. If you do not set this parameter, the SDK ignores this parameter when retrieving messages.
 		 * @param direction	 The query direction. See {@link MessageSearchDirection}.
 		 * @param callback   If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
 		 */
@@ -679,13 +680,13 @@ namespace AgoraChat
         * @param keywords   查找关键字，字符串类型。
         * @param timestamp  查询的起始时间戳，单位为毫秒。
         * @param maxCount   查询的最大消息数。
-        * @param from       消息来源，一般指会话 ID。
+        * @param from       消息发送方的用户 ID。若不设置该参数，SDK 搜索消息时会忽略该参数。
         * @param direction	查询方向，详见 {@link MessageSearchDirection}。
         * @param scope	    查询范围，详见 {@link MessageSearchScope}。
         * @param callback   成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
         *
         * \~english
-        * Queries local messages basing on message scope.
+        * Queries local messages based on the message scope.
         *
         * **Note**
         * If you want to query a great number of messages, pay attention to the memory consumption. A maximum number of 200 messages can be retrieved each time.
@@ -693,7 +694,7 @@ namespace AgoraChat
         * @param keywords   The keyword for query. The data format is String.
         * @param timestamp  The starting Unix timestamp for query, which is in milliseconds.
         * @param maxCount   The maximum number of messages to retrieve.
-        * @param from       The message source, which is usually a conversation ID.
+        * @param from       The user ID of the message sender. If you do not set this parameter, the SDK ignores this parameter when retrieving messages.
         * @param direction	The query direction. See {@link MessageSearchDirection}.
         * @param scope	    The query direction. See {@link MessageSearchScope}.
         * @param callback   If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
@@ -727,7 +728,9 @@ namespace AgoraChat
 		 *
 		 * \~english
 		 * Sends the conversation read receipt to the server.
+         *
 		 * After this method is called, the sever will set the message status from unread to read. 
+         *
 		 * The SDK triggers the {@link IChatManagerDelegate#OnConversationRead(string from, string to)} callback on the message sender's client, notifying that the messages are read. This also applies to multi-device scenarios.
 		 *
 		 * @param conversationId	The conversation ID.
@@ -788,7 +791,7 @@ namespace AgoraChat
 
         /**
 		 * \~chinese
-		 * 发送消息已读回执。
+		 * 发送单聊消息已读回执。
 		 * 
 		 * 该方法会通知服务器将此消息置为已读，消息发送方（包含多端多设备）将会收到 {@link IChatManagerDelegate#OnMessagesRead(List<Message>)} 回调。
 		 * 
@@ -796,14 +799,14 @@ namespace AgoraChat
 		 * @param callback		发送回执的结果回调，详见 {@link CallBack}。
 		 *
 		 * \~english
-		 * Sends the read receipt of a message to the server.
+		 * Sends the read receipt of a one-to-one message to the server.
 		 * 
 		 * After this method is called, the sever will set the message status from unread to read. 
 		 *
 		 * The SDK triggers the {@link IChatManagerDelegate#OnMessagesRead(List<Message>)} callback on the message sender's client, notifying that the messages are read. This also applies to multi-device scenarios.
 		 *
 		 * @param messageId		The message ID.
-		 * @param callback		The result callback. See{@link CallBack}.
+		 * @param callback		The result callback. See {@link CallBack}.
 		 */
         public void SendMessageReadAck(string messageId, CallBack callback = null)
         {
@@ -816,28 +819,28 @@ namespace AgoraChat
         * \~chinese
         * 发送群消息已读回执。
         *
-        * 前提条件：设置了 {@link Options#RequireAck(boolean)} 和 {@link Message#IsNeedGroupAck(boolean)}。
+        * 调用该方法的前提条件是设置了 {@link Options#RequireAck(boolean)} 和 {@link Message#IsNeedGroupAck(boolean)}。
         *
-        * 参考：
-        * 发送单聊消息已读回执，详见 {@link #SendMessageReadAck(String)} ;
+        * 发送单聊消息已读回执，详见 {@link #SendMessageReadAck(String)}。
+        *
         * 会话已读回执，详见 {@link #SendConversationReadAck(String)}。
         *
         * @param messageId     消息 ID。
         * @param ackContent    回执信息。`ackContent` 属性是用户自己定义的关键字，接收后，解析出自定义的字符串，可以自行处理。
-        * @param callback		发送回执的结果回调，详见 {@link CallBack}。
+        * @param callback	   发送回执的结果回调，详见 {@link CallBack}。
         *
         * \~english
-        * Sends the group message receipt to the server.
+        * Sends a read receipt for a group message to the server.
         *
-        * You can only call the method after setting the following method: {@link Options#RequireAck(boolean)} and {@link Message#IsNeedGroupAck(boolean)}.
+        * You can only call the method after setting {@link Options#RequireAck(boolean)} and {@link Message#IsNeedGroupAck(boolean)}.
         *
-        * Reference:
-        * To send the one-to-one chat message receipt to server, call {@link #SendMessageReadAck(String)};
-        * To send the conversation receipt to the server, call {@link #SendConversationReadAck(String)}.
+        * To send the read recipient for a one-to-one chat message to the server, call {@link #SendMessageReadAck(String)}.
+        *
+        * To send the conversation read receipt to the server, call {@link #SendConversationReadAck(String)}.
         *
         * @param messageId     The message ID.
-        * @param ackContent    The ack content information. Developer self-defined command string that can be used for specifying custom action/command.
-        * @param callback		The result callback. See{@link CallBack}.
+        * @param ackContent    The content of the read receipt. The content is a self-defined string that can be used for specifying custom action/command.
+        * @param callback	   The result callback. See{@ link CallBack}.
     */
         public void SendReadAckForGroupMessage(string messageId, string ackContent, CallBack callback = null)
         {
@@ -975,11 +978,13 @@ namespace AgoraChat
 
         /**
          * 获取翻译服务支持的语言。
+         *
          * @param callBack 完成的回调，详见 {@link #ValueCallBack()}。
          *
          * \~english
-         * Fetches all languages what the translate service supports.
-         * @param callBack The result callback，see {@link #ValueCallBack()}.
+         * Gets all languages supported by the translation service.
+         *
+         * @param callBack The result callback. See {@link #ValueCallBack()}.
          */
         public void FetchSupportLanguages(ValueCallBack<List<SupportLanguage>> callback = null)
         {
@@ -1002,8 +1007,8 @@ namespace AgoraChat
          * \~english
          * Translates a message.
          * @param message The message object.
-         * @param languages The list of the target languages.
-         * @param callBack The result callback，see {@link #CallBack()}.
+         * @param languages The code list of the target languages.
+         * @param callBack The result callback. See {@link #CallBack()}.
          */
         public void TranslateMessage(Message message, List<string> targetLanguages, ValueCallBack<Message> callback = null)
         {
@@ -1021,37 +1026,32 @@ namespace AgoraChat
 
         /**
          * \~chinese
-         * 从服务器获取群组消息回执详情。
+         * 从服务器分页获取群组消息回执详情。
          *
-         * 分页获取。
-         *
-         * 参考：
          * 发送群组消息回执，详见 {@link #SendReadAckForGroupMessage}。
          *
          * 异步方法。
          *
          * @param messageId		消息 ID。
 		 * @param groupId		群组 ID。
-         * @param pageSize		每页获取群消息已读回执的条数。
+         * @param pageSize		每页获取群消息已读回执的条数。取值范围[1,50]。
          * @param startAckId    已读回执的 ID，如果为空，从最新的回执向前开始获取。
          * @param callBack      结果回调，成功执行 {@link ValueCallBack#onSuccess(Object)}，失败执行 {@link ValueCallBack#onError(int, String)}。
          *
          * \~english
-         * Fetches the ack details for group messages from server.
+         * Uses the pagination to get read receipts for a group message from the server.
          *
-         * Fetches by page.
-         *
-         * Reference:
-         * If you want to send group message receipt, see {@link #SendReadAckForGroupMessage}.
+         * To send a read receipt for a group message, you can call {@link #SendReadAckForGroupMessage}.
          *
          * This is an asynchronous method.
          *
          * @param msgId			The message ID.
 		 * @param groupId		The group ID。
-         * @param pageSize		The number of records per page.
-         * @param startAckId    The start ID for fetch receipts, can be null. If you set it as null, the SDK will start from the server's latest receipt.
-         * @param callBack		The result callback, if successful, the SDK will execute the method {@link ValueCallBack#onSuccess(Object)},
-         *                      if the call failed, the SDK will execute the method {@link ValueCallBack#onError(int, String)}.
+         * @param pageSize		The number of read receipts for the group message that you expect to get on each page. The value range is [1,50].
+         * @param startAckId    The starting read receipt ID for query. After this parameter is set, the SDK retrieves read receipts, from the specified one, in the reverse chronological order of when the server receives them.
+         *                      If you set this parameter as null, the SDK will retrieve from the latest read receipt.
+         * @param callBack		The result callback. If the call succeeds, the SDK executes {@link ValueCallBack#onSuccess(Object)};
+         *                      if the call fails, the SDK executes {@link ValueCallBack#onError(int, String)}.
          */
         public void FetchGroupReadAcks(string messageId, string groupId, int pageSize = 20, string startAckId = null, ValueCallBack<CursorResult<GroupReadAck>> callback = null)
         {
@@ -1087,7 +1087,7 @@ namespace AgoraChat
          * @param callBack 		完成的回调，详见 {@link #CallBack()}。
          *
          * \~english
-         * Reports a violation message.
+         * Reports an inappropriate message.
          *
          * @param messageId		The ID of the message to report.
          * @param tag			The tag of the inappropriate message. You need to type a custom tag, like `porn` or `ad`.
@@ -1116,12 +1116,12 @@ namespace AgoraChat
          * @param callback  处理结果回调，详见 {@link CallBack}。
          *
          * \~english
-         * Adds a reaction.
+         * Adds a Reaction.
          *
          * This is an asynchronous method.
          *
          * @param messageId The message ID.
-         * @param reaction  The message reaction.
+         * @param reaction  The message Reaction.
          * @param callback  The result callback which contains the error information if the method fails.
          */
         public void AddReaction(string messageId, string reaction, CallBack callback = null)
@@ -1144,12 +1144,12 @@ namespace AgoraChat
          * @param callback  处理结果回调，详见 {@link CallBack}。
          *
          * \~english
-         * Deletes a reaction.
+         * Deletes a Reaction.
          *
          * This is an asynchronous method.
          *
          * @param messageId The message ID.
-         * @param reaction  The reaction content.
+         * @param reaction  The Reaction content.
          * @param callback  The result callback which contains the error information if the method fails.
          */
 
@@ -1211,12 +1211,12 @@ namespace AgoraChat
         * @param callback    处理结果回调，包含 cursor 和 MessageReaction 列表（仅使用该列表第一个数据即可）。
         *
         * \~english
-        * Gets the reaction details.
+        * Gets the Reaction details.
         *
-        * This is an asynchronous method.
+        * This is an asynchronous method. 
         *
         * @param messageId    The message ID.
-        * @param reaction     The reaction content.
+        * @param reaction     The Reaction content.
         * @param cursor       The query cursor.
         * @param pageSize     The number of Reactions you expect to get on each page.
         * @param callback     The result callback, which contains the reaction list obtained from the server and the cursor for the next query. Returns null if all the data is fetched.
@@ -1327,7 +1327,7 @@ namespace AgoraChat
          *
          * @param conversationId     The conversation ID.
          * @param conversationType   The conversation type. See {@link ConversationType}.
-         * @param timeStamp          The specified Unix timestamp in miliseconds. Messages with a timestamp before the specified one will be removed from the conversation.
+         * @param timeStamp          The specified Unix timestamp in milliseconds. Messages with a timestamp before the specified one will be removed from the conversation.
          * @param callback           Callback for the operation. See {@link CallBack}.
          */
 
@@ -1352,12 +1352,14 @@ namespace AgoraChat
          * @param callback          处理结果回调，详见 {@link CallBack}。
          *
          * \~english
-         * Set the conversation pin or not.
+         * Sets whether to pin a conversation.
          *
          * This is an asynchronous method.
          *
          * @param conversationId     The conversation ID.
-         * @param isPinned           Pin the conversation or not.
+         * @param isPinned           Whether to pin the conversation:
+         *                           - `true`: Yes.
+         *                           - `false`: No.
          * @param callback           Callback for the operation. See {@link CallBack}.
          */
 
@@ -1398,23 +1400,31 @@ namespace AgoraChat
 
         /**
         * \~chinese
-        * 标记多个会话。
+        * 标记会话或移除会话标记。
         *
         * 异步方法。
+        * 
+        * 调用该方法会同时为本地和服务器端的会话添加标记。
         *
         * @param conversationIds   会话 ID 列表。
-        * @param isMarked          添加或者移除标记，true：添加；false：移除。
-        * @param mark              添加或移除的标记值。
+        * @param isMarked          添加或者移除标记：
+        *                          - `true`：添加；
+        *                          - `false`：移除。
+        * @param mark              添加或移除的会话标记。
         * @param callback          处理结果回调，详见 {@link CallBack}。
         *
         * \~english
-        * Mark conversations.
+        * Marks or unmarks conversations.
         *
         * This is an asynchronous method.
         *
-        * @param conversationIds    The conversation ID list.
-        * @param isMarked           Add or remove mark, true: add; false: remove.
-        * @param mark               The mark value being added or removed.
+        * This method marks conversations both locally and on the server.
+        *
+        * @param conversationIds    The list of conversation IDs.
+        * @param isMarked           Whether to add or remove the mark for the conversations.
+        *                           - `true`: add. 
+        *                           - `false`: remove.
+        * @param mark               The conversation mark to add or remove.
         * @param callback           Callback for the operation. See {@link CallBack}.
         */
         public void MarkConversations(List<string> conversationIds, bool isMarked, MarkType mark, CallBack callback = null)
@@ -1429,19 +1439,24 @@ namespace AgoraChat
 
         /**
         * \~chinese
-        * 移除所有消息和会话。
+        * 清空所有会话及其消息。
         *
         * 异步方法。
         *
-        * @param clearServerData   是否清除服务端数据。true: 清除；false：不清除
+        * @param clearServerData   是否删除服务端所有会话及其消息： 
+        *                       - `true`：是。服务端的所有会话及其消息会被清除，当前用户无法再从服务端拉取消息和会话，其他用户不受影响。
+        *                       - （默认）`false`：否。只清除本地所有会话及其消息，服务端的会话及其消息仍保留。
         * @param callback          处理结果回调，详见 {@link CallBack}。
         *
         * \~english
-        * Delete all message and conversations.
+        * Clears all conversations and all messages in them.
         *
         * This is an asynchronous method.
         *
-        * @param clearServerData    Clear server data or not. true: clear; false: not clear
+        * @param clearServerData   Whether to clear all conversations and all messages in them on the server. 
+        *   - `true`：Yes. All conversations and all messages in them will be cleared on the server side. 
+            The current user cannot retrieve messages and conversations from the server, while this has no impact on other users.
+        *  - (Default) `false`：No. All local conversations and all messages in them will be cleared, while those on the server remain.
         * @param callback           Callback for the operation. See {@link CallBack}.
         */
         public void DeleteAllMessagesAndConversations(bool clearServerData, CallBack callback = null)
@@ -1455,22 +1470,28 @@ namespace AgoraChat
         /**
         * \~chinese
         * 消息置顶或取消置顶。
+        *
         * 仅支持群组消息。
         *
         * 异步方法。
         *
-        * @param messageId         置顶或取消置顶的消息ID。
-        * @param isPinned          是否置顶消息。true: 置顶；false：取消置顶
+        * @param messageId         置顶或取消置顶的消息 ID。
+        * @param isPinned          是否置顶消息：
+        * - `true`: 置顶；
+        * - `false`：取消置顶。
         * @param callback          处理结果回调，详见 {@link CallBack}。
         *
         * \~english
-        * Pin or unpin the message.
-        * Only used for group message.
+        * Pins or unpins a message.
+        *
+        * This method is used only for group messages.
         *
         * This is an asynchronous method.
         *
-        * @param messageId          The message id to be pinned or unpinned.
-        * @param isPinned           Pin or unpin the message. true: pin the message; false: unpin the message
+        * @param messageId          The message ID to be pinned or unpinned.
+        * @param isPinned           Whether to pin the message:
+        *   - `true`: pin.
+        *   - `false`: unpin.
         * @param callback           Callback for the operation. See {@link CallBack}.
         */
         public void PinMessage(string messageId, bool isPinned, CallBack callback = null)
@@ -1486,14 +1507,14 @@ namespace AgoraChat
          * \~chinese
          * 从服务端获取指定会话的置顶消息列表。
          *
-         * @param conversationId    会话ID。
+         * @param conversationId    会话 ID。
          * @param callback          成功返回合并消息中的消息列表，失败返回错误原因，详见 {@link ValueCallBack}。
          *
          * \~english
-         * Get pinned messages in the conversation from server.
+         * Gets the list of pinned messages in the conversation from the server.
          *
          * @param msg               The conversation ID.
-         * @param callback          If success, a list of original messages included in the combined message are returned; otherwise, an error is returned. See {@link ValueCallBack}.
+         * @param callback          If success, the list of pined messages in the conversation are returned; otherwise, an error is returned. See {@link ValueCallBack}.
          */
         public void GetPinnedMessagesFromServer(string conversationId, ValueCallBack<List<Message>> callback = null)
         {
@@ -1535,7 +1556,7 @@ namespace AgoraChat
 		 *
 		 * \~english
 		 * Removes a chat manager listener.
-		 *
+		 * 
 		 * @param chatManagerDelegate 	The chat manager listener to remove. It is inherited from {@link IChatManagerDelegate}.
 		 *
 		 */

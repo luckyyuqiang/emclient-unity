@@ -213,7 +213,7 @@ namespace AgoraChat
          *
          * \~english
 	     * Whether to allow the chat room owner to leave the chat room.
-	     * - (Default) `true`: Yes. When leaving the chat room, the chat room owner still has all privileges, except for receive messages in the chat room.
+	     * - (Default) `true`: Yes. When leaving the chat room, the chat room owner still has all privileges, except for receiving messages in the chat room.
 	     * - `false`: No.
          */
         public bool IsRoomOwnerLeaveAllowed = true;
@@ -287,14 +287,14 @@ namespace AgoraChat
 
         /**
         * \~chinese
-        * 是否允许使用替换的消息内容。
-        * - `true`：是；
-        * - （默认）`false`：否。
+        * 是否在文本审核时，返回给发送者被替换内容的文本消息。
+        * - `true`：将内容替换后的消息返回给发送方。
+        * - （默认）`false`：将原消息返回给发送方。
         *
         * \~english
-        * Permit to use replaced message contents or not.
-        * -`true`: Yes;
-        * -(Default) `false`: No.
+        * Whether the server returns the sender the text message with the content replaced during text moderation.
+        * - `true`: Yes.
+	    * - (Default) `false`: No. The server returns the original message to the sender.
         *
         */
         public bool UseReplacedMessageContents = false;
@@ -306,9 +306,9 @@ namespace AgoraChat
         * - （默认）`false`：否。
         *
         * \~english
-        * Sets whether the sent message is included in {@link IChatManagerDelegate#OnMessagesReceived}.
-        * -`true`: Yes;
-        * -(Default) `false`: No.
+        * Sets whether to include the sent message in {@link IChatManagerDelegate#OnMessagesReceived}.
+        * - `true`: Yes;
+        * - (Default) `false`: No.
         *
         */
         public bool IncludeSendMessageInMessageListener = false;
@@ -358,12 +358,12 @@ namespace AgoraChat
 
         /**
         * \~chinese
-        * 将导入的消息视为已读。
+        * 是否将导入的消息视为已读。
         * - `true`：是；
         * - （默认）`false`：否。
         *
         * \~english
-        * Regard imported message as read.
+        * Whether to regard import messages as read.
         * -`true`: Yes;
         * -(Default) `false`: No.
         */
