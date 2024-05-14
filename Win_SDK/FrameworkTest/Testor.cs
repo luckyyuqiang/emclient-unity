@@ -472,6 +472,23 @@ namespace WinSDKTest
                 }
             ));
         }
+
+        static public void SendTxtMessage_return500_before_login()
+        {
+            string to = "";
+            string text = "I am message sender";
+
+            Message msg = Message.CreateTextSendMessage(to, text);
+
+            SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+                onSuccess: () => {
+                    Console.WriteLine($"SendTxtMessage success. msgid:{msg.MsgId}");
+                },
+                onError: (code, desc) => {
+                    Console.WriteLine($"SendTxtMessage failed, code:{code}, desc:{desc}");
+                }
+            ));
+        }
     }
 
     /*
@@ -3898,6 +3915,7 @@ namespace WinSDKTest
         public void CallFunc_IChatManager_SendTxtMessage(string _to="", string _text="")
         {
             //MyCase.SendTxtMessage_AddReaction_RemoveReaction(99);
+            //MyCase.SendTxtMessage_return500_before_login();
             //return;
 
             string to = "";
