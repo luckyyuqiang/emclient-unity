@@ -642,6 +642,7 @@ namespace sdk_wrapper {
 
         Document d; d.Parse(jstr);
         string msg_id = GetJsonValue_String(d, "msgId", "");
+        string ext = GetJsonValue_String(d, "ext", "");
 
         EMMessagePtr messagePtr = CLIENT->getChatManager().getMessage(msg_id);
 
@@ -655,7 +656,7 @@ namespace sdk_wrapper {
 
         thread t([=]() {
             EMError error;
-            CLIENT->getChatManager().recallMessage(messagePtr, error);
+            CLIENT->getChatManager().recallMessage(messagePtr, ext, error);
 
             if (EMError::EM_NO_ERROR == error.mErrorCode) {
                 string call_back_jstr = MyJson::ToJsonWithSuccess(local_cbid.c_str());
