@@ -1711,7 +1711,12 @@ namespace sdk_wrapper {
             gChatManagerListener->onReceiveCmdMessages(msg_list);
             gChatManagerListener->onReceiveHasReadAcks(msg_list);
             gChatManagerListener->onReceiveHasDeliveredAcks(msg_list);
-            gChatManagerListener->onReceiveRecallMessages(msg_list);
+
+            std::vector<std::tuple<std::string, std::string, std::string, easemob::EMMessagePtr>> recallVec;
+            std::tuple<std::string, std::string, std::string, easemob::EMMessagePtr> tuple("recallBy", "msgId", "ext", msg);
+            recallVec.push_back(tuple);
+            gChatManagerListener->onReceiveRecallMessages(recallVec);
+
             gChatManagerListener->onUpdateGroupAcks();
 
             EMGroupReadAckList acklist;

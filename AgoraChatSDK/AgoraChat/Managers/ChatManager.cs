@@ -1627,6 +1627,15 @@ namespace AgoraChat
                         }
                     }
                     break;
+                case SDKMethod.onMessagesRecalledByExt:
+                    {
+                        List<RecallMessageInfo> list = List.BaseModelListFromJsonArray<RecallMessageInfo>(jsonNode);
+                        foreach (IChatManagerDelegate it in delegater)
+                        {
+                            if (list.Count > 0) it.OnMessagesRecalled(list);
+                        }
+                    }
+                    break;
                 case SDKMethod.onReadAckForGroupMessageUpdated:
                     {
                         foreach (IChatManagerDelegate it in delegater)
