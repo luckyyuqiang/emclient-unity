@@ -14,6 +14,7 @@
 #import "EMGroupMessageAck+Helper.h"
 #import "EMMessageReactionChange+Helper.h"
 #import "EMFetchServerMessagesOption+Helper.h"
+#import "EMRecallMessageInfo+Helper.h"
 #import "EMError+Helper.h"
 #import "EMUtil.h"
 #import "EMHelper.h"
@@ -1065,12 +1066,17 @@
 }
 
 - (void)messagesInfoDidRecall:(NSArray<EMRecallMessageInfo *> *)aRecallMessagesInfo {
-    NSMutableArray *ary = [NSMutableArray array];
+    NSMutableArray *msgArray = [NSMutableArray array];
+    NSMutableArray *recallMessageInfoArray = [NSMutableArray array];
+
     for (EMRecallMessageInfo *info in aRecallMessagesInfo) {
-        [ary addObject:[info.recallMessage toJson]];
+        [msgArray addObject:[info.recallMessage toJson]];
+        [recallMessageInfoArray addObject:[info toJson]];
     }
     
-    [EMWrapperHelper.shared.listener onReceive:chatListener method:onMessagesRecalled info:[ary toJsonString]];
+    [EMWrapperHelper.shared.listener onReceive:chatListener method:onMessagesRecalledByExt info:[recallMessageInfoArray toJsonString]];
+
+    [EMWrapperHelper.shared.listener onReceive:chatListener method:onMessagesRecalled info:[msgArray toJsonString]];
 }
 
 - (void)messageStatusDidChange:(EMChatMessage *)aMessage error:(EMError *)aError {
