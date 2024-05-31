@@ -25,7 +25,7 @@
 		4578AED32BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4578AED22BC2452500DE8EB3 /* EMMessagePinInfo+Helper.h */; };
 		4578AED52BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4578AED42BC2467B00DE8EB3 /* EMMessagePinInfo+Helper.m */; };
 		4597E80F2B875E1200D70B6D /* EMContact+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4597E80E2B875E1200D70B6D /* EMContact+Helper.m */; };
-		45F88D192B81EF2A0051DFEE /* HyphenateChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90319D0D29360033000D01BE /* HyphenateChat.framework */; };
+		45C0A2032C09A9EE00D4833E /* HyphenateChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90319D0D29360033000D01BE /* HyphenateChat.framework */; };
 		90319C812935FC1E000D01BE /* EMMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90319C2A2935FC1E000D01BE /* EMMessageManager.m */; };
 		90319C822935FC1E000D01BE /* EMChatroom+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 90319C2B2935FC1E000D01BE /* EMChatroom+Helper.m */; };
 		90319C832935FC1E000D01BE /* EMUserInfoManagerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 90319C2C2935FC1E000D01BE /* EMUserInfoManagerWrapper.h */; };
@@ -237,7 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45F88D192B81EF2A0051DFEE /* HyphenateChat.framework in Frameworks */,
+				45C0A2032C09A9EE00D4833E /* HyphenateChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
