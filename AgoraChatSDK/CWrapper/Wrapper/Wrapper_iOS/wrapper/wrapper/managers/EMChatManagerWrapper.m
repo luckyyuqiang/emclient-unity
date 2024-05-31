@@ -225,12 +225,14 @@
                    callback:(EMWrapperCallback *)callback {
     __weak EMChatManagerWrapper * weakSelf = self;
     NSString *msgId = param[@"msgId"];
+    NSString *ext = param[@"ext"];
     EMChatMessage *msg = [EMClient.sharedClient.chatManager getMessageWithMessageId:msgId];
     if (!msg) {
         EMError *error = [EMError errorWithDescription:@"The message was not found" code:EMErrorMessageInvalid];
         [weakSelf wrapperCallback:callback error:error object:nil];
     }
     [EMClient.sharedClient.chatManager recallMessageWithMessageId:msgId
+                                                              ext:ext
                                                        completion:^(EMError *aError)
      {
         [weakSelf wrapperCallback:callback error:aError object:nil];
