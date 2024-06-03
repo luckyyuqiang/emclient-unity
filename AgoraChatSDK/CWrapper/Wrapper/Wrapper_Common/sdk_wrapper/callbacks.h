@@ -26,7 +26,7 @@ namespace sdk_wrapper {
             CallBack(STRING_CLIENT_LISTENER.c_str(), STRING_onConnected.c_str(), info.c_str());
         }
 
-        void onDisconnect(EMErrorPtr error, const std::string& info) override
+        void onDisconnect(EMErrorPtr error, const std::string& info, const std::string& ext) override
         {
             string json = "";
 
