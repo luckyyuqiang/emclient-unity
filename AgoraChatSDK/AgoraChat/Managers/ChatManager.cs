@@ -1618,7 +1618,7 @@ namespace AgoraChat
                         }
                     }
                     break;
-                case SDKMethod.onMessagesRecalled:
+                /*case SDKMethod.onMessagesRecalled:
                     {
                         List<Message> list = List.BaseModelListFromJsonArray<Message>(jsonNode);
                         foreach (IChatManagerDelegate it in delegater)
@@ -1626,7 +1626,7 @@ namespace AgoraChat
                             if (list.Count > 0) it.OnMessagesRecalled(list);
                         }
                     }
-                    break;
+                    break;*/
                 case SDKMethod.onMessagesRecalledByExt:
                     {
                         List<RecallMessageInfo> list = List.BaseModelListFromJsonArray<RecallMessageInfo>(jsonNode);

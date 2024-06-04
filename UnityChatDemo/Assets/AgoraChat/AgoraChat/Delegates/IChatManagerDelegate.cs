@@ -74,22 +74,6 @@ namespace AgoraChat
 		void OnMessagesDelivered(List<Message> messages);
 
         /**
- 	     * \~chinese
- 	     * 撤回收到消息的回调。
-	     * 此方法已经废弃，请使用OnMessagesRecalled(List<RecallMessageInfo>)
- 	     * 
- 	     * @param messages 被撤回的消息列表。
- 	     *
- 	     * \~english
- 	     * Occurs when a received message is recalled.
-	     * This callback is obsolete, please use OnMessagesRecalled(List<RecallMessageInfo>) to replace.
- 	     * 
- 	     * @param messages  The recalled message(s).
- 	     */
-        [Obsolete]
-        void OnMessagesRecalled(List<Message> messages);
-
-        /**
 	    * \~chinese
 	    * 撤回收到消息的回调。
 	    *

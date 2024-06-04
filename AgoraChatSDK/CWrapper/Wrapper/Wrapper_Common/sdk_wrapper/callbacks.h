@@ -124,6 +124,7 @@ namespace sdk_wrapper {
                 if (json.size() > 0)
                     CallBack(STRING_CHATMANAGER_LISTENER.c_str(), STRING_onMessagesRecalledByExt.c_str(), json.c_str());
 
+                /*
                 json.clear();
                 EMMessageList msgList;
                 for (auto it : list) {
@@ -136,6 +137,7 @@ namespace sdk_wrapper {
                 json = Message::ToJson(msgList);
                 if (json.size() > 0)
                     CallBack(STRING_CHATMANAGER_LISTENER.c_str(), STRING_onMessagesRecalled.c_str(), json.c_str());
+                */
             }
         }
 
