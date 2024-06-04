@@ -10418,6 +10418,7 @@ namespace WinSDKTest
                 Console.WriteLine($"recallBy: {recallIt.RecallBy}");
                 Console.WriteLine($"recallMessageId: {recallIt.RecallMessageId}");
                 Console.WriteLine($"recall-ext: {recallIt.Ext}");
+                if (null == it) continue;
                 Console.WriteLine($"recallMessage: -------------------");
                 Console.WriteLine($"message id: {it.MsgId}");
                 Console.WriteLine($"cov id: {it.ConversationId}");
