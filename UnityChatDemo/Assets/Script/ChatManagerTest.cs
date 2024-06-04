@@ -472,7 +472,9 @@ public class ChatManagerTest : MonoBehaviour, IChatManagerDelegate
                 return;
             }
 
-            SDKClient.Instance.ChatManager.RecallMessage(dict["msgId"], new CallBack(
+            string ext = dict["ext"];
+
+            SDKClient.Instance.ChatManager.RecallMessage(dict["msgId"], ext, new CallBack(
                 onSuccess: () =>
                 {
                     UIManager.TitleAlert(transform, "成功", "回撤成功");
@@ -489,6 +491,7 @@ public class ChatManagerTest : MonoBehaviour, IChatManagerDelegate
         });
 
         config.AddField("msgId");
+        config.AddField("ext");
         UIManager.DefaultInputAlert(transform, config);
     }
     void GetConversationBtnAction()
@@ -1519,9 +1522,20 @@ public class ChatManagerTest : MonoBehaviour, IChatManagerDelegate
         UIManager.DefaultAlert(transform, $"OnMessagesDelivered: {messages.Count}");
     }
 
-    public void OnMessagesRecalled(List<Message> messages)
+    /*public void OnMessagesRecalled(List<Message> messages)
     {
         UIManager.DefaultAlert(transform, $"OnMessagesRecalled: {messages.Count}");
+    }*/
+
+    public void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo)
+    {
+        List<string> list = new List<string>();
+        foreach (var msg in recallMessagesInfo)
+        {
+            list.Add(msg.ToJsonObject().ToString());
+        }
+        string s = "OnMessagesRecalled:" + string.Join(", ", list.ToArray());
+        UIManager.DefaultAlert(transform, s);
     }
 
     public void OnReadAckForGroupMessageUpdated()
