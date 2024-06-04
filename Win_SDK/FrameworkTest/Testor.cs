@@ -489,6 +489,26 @@ namespace WinSDKTest
                 }
             ));
         }
+
+        static public void ImportMessages_emptyfrom_emtpyto()
+        {
+            List<Message> messages = new List<Message>();
+            Message msg = Message.CreateTextSendMessage(null, "");
+            Message msg1 = Message.CreateReceiveMessage();
+
+            messages.Add(msg);
+            messages.Add(msg);
+
+            SDKClient.Instance.ChatManager.ImportMessages(messages, new CallBack(
+                onSuccess: () => {
+                    Console.WriteLine($"ImportMessages completed.");
+                },
+                onError: (code, desc) =>
+                {
+                    Console.WriteLine($"ImportMessages failed, code:{code}, desc:{desc}");
+                }
+            ));
+        }
     }
 
     /*
@@ -3655,6 +3675,9 @@ namespace WinSDKTest
 
         public void CallFunc_IChatManager_ImportMessages()
         {
+            //MyCase.ImportMessages_emptyfrom_emtpyto();
+            //return;
+
             List<Message> messages = new List<Message>();
             Message msg = Message.CreateTextSendMessage("to1", "hello");
             Message msg1 = Message.CreateTextSendMessage("to2", "world");
