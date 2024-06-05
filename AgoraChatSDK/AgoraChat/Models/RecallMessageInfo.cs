@@ -83,7 +83,10 @@ namespace AgoraChat
             jo.AddWithoutNull("recallBy", RecallBy);
             jo.AddWithoutNull("recallMessageId", RecallMessageId);
             jo.AddWithoutNull("ext", Ext);
-            jo.AddWithoutNull("recallMessage", RecallMessage);
+            if (null != RecallMessage)
+            {
+                jo.AddWithoutNull("recallMessage", RecallMessage.ToJsonObject());
+            }
             return jo;
         }
     }
