@@ -736,18 +736,19 @@ public class ChatManagerTest : MonoBehaviour, IChatManagerDelegate
             SDKClient.Instance.ChatManager.ImportMessages(msgs, new CallBack(
                 onSuccess: () =>
                 {
-                    UIManager.DefaultAlert(transform, "获取消息?",
+                    UIManager.DefaultAlert(transform, "导入消息成功");
+                    /*UIManager.DefaultAlert(transform, "获取消息?",
                         () =>
                         {
                             Message loadMsg = SDKClient.Instance.ChatManager.LoadMessage(msg.MsgId);
                             TextBody body = loadMsg.Body as TextBody;
                             UIManager.DefaultAlert(transform, $"convId: { loadMsg.ConversationId}, content: {body.Text}");
                         },
-                        () => { });
+                        () => { });*/
                 },
                 onError: (code, desc) =>
                 {
-                    UIManager.DefaultAlert(transform, "插入失败");
+                    UIManager.DefaultAlert(transform, $"插入失败:{code}, {desc}");
                 }
             ));
         });
