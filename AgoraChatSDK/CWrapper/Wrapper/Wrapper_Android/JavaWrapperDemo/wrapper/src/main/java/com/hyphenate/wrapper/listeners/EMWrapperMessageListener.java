@@ -76,7 +76,7 @@ public class EMWrapperMessageListener implements EMMessageListener , EMConversat
 
     @Override
     public void onMessageRecalled(List<EMMessage> messages) {
-        JSONArray jsonArray = new JSONArray();
+        /*JSONArray jsonArray = new JSONArray();
         try {
             for (EMMessage msg : messages) {
                 jsonArray.put(EMMessageHelper.toJson(msg));
@@ -84,7 +84,7 @@ public class EMWrapperMessageListener implements EMMessageListener , EMConversat
             post(()->EMWrapperHelper.listener.onReceive(EMSDKMethod.chatListener, EMSDKMethod.onMessagesRecalled, jsonArray.toString()));
         }catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
