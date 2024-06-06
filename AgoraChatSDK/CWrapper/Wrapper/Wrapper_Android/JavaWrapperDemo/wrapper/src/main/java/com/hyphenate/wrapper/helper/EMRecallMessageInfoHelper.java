@@ -13,7 +13,7 @@ public class EMRecallMessageInfoHelper {
         data.put("recallMessageId", info.getRecallMessageId());
         data.put("ext", info.getExt());
         if (info.getRecallMessage() != null) {
-            data.put("recallMessage", info.getRecallMessage());
+            data.put("recallMessage", EMMessageHelper.toJson(info.getRecallMessage()));
         }
         return data;
     }
