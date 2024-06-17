@@ -3,8 +3,8 @@ setlocal
 
 rem 定义版本号变量
 set "version=1.3.1"
-set "cid1=emclient-linux-commit-id=1081245a2"
-set "cid2=emclient-unity-commit-id=ee34d391b"
+set "cid1=emclient-linux-commit-id=1081245a22"
+set "cid2=emclient-unity-commit-id=d4d6cb6347"
 
 rem 打开命令回显，以显示每个命令
 @echo on
