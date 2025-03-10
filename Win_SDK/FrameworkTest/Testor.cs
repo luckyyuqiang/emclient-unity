@@ -2496,7 +2496,7 @@ namespace WinSDKTest
             //if (appkey.Length > 0 && appkey.Contains("#") == true)
             //    options.AppKey = appkey;
 
-            //Options options = Options.InitOptionsWithAppId("ba85504621304fb894790708d304794f");
+            //Options options = Options.InitOptionsWithAppKey("easemob-demo#sdk111");
             Options options = Options.InitOptionsWithAppKey("easemob-demo#unitytest");
 
             options.AutoLogin = false;
@@ -10940,9 +10940,9 @@ namespace WinSDKTest
             Console.WriteLine($"IConnectionDelegate6 OnKickedByOtherDevice, total listener count: {LISTENER_COUNT}");
         }
 
-        public void OnLoggedOtherDevice(string dn)
+        public void OnLoggedOtherDevice(string dn, string info)
         {
-            Console.WriteLine($"IConnectionDelegate7 OnLoggedOtherDevice, devicename:{dn}, total listener count: {LISTENER_COUNT}");
+            Console.WriteLine($"IConnectionDelegate7 OnLoggedOtherDevice, devicename:{dn}, info:{info}, total listener count: {LISTENER_COUNT}");
         }
 
         public void OnForbidByServer()
