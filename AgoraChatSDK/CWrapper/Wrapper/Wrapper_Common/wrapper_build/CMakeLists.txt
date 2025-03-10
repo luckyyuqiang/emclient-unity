@@ -43,6 +43,8 @@ add_definitions(
     -DMEDIA_SERVER_LIBRARY_SDK
     -DMEDIA_SERVER_LIBRARY_NGSDK
     -DMEDIA_SERVER_LIBRARY_EMPTY_LOG
+    -DNO_SSL_DL
+    -DUSE_WEBSOCKET
 )
 
 if(MSVC)
@@ -142,6 +144,7 @@ include_directories(
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_facilities/inc
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_utils/inc
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/aut
+    ${EMCLIENT_LINUX_PATH}/3rd_party/civetweb
 )
 
 # 设置平台区分包含目录
@@ -290,6 +293,8 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/stubs/common.cc
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/stubs/once.cc
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/stubs/atomicops_internals_x86_msvc.cc
+    ${EMCLIENT_LINUX_PATH}/3rd_party/civetweb/civetweb.c
+    ${EMCLIENT_LINUX_PATH}/3rd_party/civetweb/ws_client.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/basenode.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/chatclient.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/conference.cpp
