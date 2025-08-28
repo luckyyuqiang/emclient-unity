@@ -330,6 +330,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/unreadul.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/roamconfig.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/muc.cpp
+    ${EMCLIENT_LINUX_PATH}/protocol/offlinemessagerecord.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/generated/conferencebody.pb.cc
     ${EMCLIENT_LINUX_PATH}/protocol/generated/jid.pb.cc
     ${EMCLIENT_LINUX_PATH}/protocol/generated/keyvalue.pb.cc
