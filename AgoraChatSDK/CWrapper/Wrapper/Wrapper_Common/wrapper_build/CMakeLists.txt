@@ -294,7 +294,6 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/stubs/once.cc
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/stubs/atomicops_internals_x86_msvc.cc
     ${EMCLIENT_LINUX_PATH}/3rd_party/civetweb/civetweb.c
-    ${EMCLIENT_LINUX_PATH}/3rd_party/civetweb/ws_client.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/basenode.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/chatclient.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/conference.cpp
@@ -427,6 +426,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/src/emcrashmonitor.cpp
     ${EMCLIENT_LINUX_PATH}/src/emautchattransport.cpp
     ${EMCLIENT_LINUX_PATH}/src/emtcpchattransport.cpp
+    ${EMCLIENT_LINUX_PATH}/src/ws_client.cpp
 )
 
 if(APPLE)
