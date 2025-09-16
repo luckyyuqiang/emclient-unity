@@ -427,6 +427,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/src/emautchattransport.cpp
     ${EMCLIENT_LINUX_PATH}/src/emtcpchattransport.cpp
     ${EMCLIENT_LINUX_PATH}/src/ws_client.cpp
+    #${EMCLIENT_LINUX_PATH}/src/emembeddedcacerts.cpp
 )
 
 if(APPLE)
