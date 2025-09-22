@@ -144,7 +144,7 @@ include_directories(
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_facilities/inc
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_utils/inc
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/aut
-    ${EMCLIENT_LINUX_PATH}/3rd_party/civetweb
+    ${EMCLIENT_LINUX_PATH}/3rd_party/libwebsockets/include
 )
 
 # 设置平台区分包含目录
@@ -218,8 +218,9 @@ if(CMAKE_GENERATOR MATCHES "Visual Studio")
 		find_library(agora_ap_static NAMES agora_ap_static PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/facility-x64-static-mt-0.0.60.11/lib)
 		find_library(agora_edge_allocator_static NAMES agora_edge_allocator_static PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/facility-x64-static-mt-0.0.60.11/lib)
 		find_library(agora_generic_report_static NAMES agora_generic_report_static PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/facility-x64-static-mt-0.0.60.11/lib)
-		find_library(libaosl_chat NAMES libaosl PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/aosl_1.2.2-x64-release)
+		find_library(libaosl_chat NAMES libaosl PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/aosl_1.3.0-x64-release)
 		find_library(libzip NAMES zip PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/libzip_1.11.2-x64-static-mt/lib)
+		find_library(libwebsockets NAMES libwebsockets PATHS ${EMCLIENT_LINUX_PATH}/3rd_party/platform/win/depends/libwebsockets-4.3.6-x64-static-mt/lib)
     endif()
     message(STATUS "Found zlib: ${zlib}")
 
@@ -267,13 +268,14 @@ message(STATUS "Found agora_edge_allocator_static: ${agora_edge_allocator_static
 message(STATUS "Found agora_generic_report_static: ${agora_generic_report_static}")
 message(STATUS "Found libaosl_chat: ${libaosl_chat}")
 message(STATUS "Found libzip: ${libzip}")
+message(STATUS "Found libwebsockets: ${libwebsockets}")
 
 # 检查是否找到所有库
 if(NOT libcrypto OR NOT libssl OR NOT libcurl OR NOT libsqlcipher OR
    NOT libevent_openssl OR NOT libevent_core OR NOT libevent_extra OR NOT libevent OR
    NOT agora_utils_static OR NOT agora_transport_static OR NOT agora_ap_static OR
    NOT agora_edge_allocator_static OR NOT agora_generic_report_static
-   OR NOT libzip)
+   OR NOT libzip OR NOT libwebsockets)
     message(FATAL_ERROR "Could not find one or more libraries")
 endif()
 
@@ -330,6 +332,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/roamconfig.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/muc.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/offlinemessagerecord.cpp
+    ${EMCLIENT_LINUX_PATH}/protocol/logout.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/generated/conferencebody.pb.cc
     ${EMCLIENT_LINUX_PATH}/protocol/generated/jid.pb.cc
     ${EMCLIENT_LINUX_PATH}/protocol/generated/keyvalue.pb.cc
@@ -426,6 +429,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/src/emcrashmonitor.cpp
     ${EMCLIENT_LINUX_PATH}/src/emautchattransport.cpp
     ${EMCLIENT_LINUX_PATH}/src/emtcpchattransport.cpp
+    ${EMCLIENT_LINUX_PATH}/src/emwebsocketchattransport.cpp
     #${EMCLIENT_LINUX_PATH}/src/ws_client.cpp
     #${EMCLIENT_LINUX_PATH}/src/emembeddedcacerts.cpp
 )
@@ -530,6 +534,7 @@ else()
 		${agora_generic_report_static}
 		${libaosl_chat}
 		${libzip}
+		${libwebsockets}
 	)
 
 	target_link_options(${SdkWrapper} PRIVATE "/NODEFAULTLIB:LIBCMT.lib")
