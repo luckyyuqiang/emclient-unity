@@ -43,6 +43,7 @@ add_definitions(
     -DMEDIA_SERVER_LIBRARY_SDK
     -DMEDIA_SERVER_LIBRARY_NGSDK
     -DMEDIA_SERVER_LIBRARY_EMPTY_LOG
+    -DCURLCPP_NO_EXCEPTIONS
     #-DNO_SSL_DL
     #-DUSE_WEBSOCKET
 )
@@ -133,18 +134,20 @@ include_directories(
     ${EMCLIENT_LINUX_PATH}/include/message
     ${EMCLIENT_LINUX_PATH}/include/utils
     ${EMCLIENT_LINUX_PATH}/include
+    ${EMCLIENT_LINUX_PATH}/include/doh
     ${EMCLIENT_LINUX_PATH}/internal/include
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf
     ${EMCLIENT_LINUX_PATH}/3rd_party/aosl
     ${EMCLIENT_LINUX_PATH}/3rd_party/rapidjson/include
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include
-    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/include
+    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp_3_1/include
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_facilities
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_facilities/internal
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_facilities/inc
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/agora_utils/inc
     ${EMCLIENT_LINUX_PATH}/3rd_party/facility/include/aut
     ${EMCLIENT_LINUX_PATH}/3rd_party/libwebsockets/include
+    ${EMCLIENT_LINUX_PATH}/3rd_party/lz4
 )
 
 # 设置平台区分包含目录
@@ -280,11 +283,12 @@ if(NOT libcrypto OR NOT libssl OR NOT libcurl OR NOT libsqlcipher OR
 endif()
 
 set(EASEMOB_SRC
-${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
-    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_exception.cpp
-    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_form.cpp
-    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_header.cpp
-    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_writer.cpp
+${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp_3_1/src/curl_easy.cpp
+    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp_3_1/src/curl_exception.cpp
+    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp_3_1/src/curl_form.cpp
+    ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp_3_1/src/curl_header.cpp
+    #${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp_3_1/src/curl_writer.cpp
+    ${EMCLIENT_LINUX_PATH}/3rd_party/lz4/lz4.c
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/generated_message_util.cc
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/message_lite.cc
     ${EMCLIENT_LINUX_PATH}/3rd_party/protobuf/google/protobuf/repeated_field.cc
@@ -309,6 +313,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/keyvalue.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/message.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/messagebody.cpp
+    ${EMCLIENT_LINUX_PATH}/protocol/messagebodystream.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/messagebodycontent.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/messageconfig.cpp
     ${EMCLIENT_LINUX_PATH}/protocol/meta.cpp
@@ -412,6 +417,7 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/src/message/emvoicemessagebody.cpp
     ${EMCLIENT_LINUX_PATH}/src/message/emmessagereaction.cpp
     ${EMCLIENT_LINUX_PATH}/src/message/emcombinemessagebody.cpp
+    ${EMCLIENT_LINUX_PATH}/src/message/emstreamchunk.cpp
     ${EMCLIENT_LINUX_PATH}/src/utils/emcryptoadapter.cpp
     ${EMCLIENT_LINUX_PATH}/src/utils/emencryptutils.cpp
     ${EMCLIENT_LINUX_PATH}/src/utils/emfilecompressor.cpp
@@ -420,6 +426,10 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/src/utils/emtimer.cpp
     ${EMCLIENT_LINUX_PATH}/src/utils/emutils.cpp
     ${EMCLIENT_LINUX_PATH}/src/utils/emaestool.cpp
+    ${EMCLIENT_LINUX_PATH}/src/utils/emhttprequestcurl.cpp
+    ${EMCLIENT_LINUX_PATH}/src/utils/emsystemutil.cpp
+    ${EMCLIENT_LINUX_PATH}/src/utils/emcodecutil.cpp
+    ${EMCLIENT_LINUX_PATH}/src/utils/emsecurefilemanager.cpp
     ${EMCLIENT_LINUX_PATH}/src/emapclientmanager.cpp
     ${EMCLIENT_LINUX_PATH}/src/emeventengine.cpp
     ${EMCLIENT_LINUX_PATH}/src/emtcpclientimpl.cpp
@@ -431,7 +441,12 @@ ${EMCLIENT_LINUX_PATH}/3rd_party/curlcpp/src/curl_easy.cpp
     ${EMCLIENT_LINUX_PATH}/src/emtcpchattransport.cpp
     ${EMCLIENT_LINUX_PATH}/src/emwebsocketchattransport.cpp
     #${EMCLIENT_LINUX_PATH}/src/ws_client.cpp
-    #${EMCLIENT_LINUX_PATH}/src/emembeddedcacerts.cpp
+    ${EMCLIENT_LINUX_PATH}/src/emembeddedcacerts.cpp
+    ${EMCLIENT_LINUX_PATH}/src/emstreammessagecachemanager.cpp
+    ${EMCLIENT_LINUX_PATH}/src/doh/emdnsjsonparser.cpp
+    ${EMCLIENT_LINUX_PATH}/src/doh/emdohconfigmanager.cpp
+    ${EMCLIENT_LINUX_PATH}/src/doh/emdnsresolver.cpp
+    ${EMCLIENT_LINUX_PATH}/src/doh/emdohconfigmanager.cpp
 )
 
 if(APPLE)
