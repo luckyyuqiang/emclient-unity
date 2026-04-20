@@ -141,6 +141,9 @@ namespace AgoraChat
 	     */
         public int IMPort = 0;
 
+        public string WebSocketServer = "";
+        public int WebPort = 0;
+
         /**
 	     * \~chinese
 	     * 设置是否开启 DNS。
@@ -587,6 +590,16 @@ namespace AgoraChat
             if (IMPort != 0)
             {
                 jo.AddWithoutNull("imPort", IMPort);
+            }
+
+            if (WebSocketServer != null)
+            {
+                jo.AddWithoutNull("websocketServer", WebSocketServer);
+            }
+
+            if (WebPort != 0)
+            {
+                jo.AddWithoutNull("webPort", WebPort);
             }
 
             if (DNSURL != null)

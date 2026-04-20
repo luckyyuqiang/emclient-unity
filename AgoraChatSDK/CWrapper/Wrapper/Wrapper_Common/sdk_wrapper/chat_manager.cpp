@@ -175,7 +175,12 @@ namespace sdk_wrapper {
             }));
 
         message_ptr->setCallback(callback_ptr);
-        CLIENT->getChatManager().sendMessage(message_ptr);
+        //CLIENT->getChatManager().sendMessage(message_ptr);
+
+        thread t([=]() {
+             CLIENT->getChatManager().sendMessage(message_ptr);
+        });
+        t.detach();
 
         string updated_msg_json = JsonStringFromUpdatedMessage(msg_id);
         return CopyToPointer(updated_msg_json);

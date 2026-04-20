@@ -2493,13 +2493,19 @@ namespace WinSDKTest
             //Options options = new Options("5101220107132865#test"); // 北京沙箱测试环境，无法正常登录
             //Options options = new Options("41117440#383391"); // 线上环境, demo中的token
 
-            Options options = Options.InitOptionsWithAppKey("easemob-demo#unitytest");
-
-            if (appkey.Length > 0 && appkey.Contains("#") == true)
-                options = Options.InitOptionsWithAppKey(appkey);
-
-            //Options options = Options.InitOptionsWithAppKey("easemob-demo#sdk111");
             //Options options = Options.InitOptionsWithAppKey("easemob-demo#unitytest");
+
+            //if (appkey.Length > 0 && appkey.Contains("#") == true)
+            //    options = Options.InitOptionsWithAppKey(appkey);
+
+            //Options options = Options.InitOptionsWithAppId("ba85504621304fb894790708d304794f");
+            //string real_appkey = "easemob-demo#wang";
+            //string real_appkey = "easemob-demo#testngi01";
+            //string real_appkey = "easemob-demo#ngisdkdemo";
+            //string real_appkey = "easemob-demo#wang";
+            string real_appkey = "101251105104270#yctest";
+            if (appkey.Length > 0) real_appkey = appkey;
+            Options options = Options.InitOptionsWithAppKey(real_appkey);
 
             options.AutoLogin = false;
             options.UsingHttpsOnly = true;
@@ -2513,10 +2519,13 @@ namespace WinSDKTest
             //options.IsAutoDownload = true;
 
             // 沙箱环境
-            /*options.EnableDNSConfig = false;
-            options.RestServer = "a1-hsb.easemob.com";
-            options.IMServer = "180.184.143.60";
-            options.IMPort = 6717;*/
+            options.EnableDNSConfig = false;
+            options.RestServer = "tke-sdb-a1.easemob.com";
+            //options.IMServer = "msync-im-qa-hsb.easemob.com";
+            //options.IMPort = 6717;
+            options.WebSocketServer = "tke-sdb-im-api-wechat.easemob.com";
+            options.WebPort = 443;
+           
 
             if (SDKClient.Instance.InitWithOptions(options) != 0)
             {
@@ -4087,7 +4096,7 @@ namespace WinSDKTest
             Message msg = Message.CreateTextSendMessage(to, text);
             msg.MessageType = msg_type;
             msg.IsThread = is_thread;
-            msg.IsNeedGroupAck = true;
+            //msg.IsNeedGroupAck = true;
             //msg.DeliverOnlineOnly = true;
             msg.SetRoomMessagePriority(RoomMessagePriority.High);
             AgoraChat.MessageBody.TextBody tb = (AgoraChat.MessageBody.TextBody)msg.Body;
@@ -4309,8 +4318,168 @@ namespace WinSDKTest
             ));
         }
 
+        static string static_room_id = "311439183118337";
+        void SendMultTextAction(string txt)
+        {
+            //Message msg = Message.CreateTextSendMessage("238510777892867", txt);
+            //msg.MessageType = MessageType.Room;
+
+            Dictionary<string, string> customParams = new Dictionary<string, string>();
+
+            // 逐字字符串 @""，内部双引号用 "" 替代，直接换行实现自动拆分，保留层级可读性
+            customParams["data"] = @"{
+""type"":""ROOM_CHAT"",
+""data"":""{""type"":""GIFT"",
+""badgeUrls"":[""https://miggo.oss-ap-southeast-1.aliyuncs.com/other/manager-15f1274c-672c-4981-92ad-ea7da88d1086.png""],
+""vipInfo"":{""type"":""MARQUIS"",
+""badgeUrl"":""https://miggo.oss-ap-southeast-1.aliyuncs.com/svga_cover/manager-a48640ae-9dcf-45a3-88b0-12b850ccd8c7.png""},
+""userProfile"":{""id"":""2001635932659589121"",
+""account"":""10048"",
+""userAvatar"":""https://dev-yuyin.oss-ap-southeast-1.aliyuncs.com/avatar/c311e981-2080-4ff9-bdf5-110329924ba1.jpg"",
+""userNickname"":""box1"",
+""userSex"":1,
+""age"":29,
+""freezingTime"":1766004570000,
+""countryId"":""1231833304232112130"",
+""countryName"":""India"",
+""countryCode"":""IN"",
+""regionCode"":""OTHER"",
+""originSys"":""MIGGO"",
+""sysOriginChild"":""MIGGO"",
+""del"":false,
+""createTime"":1766090970000,
+""bornYear"":1996,
+""bornMonth"":1,
+""bornDay"":1,
+""useProps"":[{""userId"":""2001635932659589121"",
+""propsResources"":{""id"":""2005473358830690306"",
+""type"":""NOBLE_VIP"",
+""code"":""VIP3"",
+""name"":""MARQUIS"",
+""cover"":""https://miggo.oss-ap-southeast-1.aliyuncs.com/svga_cover/manager-a48640ae-9dcf-45a3-88b0-12b850ccd8c7.png"",
+""sourceUrl"":""https://miggo.oss-ap-southeast-1.aliyuncs.com/svgasource/manager-c1e11c97-074d-4e28-8b76-4914d4aa9efa.svga"",
+""expand"":"""",
+""amount"":30000.0},
+""expireTime"":1769582552000,
+""allowGive"":null}],
+""wearBadge"":[{""id"":""1565533277562978305"",
+""badgeLevel"":5,
+""milestone"":"""",
+""badgeName"":""SVIP5"",
+""type"":""ACTIVITY"",
+""badgeKey"":""svip5_badge"",
+""selectUrl"":""https://miggo.oss-ap-southeast-1.aliyuncs.com/other/manager-15f1274c-672c-4981-92ad-ea7da88d1086.png"",
+""notSelectUrl"":"""",
+""animationUrl"":""https://miggo.oss-ap-southeast-1.aliyuncs.com/other/manager-7f5f13b8-0830-4c19-b4f9-3ffcf05eb69b.svga""}],
+""ownSpecialId"":null,
+""userLevel"":null,
+""inRoomId"":null,
+""roomIcon"":null,
+""accountStatus"":""NORMAL"",
+""sameRegion"":true,
+""isUpdateCountry"":""1""},
+""chatBubble"":"""",
+""giftMsg"":{""sender"":{""id"":""2001635932659589121"",
+""userName"":""box1"",
+""userPic"":""https://dev-yuyin.oss-ap-southeast-1.aliyuncs.com/avatar/c311e981-2080-4ff9-bdf5-110329924ba1.jpg""},
+""sendGiftAllType"":""ON_MIC"",
+""giftList"":[{""giftId"":""2006262610737274881"",
+""giftPic"":""https://miggo.oss-ap-southeast-1.aliyuncs.com/gifts/manager-83303ab8-9d49-498b-80b7-9a73c91d7994.png"",
+""giftSourceUrl"":"""",
+""special"":"""",
+""currencyType"":"""",
+""giftTab"":""LUCKY_GIFT"",
+""giftCount"":1,
+""giftPrice"":10,
+""rewardMultiple"":1}],
+""receiverList"":[{""receiverId"":""2001635932659589121"",
+""receiverName"":""box1"",
+""receiverAvatar"":""https://dev-yuyin.oss-ap-southeast-1.aliyuncs.com/avatar/c311e981-2080-4ff9-bdf5-110329924ba1.jpg"",
+""jumpCombo"":8,
+""giftIds"":[""2006262610737274881""]}],
+""sendGiftTime"":1767773894989,
+""target"":1},
+""svipLevel"":""SVIP_5""}""
+}";
+
+            Message msg = Message.CreateCustomSendMessage(static_room_id, txt, customParams);
+            msg.MessageType = MessageType.Room;
+
+            SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+                onSuccess: () =>
+                {
+                    //UIManager.TitleAlert(transform, "成功", msg.MsgId);
+                    Console.WriteLine($"{msg.MsgId} sucess.");
+                },
+                //onProgress: (progress) =>
+                //{
+                //    //UIManager.TitleAlert(transform, "发送进度", progress.ToString());
+                //    //Debug.Log($"");
+                //},
+                onError: (code, desc) =>
+                {
+                    //UIManager.ErrorAlert(transform, code, msg.MsgId);
+                    Console.WriteLine($"{msg.MsgId} failed, code:{code}, desc:{desc}.");
+                }
+            ));
+        }
+
+        void SendMultTextAction_littlemsg(string txt)
+        {
+            //Message msg = Message.CreateTextSendMessage("238510777892867", txt);
+            //msg.MessageType = MessageType.Room;
+
+            Dictionary<string, string> customParams = new Dictionary<string, string>();
+
+            // 逐字字符串 @""，内部双引号用 "" 替代，直接换行实现自动拆分，保留层级可读性
+            customParams["data"] = @"{
+""type"":""ROOM_CHAT"",
+""data"":""{""type"":""GIFT"",
+""badgeUrls"":[""https://miggo.oss-ap-southeast-1.aliyuncs.com/other/manager-15f1274c.png""],
+""vipInfo"":{""type"":""MARQUIS""
+}";
+
+            Message msg = Message.CreateCustomSendMessage(static_room_id, txt, customParams);
+            msg.MessageType = MessageType.Room;
+
+            SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+                onSuccess: () =>
+                {
+                    //UIManager.TitleAlert(transform, "成功", msg.MsgId);
+                    Console.WriteLine($"{msg.MsgId} sucess.");
+                },
+                //onProgress: (progress) =>
+                //{
+                //    //UIManager.TitleAlert(transform, "发送进度", progress.ToString());
+                //    //Debug.Log($"");
+                //},
+                onError: (code, desc) =>
+                {
+                    //UIManager.ErrorAlert(transform, code, msg.MsgId);
+                    Console.WriteLine($"{msg.MsgId} failed, code:{code}, desc:{desc}.");
+                }
+            ));
+        }
+
         public void CallFunc_IChatManager_SendCustomMessage(string _to="", string _custom="")
         {
+            
+            /*Console.WriteLine("Begin to send messages.");
+            for (int i = 1; i <= 10; i++)
+            {
+                // 手动定义 Unix 纪元时间（1970-01-01 00:00:00 UTC）
+                DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                // 计算当前 UTC 时间距离 Unix 纪元的秒数
+                long unixTimeSeconds = (long)(DateTime.UtcNow - unixEpoch).TotalSeconds;
+
+                // 步骤2：打印时间戳
+                Console.WriteLine($"当前Unix秒级时间戳：{unixTimeSeconds}");
+
+                string txt = $"ROOM_CHAT_{i}";
+                SendMultTextAction(txt);
+            }
+            return;*/
+
             string to = "";
             string custom = "";
 
@@ -4332,7 +4501,7 @@ namespace WinSDKTest
             tb.CustomParams["key2"] = "value2";
             */
 
-            msg.MessageType = MessageType.Group;
+            msg.MessageType = MessageType.Room;
             tb.CustomEvent = "customCombinedMsg";
 
             msg.Attributes = new Dictionary<string, AttributeValue>();
@@ -4340,7 +4509,7 @@ namespace WinSDKTest
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("type", "img");
             dict.Add("displayName", "0n1cgjo1zqz-lp.jpg");
-            dict.Add("fileStatus", "3");
+            /*dict.Add("fileStatus", "3");
             dict.Add("width", "150");
             dict.Add("height", "150");
             dict.Add("sendOriginalImage", "false");
@@ -4357,7 +4526,7 @@ namespace WinSDKTest
             Message.SetAttribute(msg.Attributes, "msg_list", ja.ToString(), AttributeValueType.JSONSTRING);
 
             Message.SetAttribute(msg.Attributes, "text_content", "", AttributeValueType.STRING);
-            Message.SetAttribute(msg.Attributes, "type", "customCombinedMsg", AttributeValueType.STRING);
+            Message.SetAttribute(msg.Attributes, "type", "customCombinedMsg", AttributeValueType.STRING);*/
 
             SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
                 onSuccess: () => {
@@ -4376,6 +4545,21 @@ namespace WinSDKTest
 
         public void CallFunc_IChatManager_SendLocationMessage(string _to="", string _addr="", string _building="")
         {
+            for (int i = 1; i <= 10; i++)
+            {
+                // 手动定义 Unix 纪元时间（1970-01-01 00:00:00 UTC）
+                DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                // 计算当前 UTC 时间距离 Unix 纪元的秒数
+                long unixTimeSeconds = (long)(DateTime.UtcNow - unixEpoch).TotalSeconds;
+
+                // 步骤2：打印时间戳
+                Console.WriteLine($"当前Unix秒级时间戳：{unixTimeSeconds}");
+
+                string txt = $"ROOM_CHAT_{i}";
+                SendMultTextAction(txt);
+            }
+            return;
+
             string to = "";
             string addr = "";
             string building = "";
@@ -4414,6 +4598,21 @@ namespace WinSDKTest
 
         public void CallFunc_IChatManager_SendCombineMessage(string _to = "", string _text = "")
         {
+            for (int i = 1; i <= 10; i++)
+            {
+                // 手动定义 Unix 纪元时间（1970-01-01 00:00:00 UTC）
+                DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                // 计算当前 UTC 时间距离 Unix 纪元的秒数
+                long unixTimeSeconds = (long)(DateTime.UtcNow - unixEpoch).TotalSeconds;
+
+                // 步骤2：打印时间戳
+                Console.WriteLine($"当前Unix秒级时间戳：{unixTimeSeconds}");
+
+                string txt = $"ROOM_CHAT_{i}";
+                SendMultTextAction_littlemsg(txt);
+            }
+            return;
+
             /*
                 param.Add(menu_index, "to (string)"); menu_index++;
                 param.Add(menu_index, "chattype (int: 0-chat;1-group;2-room)"); menu_index++;
@@ -10944,7 +11143,7 @@ namespace WinSDKTest
 
         public void OnLoggedOtherDevice(string dn, string info)
         {
-            Console.WriteLine($"IConnectionDelegate7 OnLoggedOtherDevice, devicename:{dn}, info:{info}, total listener count: {LISTENER_COUNT}");
+            Console.WriteLine($"IConnectionDelegate7 OnLoggedOtherDevice, devicename:{dn}, total listener count: {LISTENER_COUNT}");
         }
 
         public void OnForbidByServer()
@@ -11122,6 +11321,16 @@ namespace WinSDKTest
         public void OnMemberExitedFromGroup(string groupId, string member)
         {
             Console.WriteLine($"IGroupManagerDelegate19 OnMemberExitedFromGroup: gid: {groupId}; member:{member}, total listener count:{LISTENER_COUNT}");
+        }
+
+        public void OnMembersJoinedFromGroup(string groupId, List<string> members)
+        {
+            Console.WriteLine($"IGroupManagerDelegate26 OnMembersJoinedFromGroup groupId: {groupId}, members: {string.Join(", ", members.ToArray())}");
+        }
+
+        public void OnMembersExitedFromGroup(string groupId, List<string> members)
+        {
+            Console.WriteLine($"IGroupManagerDelegate27 OnMembersExitedFromGroup groupId: {groupId}, members: {string.Join(", ", members.ToArray())}");
         }
 
         public void OnAnnouncementChangedFromGroup(string groupId, string announcement)

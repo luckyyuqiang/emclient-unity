@@ -358,6 +358,19 @@ namespace sdk_wrapper
             configs->privateConfigs()->restServer() = rest_server;
         }
 
+        if (jnode.HasMember("websocketServer") && jnode["websocketServer"].IsString()) {
+            string web_server = jnode["websocketServer"].GetString();
+            configs->privateConfigs()->webSocketServer() = web_server;
+        }
+
+        if (jnode.HasMember("webPort") && jnode["webPort"].IsInt()) {
+            int web_port = jnode["webPort"].GetInt();
+            configs->privateConfigs()->webSocketPort() = web_port;
+            if (web_port == 443) {
+                configs->privateConfigs()->enableTLSConnection(true);
+            }
+        }
+
         if (jnode.HasMember("imPort") && jnode["imPort"].IsInt()) {
             int im_port = jnode["imPort"].GetInt();
             configs->privateConfigs()->chatPort() = im_port;
