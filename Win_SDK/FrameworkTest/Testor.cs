@@ -1039,20 +1039,20 @@ namespace WinSDKTest
 
             menu_index = 1;
             param.Add(menu_index, "to (string)"); menu_index++;
-            param.Add(menu_index, "address (string)"); menu_index++;
-            param.Add(menu_index, "buildingName (string)"); menu_index++;
+            //param.Add(menu_index, "address (string)"); menu_index++;
+            //param.Add(menu_index, "buildingName (string)"); menu_index++;
             level3_menus.Add("SendLocationMessage", new Dictionary<int, string>(param));
             param.Clear();
 
             menu_index = 1;
             param.Add(menu_index, "to (string)"); menu_index++;
-            param.Add(menu_index, "chattype (int: 0-chat;1-group;2-room)"); menu_index++;
-            param.Add(menu_index, "isthread (bool)"); menu_index++;
-            param.Add(menu_index, "title (string)"); menu_index++;
-            param.Add(menu_index, "summary (string)"); menu_index++;
-            param.Add(menu_index, "compatible (string)"); menu_index++;
-            param.Add(menu_index, "sub-msgid1 (string)"); menu_index++;
-            param.Add(menu_index, "sub-msgid2 (string)"); menu_index++;
+            //param.Add(menu_index, "chattype (int: 0-chat;1-group;2-room)"); menu_index++;
+            //param.Add(menu_index, "isthread (bool)"); menu_index++;
+            //param.Add(menu_index, "title (string)"); menu_index++;
+            //param.Add(menu_index, "summary (string)"); menu_index++;
+            //param.Add(menu_index, "compatible (string)"); menu_index++;
+            //param.Add(menu_index, "sub-msgid1 (string)"); menu_index++;
+            //param.Add(menu_index, "sub-msgid2 (string)"); menu_index++;
             level3_menus.Add("SendCombineMessage", new Dictionary<int, string>(param));
             param.Clear();
 
@@ -2501,16 +2501,17 @@ namespace WinSDKTest
             //Options options = Options.InitOptionsWithAppId("ba85504621304fb894790708d304794f");
             //string real_appkey = "easemob-demo#wang";
             //string real_appkey = "easemob-demo#testngi01";
-            //string real_appkey = "easemob-demo#ngisdkdemo";
+            string real_appkey = "easemob-demo#ngisdkdemo";
             //string real_appkey = "easemob-demo#wang";
-            string real_appkey = "101251105104270#yctest";
+            //string real_appkey = "101251105104270#yctest";
             if (appkey.Length > 0) real_appkey = appkey;
             Options options = Options.InitOptionsWithAppKey(real_appkey);
 
             options.AutoLogin = false;
             options.UsingHttpsOnly = true;
             options.DebugMode = true;
-            options.MyUUID = "12345678-1111-5555-aaaa-eeeeeeeeeeef";
+            //options.MyUUID = "12345678-1111-5555-aaaa-eeeeeeeeeeef";
+            options.MyUUID = "87654321-1111-5555-aaaa-eeeeeeeeeeef";
             options.EnableEmptyConversation = true;
             options.UseReplacedMessageContents = true;
             options.RegardImportMsgAsRead = true;
@@ -2519,12 +2520,12 @@ namespace WinSDKTest
             //options.IsAutoDownload = true;
 
             // 沙箱环境
-            options.EnableDNSConfig = false;
-            options.RestServer = "tke-sdb-a1.easemob.com";
+            //options.EnableDNSConfig = false;
+            //options.RestServer = "tke-sdb-a1.easemob.com";
             //options.IMServer = "msync-im-qa-hsb.easemob.com";
             //options.IMPort = 6717;
-            options.WebSocketServer = "tke-sdb-im-api-wechat.easemob.com";
-            options.WebPort = 443;
+            //options.WebSocketServer = "tke-sdb-im-api-wechat.easemob.com";
+            //options.WebPort = 443;
            
 
             if (SDKClient.Instance.InitWithOptions(options) != 0)
@@ -4318,7 +4319,7 @@ namespace WinSDKTest
             ));
         }
 
-        static string static_room_id = "311439183118337";
+        static string static_room_id = "311359526993921";
         void SendMultTextAction(string txt)
         {
             //Message msg = Message.CreateTextSendMessage("238510777892867", txt);
